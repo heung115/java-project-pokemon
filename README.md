@@ -1,6 +1,6 @@
-#java-project-pockemon
+# java-project-pockemon
 
-##1.github 간단정리
+## 1.github 간단정리
 
 ### 1.용어 정리
 ##### 나도 잘모르니까 정확한 정보가 아닐수 있음 :)
