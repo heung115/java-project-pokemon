@@ -16,6 +16,7 @@
 * pull : 원격저장소의 데이터를 로컬로 가져옴. 수시로 pull을해서 수정사항을 업데이트 해줘야함.  
 * merege : 서로 다른 branch를 병합해준다.
 
+        git diff origin/<branch-name>
 ### 2.branch
 #### **!!!!!!!!!중요!!!!!!!**  
 본인 이름의 branch를 생성해서 거기에 수정한 파일을 pull하고 다같이 확인후 pull request로 main branch로 업데이트!
