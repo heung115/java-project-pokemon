@@ -1,0 +1,66 @@
+<<시나리오>>
+
+1. 접속시 save file이 있다면 road 여부 확인
+2. 새로 시작
+	2-1. 시작 포켓몬 선택 (3中 1택) //시작 포켓몬은 능력치 base값
+	2-2. 기본 주어지는 아이템 (몬스터볼 3개 등등)
+3. 메인 메뉴 진입
+	3-0. 항상 트레이너 exp/level 띄워두기
+	3-1. 수집모드 (포켓몬을 잡으러 간다 --)
+		3-1-1 야생 포켓몬 생성
+		3-1-2 포캣몬 대전
+			-공격 
+			-교체
+			-가방 (볼, 힐 --- )
+			-도망친다
+		3-1-3 보상 부여 
+			-exp
+			-gold
+			-item
+		3-1-4 포켓몬센터
+		3-1-5 상점
+		//2D 맵구현 
+
+	3-2. 전투모드 (AI 포켓몬 트레이너와 대전)]
+		3-2-1 AI 생성
+			-AI 포켓몬 3마리 생성(등장 순서)
+		3-2-2 3-1-2(포켓몬 대전) 호출
+		3-2-3 3-1-3 (보상 부여) 호출
+
+            3-3. 옵션(플레이어 상호작용)
+		3-3-1. 가방
+			-ball_n //제약있음
+			-candy_n
+			-fruit_n
+		3-3-2. 포켓몬 info
+			-remaining hp
+			-state // 마비, 졸음 등
+			-info //level, stat, type etc.
+			-order_list // 전투에 나갈 순서(변경)
+			
+		3-3-3. 도감
+
+class Save(){}
+class Load(){}
+class NewStart(){}
+class Player(){}
+	class bag(){}
+	class Encyclopedia(){}
+	void ViewPokeInfo //놓아주기. 순서바꾸기
+	
+class Adventure(){}
+	class Map(){}
+		class HealCenter(){}
+		class Shop(){}
+		class Battle(){}  	//reward()메소드	
+
+class MakePoke(){}
+
+class bag(){
+
+	int ball_n
+	int candy_n
+
+	void use_ball(){}
+	void use_candy(){}
+}
