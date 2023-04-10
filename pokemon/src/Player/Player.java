@@ -16,7 +16,9 @@ public class Player {
   public int getExp(){
     return exp;
   }
-
+  public void levelUp(){
+    levelUpUitll.levelUp();
+  }
   public Player(String playerName){
     this.playerName = playerName; 
     level = 1;
