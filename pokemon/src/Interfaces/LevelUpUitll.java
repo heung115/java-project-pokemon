@@ -2,11 +2,10 @@ package Interfaces;
 
 
 interface LevelUpUInterface {
-  public void Levelup();
+  public void levelUp();
 }
 public class LevelUpUitll implements LevelUpUInterface{
-
-  public void Levelup(){
+  public void levelUp(){
     System.out.print("level up");
   }
   
