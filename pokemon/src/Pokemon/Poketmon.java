@@ -1,3 +1,4 @@
+package Pokemon;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException; //Input,Output 예외처리 
