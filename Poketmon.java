@@ -1,29 +1,42 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.IOException; //Input,Output 예외처리 
 import java.util.StringTokenizer;
 
 public class Poketmon {
 	String name;
-	int hp;
+	int  maxHp,correntHp;
 	int level;
-	int exp;
+	int exp, maxExp;
 	int belong; //0은 플레이어, 1은 야생, 2는 AI
-	char type;
+	int type; //0은 물, 1은 불, 2는 풀
 	int attack;
 	
+	//포켓몬 정보를 한 줄 읽어오고, 공백 단위로 구분해서 담기
 	public void getPokeInfo() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\choi_\\Desktop\\java-project-pokemon\\poketmonList.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("poketmonList.txt"));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		name = st.nextToken();
-		type = st.nextToken().charAt(0);
-		hp = Integer.parseInt(st.nextToken());
+		type = Integer.parseInt(st.nextToken());
+		maxHp = Integer.parseInt(st.nextToken());
 		attack = Integer.parseInt(st.nextToken());
 		
-		System.out.println(name+" "+type+" "+hp+" "+attack);
+		System.out.println(name+" "+type+" "+maxHp+" "+attack);
 	}
+
+	int getMaxHp(){
+		return maxHp;
+	}
+
+	//전투 이후 남은 HP를 리턴
+	int setHp(int damege){
+
+		correntHp -= damege;//damege는 전투 영역에서 타입별로 setDamege();,어디선가 correntHp=maxHp 초기화 필요
+		return correntHp;
+	}
+
+	
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		
 		Poketmon po = new Poketmon();
 		po.getPokeInfo();
