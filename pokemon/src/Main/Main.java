@@ -61,7 +61,6 @@ public class Main {
     Player player = my.gameStartSetting();
 
     System.out.println(player.getName());
-    System.out.println(player.getLevel());
 
   }
 }
