@@ -10,8 +10,6 @@ public class Pokemon {
 	private int pokemonNumber;
 	private int maxHp;
 	private int currentHp;
-	private int level;
-	private int exp, maxExp;
 	private int belong; // 0은 플레이어, 1은 야생, 2는 AI
 	private int type; // 0은 물, 1은 불, 2는 풀
 	private int damage;
@@ -46,20 +44,22 @@ public class Pokemon {
 	}
 
 	int getMaxHp() {
-		return maxHp;
+		return this.maxHp;
 	}
 
 	// 전투 이후 남은 HP를 리턴
 	int setHp(int damage) {
 		currentHp -= damage;// damage는 전투 영역에서 타입별로 setDamage();,어디선가 currentHp=maxHp 초기화 필요
-		return currentHp;
+		return this.currentHp;
 	}
 
 	private void startStatSetting() {
 
 	}
 
-	public Pokemon() {
-		startStatSetting();
+	@Override
+	public String toString() {
+		return "Pokemon [pokemonName=" + pokemonName + ", maxHp=" + maxHp + ", currentHp=" + currentHp + ", belong="
+				+ belong + ", type=" + type + ", damage=" + damage + "]";
 	}
 }
