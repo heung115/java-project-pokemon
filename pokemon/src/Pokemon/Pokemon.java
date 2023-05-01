@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 
 public class Pokemon {
 	private String pokemonName;
+	private int pokemonNumber;
 	private int maxHp;
 	private int currentHp;
 	private int level;
@@ -25,7 +26,23 @@ public class Pokemon {
 		damage = Integer.parseInt(st.nextToken());
 
 		System.out.println(pokemonName + " " + type + " " + maxHp + " " + damage);
-		// TODO br닫기 :
+	}
+
+	public void showAllStat() {
+		System.out.println(pokemonName);
+		System.out.println("max hp : " + maxHp);
+		System.out.println("current hp : " + currentHp);
+		System.out.println("type : " + type);
+		System.out.println("damage" + damage);
+
+	}
+
+	public int getPokemonNumber() {
+		return pokemonNumber;
+	}
+
+	public String getName() {
+		return pokemonName;
 	}
 
 	int getMaxHp() {
@@ -38,7 +55,11 @@ public class Pokemon {
 		return currentHp;
 	}
 
-	public Pokemon() {
+	private void startStatSetting() {
 
+	}
+
+	public Pokemon() {
+		startStatSetting();
 	}
 }

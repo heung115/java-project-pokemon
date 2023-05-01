@@ -6,6 +6,6 @@ public class LevelPokemon {
     private int maxExp;
 
     public LevelPokemon() {
-    
+        
     }
 }

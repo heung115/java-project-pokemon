@@ -1,4 +1,3 @@
-package Main;
 
 import Player.*;
 
@@ -57,8 +56,8 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     // main클래스 내 함수 사용위한 main객체
-    Main my = new Main();
-    Player player = my.gameStartSetting();
+    // Main my = new Main();
+    // Player player = my.gameStartSetting();
 
     System.out.println(player.getName());
 

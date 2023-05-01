@@ -19,7 +19,7 @@ public class Encyclopedia {
   }
 
   // 도감 출력
-  public void printEncyclopedia() {
+  public void ShowEncyclopedia() {
     for (int i = 0; i < encyclopedia.size(); i++) {
       for (int j = 0; j < encyclopedia.get(i).size(); j++) {
         System.out.print(encyclopedia.get(i).get(j) + " ");
@@ -27,4 +27,7 @@ public class Encyclopedia {
       System.out.println();
     }
   }
+  public void addPokemonToEncyclopedia(int pokemonNum){
+    
+  } 
 }

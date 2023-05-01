@@ -1,18 +1,16 @@
 package Player;
 
-import javax.swing.border.EmptyBorder;
-
-import Interfaces.LevelUpUtill;
+import java.util.ArrayList;
 import Pokemon.Pokemon;
 
 public class Player {
   private String playerName;
+  // private int playerState;
   private int money;
-  private Pokemon playerPokemon = new Pokemon();
+  LevelPlayer levelPlayer = new LevelPlayer();
+  ArrayList<Pokemon> playerPokemon = new ArrayList<>();
   private Bag playerBag = new Bag();
   private Encyclopedia playerEncyclopedia = new Encyclopedia();
-
-  //LevelUpUtill levelUpUitll = new LevelUpUtill();
 
   public String getName() {
     return playerName;
@@ -24,13 +22,33 @@ public class Player {
 
   public void printBag() {
     System.out.println("player : bag");
-    playerBag.printBag();
+    playerBag.showBag();
+  }
+
+  public void addPokemonToPlayerPokemonArrayList() {
+    Pokemon tempPokemon = new Pokemon();
+    playerPokemon.add(tempPokemon);
   }
 
   public Player(String playerName) {
     this.playerName = playerName;
-    //level = 1;
-    //currentExp = 0;
-
+    // level = 1;
+    // currentExp = 0;
   }
+
+  /*
+   * for Encyclopedia
+   */
+  public void ShowEncyclopedia() {
+    playerEncyclopedia.ShowEncyclopedia();
+  }
+
+  public void addPokemonToEncyclopedia() {
+    Pokemon tempPokemon = playerPokemon.get(playerPokemon.size());
+    playerEncyclopedia.addPokemonToEncyclopedia(tempPokemon.getPokemonNumber());
+  }
+  /*
+   * for Pokemon
+   */
+
 }
