@@ -1,3 +1,4 @@
+package Main;
 
 import Player.*;
 
@@ -24,42 +25,40 @@ public class Main {
 
   }
 
+  private void showInfo(Player player) {
+
+  }
+
   public Player gameStartSetting() {
     Player player = createPlayerInstance();
     choicePokemon();
     giveItem();
+    showInfo(player);
     return player;
   }
 
-  public static void mainGame() {
-    while (true) {
-      int mainNum = sc.nextInt();
-      System.out.println("뭘 할건가요?");
-      System.out.println("1. 탐험");
-      System.out.println("2. 전투");
-      System.out.println("3. 옵션");
-      switch (mainNum) {
-        case 1:
-
-          break;
-        case 2:
-
-          break;
-        case 3:
-
-          break;
-        default:
-          System.out.println("다시 입력하세요");
-      }
-    }
+  /*
+   * show UI
+   */
+  private void mainTitle() {
+    System.out.println("===================================================");
+    System.out.println("______         _                                   ");
+    System.out.println("| ___ \\       | |                                  ");
+    System.out.println("| |_/ /  ___  | | __  ___  _ __ ___    ___   _ __  ");
+    System.out.println("|  __/  / _ \\ | |/ / / _ \\| '_ ` _ \\  / _ \\ | '_ \\ ");
+    System.out.println("| |    | (_) ||   < |  __/| | | | | || (_) || | | |");
+    System.out.println("\\_|     \\___/ |_|\\_\\ \\___||_| |_| |_| \\___/ |_| |_|");
+    System.out.println("                                                   ");
+    System.out.println("===================================================");
   }
 
   public static void main(String[] args) throws Exception {
     // main클래스 내 함수 사용위한 main객체
-    // Main my = new Main();
-    // Player player = my.gameStartSetting();
+    Main my = new Main();
+    Player player = my.gameStartSetting();
+    MainGame mainGame = new MainGame();
 
-    System.out.println(player.getName());
-
+    my.mainTitle();
+    mainGame.mainGameLoop(player);
   }
 }
