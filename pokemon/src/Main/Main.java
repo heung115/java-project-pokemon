@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
   static Scanner sc = new Scanner(System.in);
-  // static Player player;
+  //static Player player;
 
   private Player createPlayerInstance() {
     System.out.print("플레이어의 이름 : ");
@@ -59,7 +59,7 @@ public class Main {
     // Main my = new Main();
     // Player player = my.gameStartSetting();
 
-    System.out.println(player.getName());
+    //System.out.println(player.getName());
 
   }
 }
