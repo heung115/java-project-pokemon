@@ -1,0 +1,33 @@
+POKEMON 시나리오
+
+1. 게임이 실행된다.
+2. SAVE된 파일이 있다면, LOAD여부 확인
+   class-Load
+3. 새로 시작할 경우, 시작 포켓몬을 고르고 몬스터볼을 지급받는다.
+   (플레이어 객체 생성)
+   class-GameStart // 
+4. 모험, 대전, 옵션 기능을 선택할 수 있는 화면이 출력된다. 
+   class-MainGame
+	4-1. 모험 선택시 이동 가능한 2차원 map이 생성된다.
+	      class-AdventureMode, Map
+		4-1-1 힐센터 : 몬스터를 치료한다.
+		        class-HealCenter
+		4-1-2 상점 : 아이템을 구매한다.
+		        class-Shop
+		4-1-3 부쉬 : 확률적으로 몬스터와 조우한다.
+		        class-Bush
+			4-1-3-1 : 모험모드 배틀
+				야생 포켓몬 생성, 배틀화면 출력
+				class-AdventureBattle
+	4-2 대전 선택시 ai플레이어를 생성한다.
+	     class-BattleMode()
+	4-3 옵션 선택시 추가 기능을 선택할 수 있다.
+	     class-Option()
+		4-3-1 가방 
+		        class-Bag
+		4-3-2 포켓몬 정보 
+		        //매서드-showPokemonInfo(),deletePokemon(), ChangePokemon() 
+		4-3-3 도감
+		        class-Encyclopedia
+
+기타 - 플레이어 객체, 포켓몬 객체, 스킬 객체, 레벨 객체, 아이템 객체

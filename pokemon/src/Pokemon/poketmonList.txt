@@ -1,0 +1,4 @@
+IndexNo Name Type MaxHp Damege Evolution EvolutionLevel EvolutionNo
+1 kobugi 0 750 150 TRUE 30 3
+2 aunibugi 0 1000 250 TRUE 60 4
+3 kobuking 0 1250 350 FALUSE 0 0
