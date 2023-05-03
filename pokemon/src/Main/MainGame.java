@@ -1,19 +1,20 @@
 package Main;
 
 import java.util.Scanner;
+import Player.Player;
 
 public class MainGame {
     Scanner scanner = new Scanner(System.in);
     private int choice = 0;
 
-    public void mainGameLoop() {
+    public void mainGameLoop(Player player) {
         while (choice == 4) {
             PrintUi.printMainGameLoopUi();
             scanner.nextInt();
 
             switch (choice) {
                 case 1:
-
+                    
                     break;
                 case 2:
 
