@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
   static Scanner sc = new Scanner(System.in);
-  // static Player player;
+  //static Player player;
 
   private Player createPlayerInstance() {
     System.out.print("플레이어의 이름 : ");
@@ -54,6 +54,7 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     // main클래스 내 함수 사용위한 main객체
+
     Main my = new Main();
     Player player = my.gameStartSetting();
     MainGame mainGame = new MainGame();

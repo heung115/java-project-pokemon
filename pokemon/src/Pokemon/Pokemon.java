@@ -1,31 +1,56 @@
 package Pokemon;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException; //Input,Output 예외처리 
-import java.util.StringTokenizer;
+import Player.Encyclopedia.encyclopedia;
+import java.util.Random;
+
 
 public class Pokemon {
 	private String pokemonName;
 	private int pokemonNumber;
 	private int maxHp;
 	private int currentHp;
-	private int belong; // 0은 플레이어, 1은 야생, 2는 AI
-	private int type; // 0은 물, 1은 불, 2는 풀
+	private int belong; // 0-player, 1-wild, 2-AI
+	private int type; // 0-water, 1-fire, 2-grass
 	private int damage;
+	private boolean evolution;
+	private int evolutionLevel;
+	private int evolutionNo;
 
-	// 포켓몬 정보를 한 줄 읽어오고, 공백 단위로 구분해서 담기
-	public void getPokeInfo() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader("pokemonList.txt"));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		pokemonName = st.nextToken();
-		type = Integer.parseInt(st.nextToken());
-		maxHp = Integer.parseInt(st.nextToken());
-		damage = Integer.parseInt(st.nextToken());
+	//creat pokemon : decided pokemonNumber 
+	public void makePokemon(int num){
+		pokemonName = encyclopedia.get(num).get(0);
+		type = encyclopedia.get(num).get(1);
+		maxHp = currentHp = encyclopedia.get(num).get(2);
+		damage = encyclopedia.get(num).get(3);
+	};
 
-		System.out.println(pokemonName + " " + type + " " + maxHp + " " + damage);
+	//creat poketmon : decided type
+	public void makePokemon(String type){
+		String str = "";
+
+		for(int i=0; i < encyclopedia.size() ; i++){
+			str = encyclopedia.get(i).get(4);
+			if(str.equals(type)){
+				break;
+			}	
+		}
+
+		pokemonName = encyclopedia.get(--i).get(1);
+		maxHp = currentHp = encyclopedia.get(i).get(2);
+		damage = encyclopedia.get(i).get(3);
+		type = encyclopedia.get(i).get(4);
+
+	};
+
+	//creat wild pokemon
+	public void makeWildPokemon(){
+		Random random = new Random();
+		int a = random.nextInt(encyclopedia.size())+1;
+		makePokemon(a);
 	}
-
+	
+	
 	public void showAllStat() {
 		System.out.println(pokemonName);
 		System.out.println("max hp : " + maxHp);
@@ -53,13 +78,14 @@ public class Pokemon {
 		return this.currentHp;
 	}
 
-	private void startStatSetting() {
-
-	}
-
-	@Override
-	public String toString() {
-		return "Pokemon [pokemonName=" + pokemonName + ", maxHp=" + maxHp + ", currentHp=" + currentHp + ", belong="
-				+ belong + ", type=" + type + ", damage=" + damage + "]";
-	}
+	/*To debug*/
+	public static void main(String[] args) {
+	
+		Pokemon poke[] = new Pokemon[2];
+		poke[0] = new Pokemon();
+		poke[1] = new Pokemon();
+		//poke[0].getPokeInfo();
+		//poke[1].makeWildPokemon();
+	
+	  }
 }
