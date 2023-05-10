@@ -1,0 +1,4 @@
+﻿IndexNo,Unlock,Name,Type,MaxHp,Damege,Evolution,EvolutionLevel,EvolutionNo
+1,FLASE,kobugi,0,750,150,TRUE,30,3
+2,FLASE,aunibugi,0,1000,250,TRUE,60,4
+3,FLASE,kobuking,0,1200,350,FALSE,0,0
