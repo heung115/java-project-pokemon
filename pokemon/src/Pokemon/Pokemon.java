@@ -5,7 +5,6 @@ import Player.Encyclopedia;
 import java.util.Random;
 import java.util.List;
 
-
 public class Pokemon {
 	private String pokemonName;
 	private int pokemonNumber;
@@ -19,23 +18,24 @@ public class Pokemon {
 	private int evolutionNo;
 
 	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
-	//creat pokemon : decided pokemonNumber 
-	public void makePokemon(int num){
+
+	// creat pokemon : decided pokemonNumber
+	public void makePokemon(int num) {
 		pokemonName = encyclopedia.get(num).get(2);
 		type = Integer.parseInt(encyclopedia.get(num).get(3));
 		maxHp = currentHp = Integer.parseInt(encyclopedia.get(num).get(4));
 		damage = Integer.parseInt(encyclopedia.get(num).get(5));
 	};
 
-	//creat poketmon : decided type
-	public void makePokemon(String type){
+	// create poketmon : decided type
+	public void makePokemon(String type) {
 		String str = "";
 		int i;
-		for(i=0; i < encyclopedia.size() ; i++){
+		for (i = 0; i < encyclopedia.size(); i++) {
 			str = encyclopedia.get(i).get(4);
-			if(str.equals(type)){
+			if (str.equals(type)) {
 				break;
-			}	
+			}
 		}
 
 		this.pokemonName = encyclopedia.get(--i).get(2);
@@ -45,14 +45,13 @@ public class Pokemon {
 
 	};
 
-	//creat wild pokemon
-	public void makeWildPokemon(){
+	// creat wild pokemon
+	public void makeWildPokemon() {
 		Random random = new Random();
 		int a = random.nextInt(encyclopedia.size());
 		makePokemon(a);
 	}
-	
-	
+
 	public void showAllStat() {
 		System.out.println(pokemonName);
 		System.out.println("max hp : " + maxHp);
@@ -80,14 +79,14 @@ public class Pokemon {
 		return this.currentHp;
 	}
 
-	/*To debug*/
+	/* To debug */
 	public static void main(String[] args) {
-	
+
 		Pokemon poke[] = new Pokemon[2];
 		poke[0] = new Pokemon();
 		poke[1] = new Pokemon();
-		//poke[0].getPokeInfo();
+		// poke[0].getPokeInfo();
 		poke[1].makeWildPokemon();
 		poke[1].showAllStat();
-	  }
+	}
 }

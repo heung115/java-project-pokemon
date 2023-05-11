@@ -52,6 +52,10 @@ public class Player {
     playerPokemon.add(tempPokemon);
   }
 
+  public void giveExpPlayerPokemon(int exp, int pokemonNum) {
+
+  }
+
   /*
    * for Encyclopedia
    */
@@ -64,7 +68,7 @@ public class Player {
     playerEncyclopedia.addPokemonToEncyclopedia(tempPokemon.getPokemonNumber());
   }
   /*
-   * for Pokemon
+   * 
    */
 
 }
