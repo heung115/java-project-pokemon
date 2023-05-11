@@ -7,7 +7,7 @@ import Util.CSVReader;
 public class Encyclopedia {
   // Encyclopedia 2차원 동적 리스트 배열 생성
   public static List<List<String>> encyclopedia = CSVReader
-      .readCSV("/Users/kimhyungho/java-project-pokemon/pokemon/src/CVSFile/Encyclopedia.csv");
+      .readCSV("pokemon/src/CVSFile/Encyclopedia.csv");
   // 도감 인덱스 : (포켓몬 넘버, 포켓몬 이름, hp,공격력, 속성, 설명 , 획득 여부)
 
   // 도감을 초기화 하는 생성자.a
