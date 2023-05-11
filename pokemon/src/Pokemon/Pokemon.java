@@ -1,8 +1,9 @@
 package Pokemon;
 
 import java.io.BufferedReader;
-import Player.Encyclopedia.encyclopedia;
+import Player.Encyclopedia;
 import java.util.Random;
+import java.util.List;
 
 
 public class Pokemon {
@@ -17,36 +18,37 @@ public class Pokemon {
 	private int evolutionLevel;
 	private int evolutionNo;
 
+	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 	//creat pokemon : decided pokemonNumber 
 	public void makePokemon(int num){
-		pokemonName = encyclopedia.get(num).get(0);
-		type = encyclopedia.get(num).get(1);
-		maxHp = currentHp = encyclopedia.get(num).get(2);
-		damage = encyclopedia.get(num).get(3);
+		pokemonName = encyclopedia.get(num).get(2);
+		type = Integer.parseInt(encyclopedia.get(num).get(3));
+		maxHp = currentHp = Integer.parseInt(encyclopedia.get(num).get(4));
+		damage = Integer.parseInt(encyclopedia.get(num).get(5));
 	};
 
 	//creat poketmon : decided type
 	public void makePokemon(String type){
 		String str = "";
-
-		for(int i=0; i < encyclopedia.size() ; i++){
+		int i;
+		for(i=0; i < encyclopedia.size() ; i++){
 			str = encyclopedia.get(i).get(4);
 			if(str.equals(type)){
 				break;
 			}	
 		}
 
-		pokemonName = encyclopedia.get(--i).get(1);
-		maxHp = currentHp = encyclopedia.get(i).get(2);
-		damage = encyclopedia.get(i).get(3);
-		type = encyclopedia.get(i).get(4);
+		this.pokemonName = encyclopedia.get(--i).get(2);
+		this.maxHp = this.currentHp = Integer.parseInt(encyclopedia.get(i).get(4));
+		this.damage = Integer.parseInt(encyclopedia.get(i).get(5));
+		this.type = Integer.parseInt(encyclopedia.get(i).get(3));
 
 	};
 
 	//creat wild pokemon
 	public void makeWildPokemon(){
 		Random random = new Random();
-		int a = random.nextInt(encyclopedia.size())+1;
+		int a = random.nextInt(encyclopedia.size());
 		makePokemon(a);
 	}
 	
@@ -56,7 +58,7 @@ public class Pokemon {
 		System.out.println("max hp : " + maxHp);
 		System.out.println("current hp : " + currentHp);
 		System.out.println("type : " + type);
-		System.out.println("damage" + damage);
+		System.out.println("damage : " + damage);
 
 	}
 
@@ -85,7 +87,7 @@ public class Pokemon {
 		poke[0] = new Pokemon();
 		poke[1] = new Pokemon();
 		//poke[0].getPokeInfo();
-		//poke[1].makeWildPokemon();
-	
+		poke[1].makeWildPokemon();
+		poke[1].showAllStat();
 	  }
 }
