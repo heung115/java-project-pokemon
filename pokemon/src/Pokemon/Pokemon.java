@@ -1,6 +1,5 @@
 package Pokemon;
 
-import java.io.BufferedReader;
 import Player.Encyclopedia;
 import java.util.Random;
 import java.util.List;
@@ -19,7 +18,7 @@ public class Pokemon {
 
 	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 
-	// creat pokemon : decided pokemonNumber
+	// create pokemon : decided pokemonNumber
 	public void makePokemon(int num) {
 		pokemonName = encyclopedia.get(num).get(2);
 		type = Integer.parseInt(encyclopedia.get(num).get(3));
@@ -27,7 +26,7 @@ public class Pokemon {
 		damage = Integer.parseInt(encyclopedia.get(num).get(5));
 	};
 
-	// create poketmon : decided type
+	// create pokemon : decided type
 	public void makePokemon(String type) {
 		String str = "";
 		int i;
@@ -45,7 +44,7 @@ public class Pokemon {
 
 	};
 
-	// creat wild pokemon
+	// create wild pokemon
 	public void makeWildPokemon() {
 		Random random = new Random();
 		int a = random.nextInt(encyclopedia.size());

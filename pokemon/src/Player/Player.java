@@ -35,8 +35,10 @@ public class Player {
   /*
    * for pokemon
    */
-  public void printPlayerPokemon() {
-    for (int i = 0; i < playerPokemon.size(); i++) {
+  public void showPlayerPokemon() {
+    int playerPokemonSize = playerPokemon.size();
+    
+    for (int i = 0; i < playerPokemonSize; i++) {
       Pokemon tempPokemon = playerPokemon.get(i);
       tempPokemon.showAllStat();
       // TODO 포켓몬 정보 출력 부분 추가
@@ -47,9 +49,8 @@ public class Player {
     Collections.swap(playerPokemon, num1, num2);
   }
 
-  public void addPokemonToPlayerPokemonArrayList() {
-    Pokemon tempPokemon = new Pokemon();
-    playerPokemon.add(tempPokemon);
+  public void addPokemonToPlayerPokemonArrayList(Pokemon pokemon) {
+    playerPokemon.add(pokemon);
   }
 
   public void giveExpPlayerPokemon(int exp, int pokemonNum) {
