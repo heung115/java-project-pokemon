@@ -1,8 +1,8 @@
 package Pokemon;
 
-import java.io.BufferedReader;
 import Player.Encyclopedia;
 import java.util.Random;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,48 +17,66 @@ public class Pokemon {
 	private boolean evolution;
 	private int evolutionLevel;
 	private int evolutionNo;
+	private static List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 
-	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
+	public Pokemon(){
+
+	}
+
 	//creat pokemon : decided pokemonNumber 
-	public void makePokemon(int num){
-		pokemonName = encyclopedia.get(num).get(2);
-		type = Integer.parseInt(encyclopedia.get(num).get(3));
-		maxHp = currentHp = Integer.parseInt(encyclopedia.get(num).get(4));
-		damage = Integer.parseInt(encyclopedia.get(num).get(5));
+	public Pokemon(int num){
+		//System.out.println("인덱스 지정 : "); 
+		this.pokemonName = encyclopedia.get(num).get(2);
+		this.type = Integer.parseInt(encyclopedia.get(num).get(3));
+		this.maxHp = currentHp = Integer.parseInt(encyclopedia.get(num).get(4));
+		this.damage = Integer.parseInt(encyclopedia.get(num).get(5));
 	};
 
 	//creat poketmon : decided type
-	public void makePokemon(String type){
+	public Pokemon(String type){
+		System.out.println("타입 지정 : "); 
 		String str = "";
+		ArrayList<Integer> indexList = new ArrayList<>();
 		int i;
-		for(i=0; i < encyclopedia.size() ; i++){
-			str = encyclopedia.get(i).get(4);
-			if(str.equals(type)){
-				break;
-			}	
-		}
 
-		this.pokemonName = encyclopedia.get(--i).get(2);
-		this.maxHp = this.currentHp = Integer.parseInt(encyclopedia.get(i).get(4));
-		this.damage = Integer.parseInt(encyclopedia.get(i).get(5));
-		this.type = Integer.parseInt(encyclopedia.get(i).get(3));
+		/* 원하는 type의 포켓몬을 선별하여 저장 */
+		for(i=0; i < encyclopedia.size() ; i++){
+			str = encyclopedia.get(i).get(3);
+			System.out.printf(i+": "+str+", "+type+"\n");
+			if(str.equals(type)){
+				indexList.add(Integer.parseInt(encyclopedia.get(i).get(0)));
+			}	
+			
+		}
+		if(indexList.isEmpty()){System.out.println("타입 선택 에러"); System.exit(-1);}
+		
+		/* 원하는 type의 포켓몬 중 random한 1개체 선택 */
+		int num = makeRandom(indexList.size(), false);		
+		this.pokemonName = encyclopedia.get(indexList.get(num)).get(2);
+		this.maxHp = this.currentHp = Integer.parseInt(encyclopedia.get(indexList.get(num)).get(4));
+		this.damage = Integer.parseInt(encyclopedia.get(indexList.get(num)).get(5));
+		this.type = Integer.parseInt(encyclopedia.get(indexList.get(num)).get(3));
 
 	};
 
-	//creat wild pokemon
-	public void makeWildPokemon(){
+	//creat random integer : (0 or 1 ~ size-1)
+	public static int makeRandom(int size, boolean notZero){
+		//System.out.println("랜덤 생성 : "); 
 		Random random = new Random();
-		int a = random.nextInt(encyclopedia.size());
-		makePokemon(a);
+		int a = random.nextInt(size);
+
+		/*0을 사용할 수 없는 경우*/
+		while(a==0&&notZero)random.nextInt(size);
+		
+		return a;
 	}
-	
 	
 	public void showAllStat() {
 		System.out.println(pokemonName);
 		System.out.println("max hp : " + maxHp);
 		System.out.println("current hp : " + currentHp);
 		System.out.println("type : " + type);
-		System.out.println("damage : " + damage);
+		System.out.println("damage : " + damage+"\n");
 
 	}
 
@@ -70,12 +88,12 @@ public class Pokemon {
 		return pokemonName;
 	}
 
-	int getMaxHp() {
+	public int getMaxHp() {
 		return this.maxHp;
 	}
 
 	// 전투 이후 남은 HP를 리턴
-	int setHp(int damage) {
+	public int setHp(int damage) {
 		currentHp -= damage;// damage는 전투 영역에서 타입별로 setDamage();,어디선가 currentHp=maxHp 초기화 필요
 		return this.currentHp;
 	}
@@ -84,10 +102,9 @@ public class Pokemon {
 	public static void main(String[] args) {
 	
 		Pokemon poke[] = new Pokemon[2];
-		poke[0] = new Pokemon();
-		poke[1] = new Pokemon();
-		//poke[0].getPokeInfo();
-		poke[1].makeWildPokemon();
+		poke[0] = new Pokemon("1");
+		poke[1] = new Pokemon(makeRandom(encyclopedia.size(),true));
+		poke[0].showAllStat();
 		poke[1].showAllStat();
 	  }
 }

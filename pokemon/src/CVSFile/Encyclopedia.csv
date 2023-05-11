@@ -1,4 +1,10 @@
 ﻿IndexNo,Unlock,Name,Type,MaxHp,Damege,Evolution,EvolutionLevel,EvolutionNo
 1,FLASE,kobugi,0,750,150,TRUE,30,3
 2,FLASE,aunibugi,0,1000,250,TRUE,60,4
-3,FLASE,kobuking,0,1200,350,FALSE,0,0
+3,FLASE,kobuking,0,1250,350,FALSE,0,0
+4,FLASE,pyree,1,750,150,TURE,30,5
+5,FLASE,rizad,1,1000,250,TURE,60,6
+6,FLASE,rizamong,1,1250,350,FALSE,0,0
+7,FLASE,mobugi,2,750,150,TRUE,30,8
+8,FLASE,sufulbugi,2,1000,250,TRUE,60,9
+9,FLASE,todebugi,2,1250,150,FALSE,0,0
