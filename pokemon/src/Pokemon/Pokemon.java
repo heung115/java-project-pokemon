@@ -68,12 +68,16 @@ public class Pokemon {
 		return pokemonName;
 	}
 
-	int getMaxHp() {
+	public int getMaxHp() {
 		return this.maxHp;
 	}
 
+	public int getCurrentHpHp() {
+		return this.currentHp;
+	}
+
 	// 전투 이후 남은 HP를 리턴
-	int setHp(int damage) {
+	public int setHp(int damage) {
 		currentHp -= damage;// damage는 전투 영역에서 타입별로 setDamage();,어디선가 currentHp=maxHp 초기화 필요
 		return this.currentHp;
 	}

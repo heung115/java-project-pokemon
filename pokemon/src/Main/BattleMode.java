@@ -2,24 +2,26 @@ package Main;
 
 import Player.Player;
 import Pokemon.Pokemon;
+import Util.Ui;
 
 import java.util.Scanner;
 
 public class BattleMode {
     private int choice = 0;
     Scanner scanner = new Scanner(System.in);
+    // Ui ui = new Ui();
     Player aiPlayer = makeAiPlayer(1);
 
     public BattleMode() {
 
     }
 
-    public void mainBattleMode(Player player) {
-        while (choice == 4) {
+    public void mainBattleModeLoop(Player player) {
+        while (choice != 4) {
             // TODO ai 전투 과정 만들기
-            printBattleGameLoopUi();
-            showAiPokemon();
-            scanner.nextInt();
+            Ui.BattleModeUi.printBattleGameLoopUi();
+            // showAiPokemon();
+            choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
@@ -41,8 +43,9 @@ public class BattleMode {
     /*
      * for choice battle
      */
+
     private void attack(Player player, Player aiPlayer) {
-        printBattleUi(player, aiPlayer);
+        Ui.BattleModeUi.printBattleUi(player, aiPlayer);
     }
 
     private void changePokemon(Player player) {
@@ -81,25 +84,4 @@ public class BattleMode {
         aiPlayer.showPlayerPokemon();
     }
 
-    /*
-     * for Ui
-     */
-    private void printBattleGameLoopUi() {
-        System.out.println("=================///==================");
-        System.out.println("1. 공격");
-        System.out.println("2. 교체");
-        System.out.println("3. 가방");
-        System.out.println("4. 도망가기");
-        System.out.println("=================///==================");
-    }
-
-    private void printBattleUi(Player player, Player aiPlayer) {
-        System.out.println("나 : " + player.getName());
-        System.out.println("- 포켓몬 : ");
-        player.printPlayerPokemon();
-        System.out.println("=======================================");
-        System.out.println("상대 : " + aiPlayer.getName());
-        System.out.println("- 포켓몬 : ");
-        aiPlayer.printPlayerPokemon();
-    }
 }

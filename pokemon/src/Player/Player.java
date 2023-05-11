@@ -35,9 +35,16 @@ public class Player {
   /*
    * for pokemon
    */
+  public void showPlayerPokemonCombat() {
+    Pokemon pokemon = playerPokemon.get(0);
+    System.out.println(pokemon.getName());
+    System.out.println("Hp :" + pokemon.getMaxHp() + "/" + pokemon.getCurrentHpHp());
+
+  }
+
   public void showPlayerPokemon() {
     int playerPokemonSize = playerPokemon.size();
-    
+
     for (int i = 0; i < playerPokemonSize; i++) {
       Pokemon tempPokemon = playerPokemon.get(i);
       tempPokemon.showAllStat();

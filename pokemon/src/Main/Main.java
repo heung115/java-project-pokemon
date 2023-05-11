@@ -3,6 +3,7 @@ package Main;
 import Player.*;
 import Pokemon.Pokemon;
 import java.util.Scanner;
+import Util.Ui;
 
 public class Main {
   static Scanner sc = new Scanner(System.in);
@@ -15,7 +16,7 @@ public class Main {
     Player player = my.gameStartSetting();
     MainGame mainGame = new MainGame();
     player.showPlayerPokemon();
-    // my.mainTitle();
+    // Ui.Main.mainTitle();
 
     mainGame.mainGameLoop(player);
   }
@@ -60,21 +61,6 @@ public class Main {
     giveItem();
     showInfo(player);
     return player;
-  }
-
-  /*
-   * show UI
-   */
-  private void mainTitle() {
-    System.out.println("===================================================");
-    System.out.println("______         _                                   ");
-    System.out.println("| ___ \\       | |                                  ");
-    System.out.println("| |_/ /  ___  | | __  ___  _ __ ___    ___   _ __  ");
-    System.out.println("|  __/  / _ \\ | |/ / / _ \\| '_ ` _ \\  / _ \\ | '_ \\ ");
-    System.out.println("| |    | (_) ||   < |  __/| | | | | || (_) || | | |");
-    System.out.println("\\_|     \\___/ |_|\\_\\ \\___||_| |_| |_| \\___/ |_| |_|");
-    System.out.println("                                                   ");
-    System.out.println("===================================================");
   }
 
 }
