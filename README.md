@@ -35,17 +35,58 @@ main branch로 pull보내면 살짝 곤란..
 $ git checkout [본인의 branch]
 ```
 
-2. 그 후 자신의 branch에서 코드 작성 및 수정 후 orging으로 push
+2. 그 후 자신의 branch에서 코드 작성 및 수정 후 origin으로 push
 
 ```bash
 $ git push origin [본인의 branch]
 ```
 
-3. 그 후 깃허브 Repository로 이동하면 pull requset를 보낼 수 있는 버튼이 있는데, 거기서 제목과 내용을 알맞게 작성해서 풀 리퀘스트를 보내면 남은 팀원이 이를 확인 및 토론 후 main branch로 merge한다.
+3. 그 후 깃허브 Repository로 이동하면 pull request를 보낼 수 있는 버튼이 있는데, 거기서 제목과 내용을 알맞게 작성해서 풀 리퀘스트를 보내면 남은 팀원이 이를 확인 및 토론 후 main branch로 merge한다.
+
+### 오류 관련
+
+pr을 받아서 main branch에 변경사항이 있으면,
+
+```bash
+$ git checkout
+```
+
+을 하면 되는데, 가끔 내가 로컬에서 수정하던게 있으면 변경을 업데이트하라고 checkout이 안된다.  
+그럼
+
+```bash
+$ git stash
+```
+
+해서 현재 작업중인 branch에 변경사항을 스택에 저장하고 다른 branch로 넘어 갈 수있다.
+그러고 main으로 이동해서
+
+```bash
+$ git pull origin main
+```
+
+으로 원격 main의 변경을 내 로컬로 받아오고
+
+```bash
+$ git checkout "내 branch"
+```
+
+로 이동후 저장했던 stash를 적용한다.
+
+```bash
+$ git stash apply
+```
+
+그다음에 main branch와 병합하면 됨
+
+```bash
+$ git merge main
+```
+
+변경사항때문에 merge가 안되면 !표시를 찾아서 받아온걸 수락하면 됨
+<br/>
 
 ## 2. commit 작성 관련
-
-<br//>
 
 ### 1. commit message 작성 규칙
 
@@ -80,4 +121,4 @@ $ git push origin [본인의 branch]
       test : 테스트 코드 수정에 대한 커밋
 
 ex) dosc: Add commit message guide in README  
-근데 그냥 귀찮으니까 add, modify같은거 앞에두고 쓰자. add: 무슨무슨파일~~ 그냥 
+근데 그냥 귀찮으니까 add, modify같은거 앞에두고 쓰자. add: 무슨무슨파일~~ 그냥
