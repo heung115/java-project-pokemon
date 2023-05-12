@@ -35,18 +35,17 @@ public class Main {
   private Pokemon choicePokemon() {
     System.out.println("포켓몬을 고르시오");
     System.out.println("1. 파이리 ");
-    Pokemon pokemon = new Pokemon();
     int input = sc.nextInt();
     switch (input) {
       case 1:
-        pokemon.makePokemon(1);
+        Pokemon pokemon = new Pokemon(1);
         return pokemon;
       case 2:
         break;
       default:
-        return pokemon;
+        return null;
     }
-    return pokemon;
+    return null;
   }
 
   // TODO: give item 작성

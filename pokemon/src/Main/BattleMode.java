@@ -99,8 +99,8 @@ public class BattleMode {
 
     private Pokemon makeAiPlayerPokemon(int levelNum) {
         // TODO: levelNum에 따라서 생성되면 포켓몬 변경로직 작성
-        Pokemon pokemon = new Pokemon();
-        pokemon.makePokemon(levelNum);
+        Pokemon pokemon = new Pokemon(levelNum);
+        // pokemon.makePokemon(levelNum);
         return pokemon;
     }
 }
