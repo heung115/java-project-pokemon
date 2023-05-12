@@ -17,7 +17,7 @@ public class Pokemon {
 	private boolean evolution;
 	private int evolutionLevel;
 	private int evolutionNo;
-	private static List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
+	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 
 	public Pokemon(){
 
@@ -42,7 +42,7 @@ public class Pokemon {
 		/* 원하는 type의 포켓몬을 선별하여 저장 */
 		for(i=0; i < encyclopedia.size() ; i++){
 			str = encyclopedia.get(i).get(3);
-			System.out.printf(i+": "+str+", "+type+"\n");
+			//System.out.printf(i+": "+str+", "+type+"\n");
 			if(str.equals(type)){
 				indexList.add(Integer.parseInt(encyclopedia.get(i).get(0)));
 			}	
@@ -88,8 +88,20 @@ public class Pokemon {
 		return pokemonName;
 	}
 
+	public int getType() {
+		return this.type;
+	}
+
+	public int getDamege() {
+		return this.damage;
+	}
+
 	public int getMaxHp() {
 		return this.maxHp;
+	}
+
+	public int curretMaxHp() {
+		return this.currentHp;
 	}
 
 	// 전투 이후 남은 HP를 리턴
@@ -103,7 +115,7 @@ public class Pokemon {
 	
 		Pokemon poke[] = new Pokemon[2];
 		poke[0] = new Pokemon("1");
-		poke[1] = new Pokemon(makeRandom(encyclopedia.size(),true));
+		poke[1] = new Pokemon(makeRandom(Encyclopedia.encyclopedia.size(),true));
 		poke[0].showAllStat();
 		poke[1].showAllStat();
 	  }
