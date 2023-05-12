@@ -107,6 +107,10 @@ public class Pokemon {
 	// 전투 이후 남은 HP를 리턴
 	public int setHp(int damage) {
 		currentHp -= damage;// damage는 전투 영역에서 타입별로 setDamage();,어디선가 currentHp=maxHp 초기화 필요
+
+		if(currentHp < 0) currentHp = 0;
+		else if (currentHp > maxHp) currentHp = maxHp; //물리치료
+		
 		return this.currentHp;
 	}
 
