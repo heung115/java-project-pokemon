@@ -22,7 +22,7 @@ public class BattleMode {
             Ui.BattleModeUi.printBattleGameLoopUi();
             // showAiPokemon();
             choice = scanner.nextInt();
-
+            Ui.BattleModeUi.printBattleUi(player, aiPlayer);
             switch (choice) {
                 case 1:
                     attack(player, aiPlayer);
@@ -43,9 +43,33 @@ public class BattleMode {
     /*
      * for choice battle
      */
+    private double circulateEffect(String type1, String type2) {
+        int type = -1;
+        int pokemonEffectSize = Main.pokemonEffect.size();
+        for (int i = 1; i < pokemonEffectSize; i++) {
+            if (type1.equals(Main.pokemonEffect.get(i).get(0))) {
+                type = i;
+                break;
+            }
+        }
+        for (int i = 1; i < pokemonEffectSize; i++) {
+            if (type2.equals(Main.pokemonEffect.get(0).get(i))) {
+                return Double.parseDouble(Main.pokemonEffect.get(type).get(i));
+            }
+        }
+        return -1.0;
+    }
 
-    private void attack(Player player, Player aiPlayer) {
-        Ui.BattleModeUi.printBattleUi(player, aiPlayer);
+    private double circulateDamageFormula(Player player1, Player player2) {
+        double typeDamage = circulateEffect(player1.getPlayerPokemonType(0), player2.getPlayerPokemonType(0));
+        return player1.getPlayerPokemonDamage(0) * typeDamage;
+    }
+
+    private void attack(Player player1, Player player2) {
+        int damage = (int) circulateDamageFormula(player1, player2);
+        player2.setPlayerPokemonHp(0, damage);
+        System.out.println(damage + "만큼의 공격 성공");
+
     }
 
     private void changePokemon(Player player) {
@@ -79,9 +103,4 @@ public class BattleMode {
         pokemon.makePokemon(levelNum);
         return pokemon;
     }
-
-    private void showAiPokemon() {
-        aiPlayer.showPlayerPokemon();
-    }
-
 }

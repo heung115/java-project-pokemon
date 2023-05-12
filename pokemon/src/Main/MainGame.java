@@ -2,6 +2,7 @@ package Main;
 
 import java.util.Scanner;
 import Player.Player;
+import Util.*;
 
 public class MainGame {
     Scanner scanner = new Scanner(System.in);
@@ -10,7 +11,7 @@ public class MainGame {
 
     public void mainGameLoop(Player player) {
         while (choice != 4) {
-            PrintUi.printMainGameLoopUi();
+            Ui.MainGame.printMainGameLoopUi();
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -30,15 +31,4 @@ public class MainGame {
 
     }
 
-}
-
-class PrintUi {
-    public static void printMainGameLoopUi() {
-        System.out.println("=================///==================");
-        System.out.println("1. 배틀 모드");
-        System.out.println("2. 어드벤쳐 모드");
-        System.out.println("3. 옵션");
-        System.out.println("4. 종료");
-        System.out.println("=================///==================");
-    }
 }

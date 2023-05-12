@@ -2,11 +2,14 @@ package Main;
 
 import Player.*;
 import Pokemon.Pokemon;
+import Util.*;
+import java.util.List;
 import java.util.Scanner;
-import Util.Ui;
 
 public class Main {
   static Scanner sc = new Scanner(System.in);
+  public static List<List<String>> pokemonEffect = CSVReader
+      .readCSV("pokemon/src/CVSFile/effect.csv");
 
   // static Player player;
   public static void main(String[] args) throws Exception {
@@ -17,7 +20,7 @@ public class Main {
     MainGame mainGame = new MainGame();
     player.showPlayerPokemon();
     // Ui.Main.mainTitle();
-
+    Ui.tools.clearConsoleScreen();
     mainGame.mainGameLoop(player);
   }
 
