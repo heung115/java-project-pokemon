@@ -14,7 +14,7 @@ public class Main {
   // static Player player;
   public static void main(String[] args) throws Exception {
     // main클래스 내 함수 사용위한 main객체
-
+    Ui.tools.clearConsoleScreen();
     Main my = new Main();
     Player player = my.gameStartSetting();
     MainGame mainGame = new MainGame();
