@@ -9,7 +9,7 @@ public class Player {
   // private int playerState;
   private int money;
   LevelPlayer levelPlayer = new LevelPlayer();
-  ArrayList<Pokemon> playerPokemon = new ArrayList<>();
+  private ArrayList<Pokemon> playerPokemon = new ArrayList<>();
   private Bag playerBag = new Bag();
   private Encyclopedia playerEncyclopedia = new Encyclopedia();
 
@@ -35,21 +35,61 @@ public class Player {
   /*
    * for pokemon
    */
-  public void printPlayerPokemon() {
-    for (int i = 0; i < playerPokemon.size(); i++) {
+
+  public void showPlayerPokemonCombat() {
+    Pokemon pokemon = playerPokemon.get(0);
+    System.out.println(pokemon.getName());
+    System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
+
+  }
+
+  public void showPlayerPokemon() {
+    int playerPokemonSize = playerPokemon.size();
+
+    for (int i = 0; i < playerPokemonSize; i++) {
       Pokemon tempPokemon = playerPokemon.get(i);
       tempPokemon.showAllStat();
       // TODO 포켓몬 정보 출력 부분 추가
     }
   }
 
+  public int getPlayerPokemonMaxHp(int num) {
+    Pokemon pokemon = playerPokemon.get(num);
+    return pokemon.getMaxHp();
+  }
+
+  public int getPlayerPokemonCurrentHp(int num) {
+    Pokemon pokemon = playerPokemon.get(num);
+    return pokemon.getCurrentHp();
+  }
+
+  public int getPlayerPokemonDamage(int num) {
+    Pokemon pokemon = playerPokemon.get(num);
+    // return pokemon.getDamage();
+    return 100;
+  }
+
+  public String getPlayerPokemonType(int num) {
+    Pokemon pokemon = playerPokemon.get(num);
+    // return pokemon.getType();
+    return "노말";
+  }
+
+  public void setPlayerPokemonHp(int num, int damage) {
+    Pokemon pokemon = playerPokemon.get(num);
+    pokemon.setHp(damage);
+  }
+
   public void changePokemon(int num1, int num2) {
     Collections.swap(playerPokemon, num1, num2);
   }
 
-  public void addPokemonToPlayerPokemonArrayList() {
-    Pokemon tempPokemon = new Pokemon();
-    playerPokemon.add(tempPokemon);
+  public void addPokemonToPlayerPokemonArrayList(Pokemon pokemon) {
+    playerPokemon.add(pokemon);
+  }
+
+  public void giveExpPlayerPokemon(int exp, int pokemonNum) {
+
   }
 
   /*
@@ -64,7 +104,7 @@ public class Player {
     playerEncyclopedia.addPokemonToEncyclopedia(tempPokemon.getPokemonNumber());
   }
   /*
-   * for Pokemon
+   * 
    */
 
 }

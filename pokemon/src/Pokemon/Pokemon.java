@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Pokemon {
 	private String pokemonName;
 	private int pokemonNumber;
@@ -114,13 +113,13 @@ public class Pokemon {
 		return this.currentHp;
 	}
 
-	/*To debug*/
+	/* To debug */
 	public static void main(String[] args) {
-	
+
 		Pokemon poke[] = new Pokemon[2];
 		poke[0] = new Pokemon("1");
 		poke[1] = new Pokemon(makeRandom(Encyclopedia.encyclopedia.size(),true));
 		poke[0].showAllStat();
 		poke[1].showAllStat();
-	  }
+	}
 }
