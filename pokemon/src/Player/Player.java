@@ -3,6 +3,7 @@ package Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import Pokemon.Pokemon;
+import Player.Item.*;
 
 public class Player {
   private String playerName;
@@ -112,8 +113,19 @@ public class Player {
     Pokemon tempPokemon = playerPokemon.get(playerPokemon.size());
     playerEncyclopedia.addPokemonToEncyclopedia(tempPokemon.getPokemonNumber());
   }
-  /*
-   * 
-   */
 
+  /*
+   * for Bag
+   */
+  public void useItemBag(int num) {
+    playerBag.useItem(num);
+  }
+
+  public void addItemBag(Item item, int num) {
+    playerBag.addItem(item, num);
+  }
+
+  public void showBag() {
+    playerBag.showBag();
+  }
 }
