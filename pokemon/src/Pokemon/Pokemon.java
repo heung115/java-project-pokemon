@@ -6,37 +6,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pokemon {
+	
 	private String pokemonName;
 	private int pokemonNumber;
-	private boolean unlock;
 	private int maxHp;
 	private int currentHp;
 	private int belong; // 0-player, 1-wild, 2-AI
 	private int type; // 0-water, 1-fire, 2-grass
 	private int damage;
-	private boolean evolution;
-	private int evolutionLevel;
-	private int evolutionNo;
+
+	
+	/* For LevelPokemon */
+	protected boolean unlock;
+	protected int level;
+    protected int currentExp;
+    protected int maxExp;
+	protected boolean evolution;
+	protected int evolutionLevel;
+	protected int evolutionNo;
+
+
 	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 
 	public Pokemon(){
 
 	}
 
-	//creat pokemon : decided pokemonNumber 
+	//create pokemon : decided pokemonNumber 
 	public Pokemon(int num){
 		//System.out.println("인덱스 지정 : "); 
-		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
-		this.pokemonName = encyclopedia.get(num).get(2);
-		this.type = Integer.parseInt(encyclopedia.get(num).get(3));
-		this.maxHp = currentHp = Integer.parseInt(encyclopedia.get(num).get(4));
-		this.damage = Integer.parseInt(encyclopedia.get(num).get(5));
-		this.evolution = Boolean.parseBoolean(encyclopedia.get(num).get(6));
-		this.evolutionLevel = Integer.parseInt(encyclopedia.get(num).get(7));
-		this.evolutionNo = Integer.parseInt(encyclopedia.get(num).get(8));
+		insertInfo(num);
 	};
 
-	//creat poketmon : decided type
+	//create pokemon : decided type
 	public Pokemon(String type){
 		System.out.println("타입 지정 : "); 
 		String str = "";
@@ -56,6 +58,11 @@ public class Pokemon {
 		
 		/* 원하는 type의 포켓몬 중 random한 1개체 선택 */
 		int num = makeRandom(indexList.size(), false);		
+		insertInfo(num);
+		
+	};
+
+	public void insertInfo(int num){
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
 		this.pokemonName = encyclopedia.get(num).get(2);
 		this.type = Integer.parseInt(encyclopedia.get(num).get(3));
@@ -64,10 +71,9 @@ public class Pokemon {
 		this.evolution = Boolean.parseBoolean(encyclopedia.get(num).get(6));
 		this.evolutionLevel = Integer.parseInt(encyclopedia.get(num).get(7));
 		this.evolutionNo = Integer.parseInt(encyclopedia.get(num).get(8));
-		
-	};
+	}
 
-	//creat random integer : (0 or 1 ~ size-1)
+	//create random integer : (0 or 1 ~ size-1)
 	public static int makeRandom(int size, boolean notZero){
 		//System.out.println("랜덤 생성 : "); 
 		Random random = new Random();
@@ -77,6 +83,12 @@ public class Pokemon {
 		while(a==0&&notZero)random.nextInt(size);
 		
 		return a;
+	}
+
+	public void increaseStat(){
+		this.maxHp += 10;
+		this.currentHp += 10;
+		this.damage += 2;
 	}
 	
 	public void showAllStat() {
@@ -100,7 +112,7 @@ public class Pokemon {
 		return this.type;
 	}
 
-	public int getDamege() {
+	public int getDamage() {
 		return this.damage;
 	}
 
