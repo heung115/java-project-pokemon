@@ -80,11 +80,11 @@ public class Pokemon {
 	}
 
 	public int getPokemonNumber() {
-		return pokemonNumber;
+		return this.pokemonNumber;
 	}
 
 	public String getName() {
-		return pokemonName;
+		return this.pokemonName;
 	}
 
 	public int getType() {
@@ -99,7 +99,7 @@ public class Pokemon {
 		return this.maxHp;
 	}
 
-	public int curretMaxHp() {
+	public int getCurrentHp() {
 		return this.currentHp;
 	}
 
