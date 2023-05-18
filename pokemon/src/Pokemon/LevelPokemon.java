@@ -4,6 +4,10 @@ public class LevelPokemon {
 
     public LevelPokemon() {}
 
+    private int levelExp(int num){
+        return (int)Math.pow(num, 3);
+    }
+
     //player pokemon list에 add할 때 호출
     public void setLevel(Pokemon pokemon){
         
@@ -13,10 +17,11 @@ public class LevelPokemon {
 
     }
 
-    //AI, 야생 포켓몬 생성 시 사용
-    public void setLevel(Pokemon pokemon, int num){
+    //야생 포켓몬 생성, 사탕 사용, etc.
+    //필드에서 Pokemon(int num) 호출 시 rand한 num으로 같이 호출하기
+    public void giveLevel(Pokemon pokemon, int num){
         
-        pokemon.level = num;
+        giveExp(pokemon, levelExp(num));
 
     }
 
@@ -40,7 +45,7 @@ public class LevelPokemon {
 
             pokemon.level++;
             pokemon.increaseStat();
-            pokemon.maxExp = (int) Math.pow(pokemon.level + 1,3);
+            pokemon.maxExp = levelExp(pokemon.level+1);
         
         }
 
@@ -58,7 +63,7 @@ public class LevelPokemon {
 
         Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
         evolutionPokemon.unlock = true;
-        evolutionPokemon.level = pokemon.level;
+        giveLevel(evolutionPokemon, pokemon.level-1);
         evolutionPokemon.currentExp = pokemon.currentExp;
         evolutionPokemon.maxExp = pokemon.maxExp;
 
