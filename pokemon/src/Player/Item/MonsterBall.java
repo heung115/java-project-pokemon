@@ -35,6 +35,7 @@ public class MonsterBall extends Item {
         System.out.println(captureRateFormula(targetPokemon));
         if (Math.random() < captureRateFormula(targetPokemon)) {
             // capture!
+            System.out.println("잡앗다!!");
             player.addPokemonToPlayerPokemonArrayList(targetPokemon);
         } else {
             System.out.println("실패!!!");
