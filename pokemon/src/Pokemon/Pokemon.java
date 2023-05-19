@@ -63,12 +63,22 @@ public class Pokemon {
 	};
 	
 	//To catch pokemon
-    boolean calculateCatchRate(Pokemon pokemon){
+    boolean calculateCatchRate(Pokemon pokemon, String ball){
         
+		double ballEffect = 1;
         double randNum = Math.random();
-        double catchRate = (3*pokemon.getMaxHp()-2)*255 / (3*pokemon.getMaxHp());
+        double catchRate;
+		
+		switch(ball){
+			case "몬스터볼": ballEffect = 1; break;
+			case "슈퍼볼": ballEffect = 1.25; break;
+			case "하이퍼볼": ballEffect = 1.5; break;
+			case "마스터볼": ballEffect = 255; break;
+		}
 
-        if(randNum <= catchRate) return true;
+		catchRate = ((3*maxHp-2*currentHp)*255 / (3*maxHp)) * ballEffect;
+
+        if(randNum * 255 <= catchRate) return true;
         else return false;
         
     }
