@@ -25,8 +25,9 @@ public class Bag {
     }
   }
 
-  public void useItem(int itemNum) {
-
+  // 어쩔수 없이 아이템 객체를 리턴... 그냥 public을 써도 되지만 코드 깔끔하게 할라고 함수 작성함
+  public Item useItem(int itemNum) {
+    return ((Item) bag.get(itemNum).get(1));
   }
 
   /*
@@ -39,6 +40,7 @@ public class Bag {
   public void addItem(Item item, int itemCount) {
     int bagSize = bag.size();
     for (int i = 0; i < bagSize; i++) {
+      // 기존에 아이템이 있다면 itemCount만큼의 수를 늘린다.
       if (((Item) bag.get(i).get(1)).getItemName().equals(item.getItemName())) {
         bag.get(i).set(2, ((Integer) bag.get(i).get(2)).intValue() + itemCount);
         sortBag();
