@@ -117,8 +117,8 @@ public class Player {
   /*
    * for Bag
    */
-  public void useItemBag(int num) {
-    playerBag.useItem(num);
+  public Item useItemBag(int num) {
+    return playerBag.useItem(num);
   }
 
   public void addItemBag(Item item, int num) {
