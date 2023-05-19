@@ -12,7 +12,7 @@ public class Pokemon {
 	private int maxHp;
 	private int currentHp;
 	private int belong; // 0-player, 1-wild, 2-AI
-	private int type; // 0-water, 1-fire, 2-grass
+	private String type; // 0-water, 1-fire, 2-grass -> 물, 불, 풀
 	private int damage;
 
 	
@@ -65,7 +65,7 @@ public class Pokemon {
 	public void insertInfo(int num){
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
 		this.pokemonName = encyclopedia.get(num).get(2);
-		this.type = Integer.parseInt(encyclopedia.get(num).get(3));
+		this.type = encyclopedia.get(num).get(3);
 		this.maxHp = currentHp = Integer.parseInt(encyclopedia.get(num).get(4));
 		this.damage = Integer.parseInt(encyclopedia.get(num).get(5));
 		this.evolution = Boolean.parseBoolean(encyclopedia.get(num).get(6));
@@ -108,7 +108,7 @@ public class Pokemon {
 		return this.pokemonName;
 	}
 
-	public int getType() {
+	public String getType() {
 		return this.type;
 	}
 
