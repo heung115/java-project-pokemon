@@ -1,5 +1,8 @@
 package Player.Item;
 
+import Player.Player;
+import Pokemon.Pokemon;
+
 public class Item {
     int itemIndex = 0;
     String itemName;
@@ -9,7 +12,12 @@ public class Item {
      * itemIndex 2 : 상처약
      */
     public void use() {
+    }
 
+    public void use(Player player, Pokemon pokemon) {
+    }
+
+    public void use(Pokemon pokemon) {
     }
 
     public int getItemIndex() {
