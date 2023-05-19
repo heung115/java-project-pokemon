@@ -61,6 +61,17 @@ public class Pokemon {
 		insertInfo(num);
 		
 	};
+	
+	//To catch pokemon
+    boolean calculateCatchRate(Pokemon pokemon){
+        
+        double randNum = Math.random();
+        double catchRate = (3*pokemon.getMaxHp()-2)*255 / (3*pokemon.getMaxHp());
+
+        if(randNum <= catchRate) return true;
+        else return false;
+        
+    }
 
 	public void insertInfo(int num){
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
