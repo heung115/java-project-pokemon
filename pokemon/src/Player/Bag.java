@@ -17,10 +17,11 @@ public class Bag {
       System.out.println("가방이 비었습니다");
     }
     for (int i = 0; i < bag.size(); i++) {
-      System.out.print(i + ":");
+      // System.out.print(i + ":");
       Item item = (Item) bag.get(i).get(1);
-      System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");
-      System.out.println();
+      // TODO: 한글 출력 정렬추가
+      System.out.printf("%2d%6s,%3d\n", i, item.getItemName(), bag.get(i).get(2));
+      // System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");
     }
   }
 
