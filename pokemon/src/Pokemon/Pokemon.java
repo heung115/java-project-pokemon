@@ -14,16 +14,16 @@ public class Pokemon {
 	private int belong; // 0-player, 1-wild, 2-AI
 	private String type; // 0-water, 1-fire, 2-grass -> 물, 불, 풀
 	private int damage;
-
+	private boolean unlock;
+	private boolean evolution;
+	private int evolutionLevel;
+	private int evolutionNo;
 	
 	/* For LevelPokemon */
-	protected boolean unlock;
-	protected int level;
-    protected int currentExp;
-    protected int maxExp;
-	protected boolean evolution;
-	protected int evolutionLevel;
-	protected int evolutionNo;
+	int level;
+    int currentExp;
+    int maxExp;
+
 
 
 	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
@@ -63,6 +63,7 @@ public class Pokemon {
 	};
 	
 	//To catch pokemon
+	//호출 시 belong 초기화 필요
     boolean calculateCatchRate(Pokemon pokemon, String ball){
         
 		double ballEffect = 1;
@@ -155,6 +156,23 @@ public class Pokemon {
 		return this.currentHp;
 	}
 
+	public boolean getEvolution(){
+		return this.evolution;
+	}
+
+	public int getEvolutionLevel(){
+		return this.evolutionLevel;
+	}
+
+	public Pokemon evolutionPokemon(Pokemon pokemon){
+
+        Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
+        evolutionPokemon.unlock = true;
+        evolutionPokemon.currentExp = pokemon.currentExp;
+        evolutionPokemon.maxExp = pokemon.maxExp;
+
+        return evolutionPokemon;
+    }
 	/* To debug */
 	public static void main(String[] args) {
 
