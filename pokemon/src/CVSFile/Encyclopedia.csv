@@ -1,4 +1,4 @@
-﻿IndexNo,Unlock,Name,Type,MaxHp,Damage,Evolution,EvolutionLevel,EvolutionNo
+IndexNo,Unlock,Name,Type,MaxHp,Damage,Evolution,EvolutionLevel,EvolutionNo
 1,false,kobugi,0,7500,550,TRUE,30,3
 2,false,aunibugi,0,1000,250,TRUE,60,4
 3,false,kobuking,0,1250,350,FALSE,0,0
