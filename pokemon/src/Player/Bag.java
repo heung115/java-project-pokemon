@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import Player.Item.*;
 import java.util.Collections;
 import java.util.Comparator;
+import java.io.*;
 
-public class Bag {
+public class Bag implements Serializable {
   // 2차원 동적 배열
   ArrayList<ArrayList<Object>> bag = new ArrayList<>();
 

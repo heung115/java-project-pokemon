@@ -44,7 +44,7 @@ public class MonsterBall extends Item {
 
     private double captureRateFormula(Pokemon targetPokemon) {
         return (3 * (double) targetPokemon.getMaxHp()
-                - 2 * (double) targetPokemon.getCurrentHp() * captureRate[monsterBallKind])
+                - 2 * (double) targetPokemon.getCurrentHp()) * captureRate[monsterBallKind]
                 / (3 * (double) targetPokemon.getMaxHp());
     }
 }
