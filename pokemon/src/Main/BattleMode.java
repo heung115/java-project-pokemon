@@ -92,7 +92,7 @@ public class BattleMode {
         int damage = (int) circulateDamageFormula(player1, player2);
         player2.setPlayerPokemonHp(0, damage);
         System.out.println(
-                player1.getName() + "의 포켓몬 " + player1.getPlayerPokemonTName(0) + "이/가 " + damage + "만큼의 공격 성공");
+                player1.getName() + "의 포켓몬 " + player1.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공");
         if (player2.getPlayerPokemonCurrentHp(0) == 0) {
             return true;
         } else {

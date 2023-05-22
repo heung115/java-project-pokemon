@@ -1,15 +1,19 @@
 package Player;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import Pokemon.Pokemon;
 import Player.Item.*;
 
-public class Player {
+public class Player implements Serializable {
   private String playerName;
   // private int playerState;
   private int money;
-  private LevelPlayer levelPlayer = new LevelPlayer();
+  private int level;
+  private int currentExp;
+  private int maxExp;
+  // private LevelPlayer levelPlayer = new LevelPlayer();
   protected int availableCombatPokemonCount = 3;
   ArrayList<Pokemon> playerPokemon = new ArrayList<>();
   private Bag playerBag = new Bag();
@@ -17,12 +21,8 @@ public class Player {
 
   public Player(String playerName) {
     this.playerName = playerName;
-    // level = 1;
-    // currentExp = 0;
-  }
-
-  public void temp() {
-    System.out.println(availableCombatPokemonCount);
+    level = 1;
+    currentExp = 0;
   }
 
   public String getName() {
@@ -80,7 +80,7 @@ public class Player {
     return "노말";
   }
 
-  public String getPlayerPokemonTName(int num) {
+  public String getPlayerPokemonName(int num) {
     Pokemon pokemon = playerPokemon.get(num);
     return pokemon.getName();
   }
@@ -128,4 +128,8 @@ public class Player {
   public void showBag() {
     playerBag.showBag();
   }
+  /*
+   * for player level
+   */
+
 }

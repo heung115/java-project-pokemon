@@ -2,8 +2,9 @@ package Player.Item;
 
 import Player.Player;
 import Pokemon.Pokemon;
+import java.io.*;
 
-public class Item {
+public class Item implements Serializable {
     int itemIndex = 0;
     String itemName;
 
