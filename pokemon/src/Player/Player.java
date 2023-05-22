@@ -3,13 +3,15 @@ package Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import Pokemon.Pokemon;
+import Player.Item.*;
 
 public class Player {
   private String playerName;
   // private int playerState;
   private int money;
-  LevelPlayer levelPlayer = new LevelPlayer();
-  private ArrayList<Pokemon> playerPokemon = new ArrayList<>();
+  private LevelPlayer levelPlayer = new LevelPlayer();
+  protected int availableCombatPokemonCount = 3;
+  ArrayList<Pokemon> playerPokemon = new ArrayList<>();
   private Bag playerBag = new Bag();
   private Encyclopedia playerEncyclopedia = new Encyclopedia();
 
@@ -17,6 +19,10 @@ public class Player {
     this.playerName = playerName;
     // level = 1;
     // currentExp = 0;
+  }
+
+  public void temp() {
+    System.out.println(availableCombatPokemonCount);
   }
 
   public String getName() {
@@ -65,14 +71,18 @@ public class Player {
 
   public int getPlayerPokemonDamage(int num) {
     Pokemon pokemon = playerPokemon.get(num);
-    // return pokemon.getDamage();
-    return 100;
+    return pokemon.getDamage();
   }
 
   public String getPlayerPokemonType(int num) {
     Pokemon pokemon = playerPokemon.get(num);
     // return pokemon.getType();
     return "노말";
+  }
+
+  public String getPlayerPokemonTName(int num) {
+    Pokemon pokemon = playerPokemon.get(num);
+    return pokemon.getName();
   }
 
   public void setPlayerPokemonHp(int num, int damage) {
@@ -103,8 +113,19 @@ public class Player {
     Pokemon tempPokemon = playerPokemon.get(playerPokemon.size());
     playerEncyclopedia.addPokemonToEncyclopedia(tempPokemon.getPokemonNumber());
   }
-  /*
-   * 
-   */
 
+  /*
+   * for Bag
+   */
+  public Item useItemBag(int num) {
+    return playerBag.useItem(num);
+  }
+
+  public void addItemBag(Item item, int num) {
+    playerBag.addItem(item, num);
+  }
+
+  public void showBag() {
+    playerBag.showBag();
+  }
 }

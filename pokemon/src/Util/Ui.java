@@ -49,6 +49,11 @@ public class Ui {
 
     public static class BattleModeUi {
 
+        public static void printBattleGameStartUi() {
+            System.out.println("배틀 모드로 진입합니다");
+            System.out.println("\n상대방 등장 \n");
+        }
+
         public static void printBattleGameLoopUi() {
             System.out.println("===================================");
             System.out.println("1. 공격");
@@ -61,7 +66,7 @@ public class Ui {
         public static void printBattleUi(Player player, Player aiPlayer) {
             System.out.println("나 : " + player.getName());
             player.showPlayerPokemonCombat();
-            System.out.println("상대 : " + aiPlayer.getName());
+            System.out.println("\n상대 : " + aiPlayer.getName());
             aiPlayer.showPlayerPokemonCombat();
         }
     }
