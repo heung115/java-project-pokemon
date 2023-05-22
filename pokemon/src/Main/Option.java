@@ -1,36 +1,35 @@
 package Main;
 
-import java.util.Scanner;
 import Player.Player;
-import Util.*;
+import java.util.Scanner;
 
-public class MainGame {
+public class Option {
     Scanner scanner = new Scanner(System.in);
-    BattleMode battleMode = new BattleMode();
-    Option option = new Option();
-    
     private int choice = 0;
 
-    public void mainGameLoop(Player player) {
-        while (choice != 4) {
-            Ui.MainGame.printMainGameLoopUi();
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    battleMode.mainBattleModeLoop(player);
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-                    option.mainOptionLoop(player);
-                    break;
-                case 4:
-
-                    break;
-            }
-        }
+    public Option() {
 
     }
 
+    public void mainOptionLoop(Player player) {
+        while (choice != 4) {
+            System.out.println("1.가방보기 \n2.포켓몬 보기 \n3.도감보기\n4.돌아가기");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("bag");
+                    player.showBag();
+                    break;
+                case 2:
+                    player.showPlayerPokemon();
+                    break;
+                case 3:
+                    player.ShowEncyclopedia();
+                    break;
+                case 4:
+                    break;
+            }
+        }
+    }
 }

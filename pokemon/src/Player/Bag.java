@@ -1,35 +1,62 @@
 package Player;
 
 import java.util.ArrayList;
+import Player.Item.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.io.*;
 
-public class Bag {
+public class Bag implements Serializable {
   // 2차원 동적 배열
-  ArrayList<ArrayList<Integer>> bag = new ArrayList<ArrayList<Integer>>();
+  ArrayList<ArrayList<Object>> bag = new ArrayList<>();
 
   public Bag() {
-    for (int i = 0; i < 10; i++) {
-      ArrayList<Integer> temp = new ArrayList<Integer>();
-      for (int j = 0; j < 2; j++) {
-        temp.add(0);
-      }
-      bag.add(temp);
-    }
   }
 
   public void showBag() {
+    if (bag.isEmpty()) {
+      System.out.println("가방이 비었습니다");
+    }
     for (int i = 0; i < bag.size(); i++) {
-      for (int j = 0; j < bag.get(i).size(); j++) {
-        System.out.print(bag.get(i).get(j) + " ");
-      }
-      System.out.println();
+      // System.out.print(i + ":");
+      Item item = (Item) bag.get(i).get(1);
+      // TODO: 한글 출력 정렬추가
+      System.out.printf("%2d%6s,%3d\n", i, item.getItemName(), bag.get(i).get(2));
+      // System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");
     }
   }
 
-  public void useItem(int itemNum) {
-
+  // 어쩔수 없이 아이템 객체를 리턴... 그냥 public을 써도 되지만 코드 깔끔하게 할라고 함수 작성함
+  public Item useItem(int itemNum) {
+    return ((Item) bag.get(itemNum).get(1));
   }
 
-  public void addItem(int itemNum, int itemCount) {
+  /*
+   * 가방에서의 아이템 인덱스
+   * 중요!!! 아이템 매개변수를 넘길 때 업캐스팅해서 넘겨야함!!!!!!!
+   * 아이템 인덱스
+   * 아이템 객체
+   * 아이템 수
+   */
+  public void addItem(Item item, int itemCount) {
+    int bagSize = bag.size();
+    for (int i = 0; i < bagSize; i++) {
+      // 기존에 아이템이 있다면 itemCount만큼의 수를 늘린다.
+      if (((Item) bag.get(i).get(1)).getItemName().equals(item.getItemName())) {
+        bag.get(i).set(2, ((Integer) bag.get(i).get(2)).intValue() + itemCount);
+        sortBag();
+        return;
+      }
+    }
+    ArrayList<Object> row = new ArrayList<>();
+    row.add(item.getItemIndex());
+    row.add(item);
+    row.add(itemCount);
+    bag.add(row);
+    sortBag();
+  }
 
+  private void sortBag() {
+    Collections.sort(bag, Comparator.comparingInt(row -> (int) row.get(0)));
   }
 }
