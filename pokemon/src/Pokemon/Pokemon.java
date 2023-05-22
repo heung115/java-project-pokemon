@@ -64,7 +64,7 @@ public class Pokemon {
 	
 	//To catch pokemon
 	//호출 시 belong 초기화 필요
-    boolean calculateCatchRate(Pokemon pokemon, String ball){
+    public boolean calculateCatchRate(Pokemon pokemon, String ball){
         
 		double ballEffect = 1;
         double randNum = Math.random();
