@@ -1,10 +1,13 @@
 package Main;
 
 import Player.*;
+import Player.Item.*;
 import Pokemon.Pokemon;
 import Util.*;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.imageio.ImageTranscoder;
 
 public class Main {
   static Scanner sc = new Scanner(System.in);
@@ -48,9 +51,11 @@ public class Main {
     return null;
   }
 
-  // TODO: give item 작성
-  private void giveItem() {
-
+  private void giveItem(Player player) {
+    Item monsterBall = new MonsterBall("몬스터볼");
+    Item potion = new Potion();
+    player.addItemBag(monsterBall, 3);
+    player.addItemBag(potion, 5);
   }
 
   private void showInfo(Player player) {
