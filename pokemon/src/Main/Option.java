@@ -18,7 +18,6 @@ public class Option {
 
             switch (choice) {
                 case 1:
-                    System.out.print("bag");
                     player.showBag();
                     break;
                 case 2:
