@@ -103,8 +103,7 @@ public class Player implements Serializable {
 
   public String getPlayerPokemonType(int num) {
     Pokemon pokemon = playerPokemon.get(num);
-    // return pokemon.getType();
-    return "노말";
+    return pokemon.getType();
   }
 
   public String getPlayerPokemonName(int num) {
