@@ -6,8 +6,7 @@ import Pokemon.Pokemon;
 import Util.*;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.imageio.ImageTranscoder;
+import java.io.IOException;
 
 public class Main {
   static Scanner sc = new Scanner(System.in);
@@ -19,11 +18,11 @@ public class Main {
     // main클래스 내 함수 사용위한 main객체
     Ui.tools.clearConsoleScreen();
     Main my = new Main();
-    Player player = my.gameStartSetting();
     MainGame mainGame = new MainGame();
-    player.showPlayerPokemon();
+    Player player = my.gameStartSetting();
+
     // Ui.Main.mainTitle();
-    Ui.tools.clearConsoleScreen();
+    // Ui.tools.clearConsoleScreen();
     mainGame.mainGameLoop(player);
   }
 
@@ -31,6 +30,7 @@ public class Main {
     System.out.print("플레이어의 이름 : ");
     String name = sc.next();
     Player player = new Player(name);
+
     return player;
   }
 
@@ -59,13 +59,26 @@ public class Main {
   }
 
   private void showInfo(Player player) {
-
+    System.out.println("플레이어" + player.getName() + "이/가 생성되었습니다.");
+    System.out.println("이름 : " + player.getName());
+    System.out.println("래벨 : " + player.getLevel() + "lv 경험치 :" + player.getCurrentExp() + "/" + player.getMaxExp());
+    System.out.println("=====가방=====");
+    player.showBag();
+    System.out.println("=====포켓몬=====");
+    player.showPlayerPokemon();
+    System.out.println("내용을 확인했으면 엔터를 눌러주세요");
+    try {
+      System.in.read(); // 아무 키나 누를 때까지 대기
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public Player gameStartSetting() {
     Player player = createPlayerInstance();
     player.addPokemonToPlayerPokemonArrayList(choicePokemon());
-    giveItem();
+    player.addPokemonToEncyclopedia();
+    giveItem(player);
     showInfo(player);
     return player;
   }
