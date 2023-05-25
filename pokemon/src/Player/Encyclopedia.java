@@ -1,10 +1,10 @@
 package Player;
 
 import java.util.List;
-
+import java.io.*;
 import Util.CSVReader;
 
-public class Encyclopedia {
+public class Encyclopedia implements Serializable {
   // Encyclopedia 2차원 동적 리스트 배열 생성
   public static List<List<String>> encyclopedia = CSVReader
       .readCSV("pokemon/src/CVSFile/Encyclopedia.csv");

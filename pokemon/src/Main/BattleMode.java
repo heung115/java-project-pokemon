@@ -1,6 +1,7 @@
 package Main;
 
 import Player.Player;
+import Player.AiPlayer;
 import Pokemon.Pokemon;
 import Util.Ui;
 
@@ -9,23 +10,45 @@ import java.util.Scanner;
 public class BattleMode {
     private int choice = 0;
     Scanner scanner = new Scanner(System.in);
-    // Ui ui = new Ui();
-    Player aiPlayer = makeAiPlayer(1);
+    Player aiPlayer = makeAiPlayer(0);
 
     public BattleMode() {
 
     }
 
     public void mainBattleModeLoop(Player player) {
+        Ui.tools.clearConsoleScreen();
+        Ui.BattleModeUi.printBattleGameStartUi();
         while (choice != 4) {
             // TODO ai 전투 과정 만들기
+            Ui.BattleModeUi.printBattleUi(player, aiPlayer);
             Ui.BattleModeUi.printBattleGameLoopUi();
             // showAiPokemon();
             choice = scanner.nextInt();
-            Ui.BattleModeUi.printBattleUi(player, aiPlayer);
+            Ui.tools.clearConsoleScreen();
             switch (choice) {
                 case 1:
-                    attack(player, aiPlayer);
+                    // 죽이면 true리턴
+                    if (attack(player, aiPlayer)) {
+                        // ai가 사용가능한 포켓몬으로 변경..
+                        // 나중에 플레이거 클래스에서 자동으로 가장 좋은 포켓몬 가져오느 로직을 구성해도 좋을듯
+                        System.out.println("ai pokemon dead");
+                        if (((AiPlayer) aiPlayer).aiPlayerCanUsePokemon() != -1) {
+                            aiPlayer.changePokemon(0, ((AiPlayer) aiPlayer).aiPlayerCanUsePokemon());
+                        } else {
+                            // ai플레이어 전투 종료...
+                            // 보상지금..
+                            System.out.println("win!!");
+                        }
+
+                        // ai 턴 넘기기
+                        continue;
+                    }
+                    if (attack(aiPlayer, player)) {
+
+                        // 보상 추가
+
+                    }
                     break;
                 case 2:
                     changePokemon(player);
@@ -65,11 +88,16 @@ public class BattleMode {
         return player1.getPlayerPokemonDamage(0) * typeDamage;
     }
 
-    private void attack(Player player1, Player player2) {
+    private boolean attack(Player player1, Player player2) {
         int damage = (int) circulateDamageFormula(player1, player2);
         player2.setPlayerPokemonHp(0, damage);
-        System.out.println(damage + "만큼의 공격 성공");
-
+        System.out.println(
+                player1.getName() + "의 포켓몬 " + player1.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공");
+        if (player2.getPlayerPokemonCurrentHp(0) == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void changePokemon(Player player) {
@@ -81,17 +109,17 @@ public class BattleMode {
     }
 
     private void run(Player player) {
-
+        System.out.println("run!!");
     }
     /*
      * for Ai
      */
 
     private Player makeAiPlayer(int aiPlayerLevel) {
-        Player aiPlayer = new Player("Ai");
+        Player aiPlayer = new AiPlayer("Ai");
         for (int i = 0; i < 3; i++) {
             // TODO: 나중에 인자로 플레이어 랩 넘기기
-            aiPlayer.addPokemonToPlayerPokemonArrayList(makeAiPlayerPokemon(i + 1));
+            aiPlayer.addPokemonToPlayerPokemonArrayList(makeAiPlayerPokemon(i + 2));
             aiPlayer.giveExpPlayerPokemon(aiPlayerLevel * 10, i);
         }
         return aiPlayer;
