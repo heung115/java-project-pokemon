@@ -85,6 +85,7 @@ public class Pokemon {
     }
 
 	public void insertInfo(int num){
+		this.pokemonNumber = Integer.parseInt(encyclopedia.get(num).get(0));
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
 		this.pokemonName = encyclopedia.get(num).get(2);
 		this.type = encyclopedia.get(num).get(3);
