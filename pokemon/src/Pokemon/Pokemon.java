@@ -65,28 +65,6 @@ public class Pokemon implements Serializable {
 
 	};
 	
-	//To catch pokemon
-	//호출 시 belong 초기화 필요
-    public boolean calculateCatchRate(Pokemon pokemon, String ball){
-        
-		double ballEffect = 1;
-        double randNum = Math.random();
-        double catchRate;
-		
-		switch(ball){
-			case "몬스터볼": ballEffect = 1; break;
-			case "슈퍼볼": ballEffect = 1.25; break;
-			case "하이퍼볼": ballEffect = 1.5; break;
-			case "마스터볼": ballEffect = 255; break;
-		}
-
-		catchRate = ((3*maxHp-2*currentHp)*255 / (3*maxHp)) * ballEffect;
-
-        if(randNum * 255 <= catchRate) return true;
-        else return false;
-        
-    }
-
 	public void insertInfo(int num){
 		this.pokemonNumber = Integer.parseInt(encyclopedia.get(num).get(0));
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));

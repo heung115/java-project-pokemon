@@ -142,20 +142,20 @@ public class AdventureMap {
         Scanner choice = new Scanner(System.in);
         boolean roof = true;
         while(roof){
+            roof = false;
             switch(choice.nextInt()){
                 case 1: 
                     //addMedicine(),payMoney()
-                    roof = false;
+                    //payMoney는 비용을 메서드로 받아 boolean을 리턴, if:false -> print: error! + roof =true;
                     break;
                 case 2: 
                     //addMonsterBall(),payMoney()
-                    roof = false;
                     break;
                 case 3: 
                     //addCandy(),payMoney()
-                    roof = false;
                     break;
                 default: 
+                    roof = true;
                     System.out.print("\n입력 오류! 다시 입력해주세요 : ");
                     break;
             }
