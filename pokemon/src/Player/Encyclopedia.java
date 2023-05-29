@@ -42,6 +42,7 @@ public class Encyclopedia implements Serializable {
   }
 
   public void addPokemonToEncyclopedia(int pokemonNum) {
-
+    //System.out.println(pokemonNum + "|| " + encyclopedia.get(pokemonNum).get(2) + "를 등록중입니다");
+    encyclopedia.get(pokemonNum).set(1, "true");
   }
 }

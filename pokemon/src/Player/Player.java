@@ -23,6 +23,7 @@ public class Player implements Serializable {
     this.playerName = playerName;
     level = 1;
     currentExp = 0;
+    maxExp = 10;
   }
 
   public String getName() {
@@ -38,6 +39,32 @@ public class Player implements Serializable {
     playerBag.showBag();
   }
 
+  public int getLevel() {
+    return level;
+  }
+
+  public int getCurrentExp() {
+    return currentExp;
+  }
+
+  public int getMaxExp() {
+    return maxExp;
+  }
+
+  public int setExp(int exp) {
+    currentExp += exp;
+    if (currentExp > maxExp) {
+      levelUp();
+      currentExp = maxExp - currentExp;
+      maxExp = level * 10;
+
+    }
+    return currentExp;
+  }
+
+  private void levelUp() {
+    level++;
+  }
   /*
    * for pokemon
    */
@@ -76,8 +103,7 @@ public class Player implements Serializable {
 
   public String getPlayerPokemonType(int num) {
     Pokemon pokemon = playerPokemon.get(num);
-    // return pokemon.getType();
-    return "노말";
+    return pokemon.getType();
   }
 
   public String getPlayerPokemonName(int num) {
@@ -110,7 +136,8 @@ public class Player implements Serializable {
   }
 
   public void addPokemonToEncyclopedia() {
-    Pokemon tempPokemon = playerPokemon.get(playerPokemon.size());
+    Pokemon tempPokemon = playerPokemon.get(playerPokemon.size() - 1);
+    System.out.println(tempPokemon.getName() + "를 도감에 등록합니다");
     playerEncyclopedia.addPokemonToEncyclopedia(tempPokemon.getPokemonNumber());
   }
 
