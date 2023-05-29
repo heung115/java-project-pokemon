@@ -11,6 +11,7 @@ public class Item implements Serializable {
     /*
      * itemIndex 1 : 몬스터볼
      * itemIndex 2 : 상처약
+     * itemIndex 3 : 이상한 사탕
      */
     public void use() {
     }
