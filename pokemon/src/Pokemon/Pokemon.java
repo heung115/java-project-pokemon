@@ -15,14 +15,16 @@ public class Pokemon implements Serializable {
 	private String type; // 0-water, 1-fire, 2-grass -> 물, 불, 풀
 	private int damage;
 
+	private boolean unlock;
+	private boolean evolution;
+	private int evolutionLevel;
+	private int evolutionNo;
+	
 	/* For LevelPokemon */
-	protected boolean unlock;
-	protected int level;
-	protected int currentExp;
-	protected int maxExp;
-	protected boolean evolution;
-	protected int evolutionLevel;
-	protected int evolutionNo;
+	int level;
+    int currentExp;
+    int maxExp;
+
 
 	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 
@@ -62,8 +64,9 @@ public class Pokemon implements Serializable {
 		insertInfo(num);
 
 	};
-
-	public void insertInfo(int num) {
+	
+	public void insertInfo(int num){
+		this.pokemonNumber = Integer.parseInt(encyclopedia.get(num).get(0));
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
 		this.pokemonName = encyclopedia.get(num).get(2);
 		this.type = encyclopedia.get(num).get(3);
@@ -138,6 +141,23 @@ public class Pokemon implements Serializable {
 		return this.currentHp;
 	}
 
+	public boolean getEvolution(){
+		return this.evolution;
+	}
+
+	public int getEvolutionLevel(){
+		return this.evolutionLevel;
+	}
+
+	public Pokemon evolutionPokemon(Pokemon pokemon){
+
+        Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
+        evolutionPokemon.unlock = true;
+        evolutionPokemon.currentExp = pokemon.currentExp;
+        evolutionPokemon.maxExp = pokemon.maxExp;
+
+        return evolutionPokemon;
+    }
 	/* To debug */
 	public static void main(String[] args) {
 

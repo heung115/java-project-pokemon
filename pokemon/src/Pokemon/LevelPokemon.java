@@ -1,7 +1,7 @@
 package Pokemon;
 
 public class LevelPokemon {
-
+    
     public LevelPokemon() {}
 
     private int levelExp(int num){
@@ -53,7 +53,7 @@ public class LevelPokemon {
     }
 
     public boolean canEvolution(Pokemon pokemon){
-        if(pokemon.evolution && pokemon.level >= pokemon.evolutionLevel) 
+        if(pokemon.getEvolution() && pokemon.level >= pokemon.getEvolutionLevel()) 
             return true;
         else 
             return false; 
@@ -61,11 +61,8 @@ public class LevelPokemon {
 
     public Pokemon evolutionPokemon(Pokemon pokemon){
 
-        Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
-        evolutionPokemon.unlock = true;
+        Pokemon evolutionPokemon = evolutionPokemon(pokemon);
         giveLevel(evolutionPokemon, pokemon.level-1);
-        evolutionPokemon.currentExp = pokemon.currentExp;
-        evolutionPokemon.maxExp = pokemon.maxExp;
 
         return evolutionPokemon;
     }
