@@ -13,6 +13,7 @@ public class Player implements Serializable {
   private int level;
   private int currentExp;
   private int maxExp;
+
   // private LevelPlayer levelPlayer = new LevelPlayer();
   protected int availableCombatPokemonCount = 3;
   ArrayList<Pokemon> playerPokemon = new ArrayList<>();
@@ -72,8 +73,8 @@ public class Player implements Serializable {
   public void showPlayerPokemonCombat() {
     Pokemon pokemon = playerPokemon.get(0);
     System.out.println(pokemon.getName());
+    // System.out.println("level :" + pokemon.getLevel);
     System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
-
   }
 
   public void showPlayerPokemon() {
@@ -82,7 +83,6 @@ public class Player implements Serializable {
     for (int i = 0; i < playerPokemonSize; i++) {
       Pokemon tempPokemon = playerPokemon.get(i);
       tempPokemon.showAllStat();
-      // TODO 포켓몬 정보 출력 부분 추가
     }
   }
 
@@ -117,7 +117,11 @@ public class Player implements Serializable {
   }
 
   public void changePokemon(int num1, int num2) {
-    Collections.swap(playerPokemon, num1, num2);
+    try {
+      Collections.swap(playerPokemon, num1, num2);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 범위의 수를 입력해주세요.");
+    }
   }
 
   public void addPokemonToPlayerPokemonArrayList(Pokemon pokemon) {
@@ -155,8 +159,19 @@ public class Player implements Serializable {
   public void showBag() {
     playerBag.showBag();
   }
+
   /*
    * for player level
    */
 
+  /*
+   * for player Money
+   */
+  public int gerMoney() {
+    return money;
+  }
+
+  public void setMoney(int amount) {
+    money += amount;
+  }
 }
