@@ -47,20 +47,22 @@ public class Main {
     System.out.println("포켓몬을 고르시오");
     System.out.println("1. 파이리, 2.파이리, 3.모부기");
 
-    int input = sc.nextInt();
-    switch (input) {
-      case 1:
-        Pokemon pokemon1 = new Pokemon(1);
-        return pokemon1;
-      case 2:
-        Pokemon pokemon2 = new Pokemon(4);
-        return pokemon2;
-      case 3:
-        Pokemon pokemon3 = new Pokemon(7);
-        return pokemon3;
-      // break;
-      default:
-        return null;
+    while (true) {
+      int input = sc.nextInt();
+      switch (input) {
+        case 1:
+          Pokemon pokemon1 = new Pokemon(1);
+          return pokemon1;
+        case 2:
+          Pokemon pokemon2 = new Pokemon(4);
+          return pokemon2;
+        case 3:
+          Pokemon pokemon3 = new Pokemon(7);
+          return pokemon3;
+        // break;
+        default:
+          System.out.println("올바른 번호를 다시 입력해주세요.");
+      }
     }
   }
 
@@ -73,12 +75,7 @@ public class Main {
 
   private void showInfo(Player player) {
     System.out.println("플레이어" + player.getName() + "이/가 생성되었습니다.");
-    System.out.println("=====정보=====");
-    System.out.println("이름 : " + player.getName());
-    System.out.println("래벨 : " + player.getLevel() + "lv 경험치 :" + player.getCurrentExp() + "/" + player.getMaxExp());
-    player.showBag();
-    System.out.println("=====포켓몬=====");
-    player.showPlayerPokemon();
+    player.showInfo();
     System.out.println("내용을 확인했으면 엔터를 눌러주세요");
     try {
       System.in.read(); // 아무 키나 누를 때까지 대기
