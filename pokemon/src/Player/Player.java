@@ -81,39 +81,72 @@ public class Player implements Serializable {
     int playerPokemonSize = playerPokemon.size();
 
     for (int i = 0; i < playerPokemonSize; i++) {
+      System.out.print((i + 1) + ". ");
       Pokemon tempPokemon = playerPokemon.get(i);
       tempPokemon.showAllStat();
     }
   }
 
   public int getPlayerPokemonMaxHp(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getMaxHp();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getMaxHp();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return -1;
+    }
   }
 
   public int getPlayerPokemonCurrentHp(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getCurrentHp();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getCurrentHp();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return -1;
+    }
   }
 
   public int getPlayerPokemonDamage(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getDamage();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getDamage();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return -1;
+    }
   }
 
   public String getPlayerPokemonType(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getType();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getType();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return "-1";
+    }
+
   }
 
   public String getPlayerPokemonName(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getName();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getName();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return "-1";
+    }
   }
 
   public void setPlayerPokemonHp(int num, int damage) {
-    Pokemon pokemon = playerPokemon.get(num);
-    pokemon.setHp(damage);
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      pokemon.setHp(damage);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return;
+    }
+
   }
 
   public void changePokemon(int num1, int num2) {
