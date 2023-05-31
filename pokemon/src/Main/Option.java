@@ -31,7 +31,7 @@ public class Option {
                     Save.savaData(player);
                     break;
                 case 5:
-                    break;
+                    return;
             }
         }
     }
