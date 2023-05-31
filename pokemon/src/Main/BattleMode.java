@@ -23,7 +23,6 @@ public class BattleMode {
         while (choice != 4) {
             Ui.BattleModeUi.printBattleUi(player, aiPlayer);
             Ui.BattleModeUi.printBattleGameLoopUi();
-            // showAiPokemon();
             choice = scanner.nextInt();
             Ui.tools.clearConsoleScreen();
             switch (choice) {
@@ -31,7 +30,7 @@ public class BattleMode {
                     // 죽이면 true리턴
                     if (attack(player, aiPlayer)) {
                         // ai가 사용가능한 포켓몬으로 변경..
-                        // 나중에 플레이거 클래스에서 자동으로 가장 좋은 포켓몬 가져오는 로직을 구성해도 좋을듯
+                        // 나중에 플레이어 클래스에서 자동으로 가장 좋은 포켓몬 가져오는 로직을 구성해도 좋을듯
                         System.out.println("상대방의 포켓몬이 쓰려졌다.\n");
                         if (((AiPlayer) aiPlayer).aiPlayerCanUsePokemon() != -1) {
                             aiPlayer.changePokemon(0, ((AiPlayer) aiPlayer).aiPlayerCanUsePokemon());
@@ -43,7 +42,6 @@ public class BattleMode {
                             aiPlayer = makeAiPlayer(0);
                             return;
                         }
-
                     }
                     break;
                 case 2:
@@ -124,9 +122,11 @@ public class BattleMode {
     private void giveReward(Player player) {
         Item rareCandy = new RareCandy();
         int moneyAmount = 100;
+        int expAmount = 11;
         player.setMoney(moneyAmount);
         player.addItemBag(rareCandy, 1);
-        System.out.println(moneyAmount + "의 돈과 이상한사탕 1개를 얻었다.");
+        System.out.println(moneyAmount + "의 돈과 이상한사탕 1개를 얻었다. \n " + expAmount + "만큼의 경험치를 획득하였다.");
+        player.setExp(expAmount);
     }
 
     /*
