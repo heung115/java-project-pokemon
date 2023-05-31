@@ -41,7 +41,7 @@ public class Ui {
             System.out.println("===================================");
             System.out.println("1. 배틀 모드");
             System.out.println("2. 어드벤쳐 모드");
-            System.out.println("3. 옵션");
+            System.out.println("3. 옵션/정보");
             System.out.println("4. 종료");
             System.out.println("===================================");
         }
@@ -68,6 +68,14 @@ public class Ui {
             player.showPlayerPokemonCombat();
             System.out.println("\n상대 : " + aiPlayer.getName());
             aiPlayer.showPlayerPokemonCombat();
+        }
+    }
+
+    public static class Option {
+        public static void printOptionUi() {
+            System.out.println("===================================");
+            System.out.println("1.가방보기 \n2.플레이어 정보보기\n3.도감보기\n4.저장하기\n5.돌아가기");
+            System.out.println("===================================");
         }
     }
 }
