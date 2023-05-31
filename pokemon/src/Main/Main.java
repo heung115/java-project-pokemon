@@ -50,14 +50,14 @@ public class Main {
     int input = sc.nextInt();
     switch (input) {
       case 1:
-        Pokemon pokemon = new Pokemon(1);
-        return pokemon;
+        Pokemon pokemon1 = new Pokemon(1);
+        return pokemon1;
       case 2:
-        Pokemon pokemon1 = new Pokemon(4);
-        return pokemon1;
+        Pokemon pokemon2 = new Pokemon(4);
+        return pokemon2;
       case 3:
-        Pokemon pokemon1 = new Pokemon(7);
-        return pokemon1;
+        Pokemon pokemon3 = new Pokemon(7);
+        return pokemon3;
       // break;
       default:
         return null;
