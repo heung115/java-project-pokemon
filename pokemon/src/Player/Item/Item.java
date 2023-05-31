@@ -19,6 +19,9 @@ public class Item implements Serializable {
     public void use(Player player, Pokemon pokemon) {
     }
 
+    public void use(Player player) {
+    }
+
     public void use(Pokemon pokemon) {
     }
 
