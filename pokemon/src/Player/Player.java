@@ -14,7 +14,6 @@ public class Player implements Serializable {
   private int currentExp;
   private int maxExp;
 
-  // private LevelPlayer levelPlayer = new LevelPlayer();
   protected int availableCombatPokemonCount = 3;
   ArrayList<Pokemon> playerPokemon = new ArrayList<>();
   private Bag playerBag = new Bag();
@@ -40,31 +39,13 @@ public class Player implements Serializable {
     playerBag.showBag();
   }
 
-  public int getLevel() {
-    return level;
-  }
-
-  public int getCurrentExp() {
-    return currentExp;
-  }
-
-  public int getMaxExp() {
-    return maxExp;
-  }
-
-  public int setExp(int exp) {
-    currentExp += exp;
-    if (currentExp > maxExp) {
-      levelUp();
-      currentExp = maxExp - currentExp;
-      maxExp = level * 10;
-
-    }
-    return currentExp;
-  }
-
-  private void levelUp() {
-    level++;
+  public void showInfo() {
+    System.out.println("=====정보=====");
+    System.out.println("이름 : " + getName());
+    System.out.println("래벨 : " + getLevel() + "\nlv 경험치 :" + getCurrentExp() + "/" + getMaxExp());
+    showBag();
+    System.out.println("=====포켓몬=====");
+    showPlayerPokemon();
   }
   /*
    * for pokemon
@@ -195,7 +176,38 @@ public class Player implements Serializable {
 
   /*
    * for player level
+   * 래벨은 경험치가 10, 20 , 30 ... 이런식으로 늘어남
    */
+
+  public int getLevel() {
+    return level;
+  }
+
+  public int getCurrentExp() {
+    return currentExp;
+  }
+
+  public int getMaxExp() {
+    return maxExp;
+  }
+
+  public int setExp(int exp) {
+    currentExp += exp;
+    if (currentExp > maxExp) {
+      levelUp();
+      currentExp = maxExp - currentExp;
+      maxExp = level * 10;
+
+    }
+    return currentExp;
+  }
+
+  private void levelUp() {
+    System.out.print("레밸업!! " + level + "->");
+    level++;
+    System.out.println(level);
+
+  }
 
   /*
    * for player Money
