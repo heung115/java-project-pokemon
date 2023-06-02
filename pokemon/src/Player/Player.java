@@ -13,7 +13,7 @@ public class Player implements Serializable {
   private int level;
   private int currentExp;
   private int maxExp;
-  // private LevelPlayer levelPlayer = new LevelPlayer();
+
   protected int availableCombatPokemonCount = 3;
   ArrayList<Pokemon> playerPokemon = new ArrayList<>();
   private Bag playerBag = new Bag();
@@ -39,31 +39,13 @@ public class Player implements Serializable {
     playerBag.showBag();
   }
 
-  public int getLevel() {
-    return level;
-  }
-
-  public int getCurrentExp() {
-    return currentExp;
-  }
-
-  public int getMaxExp() {
-    return maxExp;
-  }
-
-  public int setExp(int exp) {
-    currentExp += exp;
-    if (currentExp > maxExp) {
-      levelUp();
-      currentExp = maxExp - currentExp;
-      maxExp = level * 10;
-
-    }
-    return currentExp;
-  }
-
-  private void levelUp() {
-    level++;
+  public void showInfo() {
+    System.out.println("=====정보=====");
+    System.out.println("이름 : " + getName());
+    System.out.println("래벨 : " + getLevel() + "\nlv 경험치 :" + getCurrentExp() + "/" + getMaxExp());
+    showBag();
+    System.out.println("=====포켓몬=====");
+    showPlayerPokemon();
   }
   /*
    * for pokemon
@@ -72,52 +54,88 @@ public class Player implements Serializable {
   public void showPlayerPokemonCombat() {
     Pokemon pokemon = playerPokemon.get(0);
     System.out.println(pokemon.getName());
+    // System.out.println("level :" + pokemon.getLevel);
     System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
-
   }
 
   public void showPlayerPokemon() {
     int playerPokemonSize = playerPokemon.size();
 
     for (int i = 0; i < playerPokemonSize; i++) {
+      System.out.print((i + 1) + ". ");
       Pokemon tempPokemon = playerPokemon.get(i);
       tempPokemon.showAllStat();
-      // TODO 포켓몬 정보 출력 부분 추가
     }
   }
 
   public int getPlayerPokemonMaxHp(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getMaxHp();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getMaxHp();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return -1;
+    }
   }
 
   public int getPlayerPokemonCurrentHp(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getCurrentHp();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getCurrentHp();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return -1;
+    }
   }
 
   public int getPlayerPokemonDamage(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getDamage();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getDamage();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return -1;
+    }
   }
 
   public String getPlayerPokemonType(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getType();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getType();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return "-1";
+    }
+
   }
 
   public String getPlayerPokemonName(int num) {
-    Pokemon pokemon = playerPokemon.get(num);
-    return pokemon.getName();
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getName();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return "-1";
+    }
   }
 
   public void setPlayerPokemonHp(int num, int damage) {
-    Pokemon pokemon = playerPokemon.get(num);
-    pokemon.setHp(damage);
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      pokemon.setHp(damage);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return;
+    }
+
   }
 
   public void changePokemon(int num1, int num2) {
-    Collections.swap(playerPokemon, num1, num2);
+    try {
+      Collections.swap(playerPokemon, num1, num2);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("알맞은 범위의 수를 입력해주세요.");
+    }
   }
 
   public void addPokemonToPlayerPokemonArrayList(Pokemon pokemon) {
@@ -155,8 +173,50 @@ public class Player implements Serializable {
   public void showBag() {
     playerBag.showBag();
   }
+
   /*
    * for player level
+   * 래벨은 경험치가 10, 20 , 30 ... 이런식으로 늘어남
    */
 
+  public int getLevel() {
+    return level;
+  }
+
+  public int getCurrentExp() {
+    return currentExp;
+  }
+
+  public int getMaxExp() {
+    return maxExp;
+  }
+
+  public int setExp(int exp) {
+    currentExp += exp;
+    if (currentExp > maxExp) {
+      levelUp();
+      currentExp = maxExp - currentExp;
+      maxExp = level * 10;
+
+    }
+    return currentExp;
+  }
+
+  private void levelUp() {
+    System.out.print("레밸업!! " + level + "->");
+    level++;
+    System.out.println(level);
+
+  }
+
+  /*
+   * for player Money
+   */
+  public int gerMoney() {
+    return money;
+  }
+
+  public void setMoney(int amount) {
+    money += amount;
+  }
 }

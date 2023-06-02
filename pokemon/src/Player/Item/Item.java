@@ -11,11 +11,15 @@ public class Item implements Serializable {
     /*
      * itemIndex 1 : 몬스터볼
      * itemIndex 2 : 상처약
+     * itemIndex 3 : 이상한 사탕
      */
     public void use() {
     }
 
     public void use(Player player, Pokemon pokemon) {
+    }
+
+    public void use(Player player) {
     }
 
     public void use(Pokemon pokemon) {
