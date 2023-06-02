@@ -1,6 +1,7 @@
 package Main;
 
 import Player.Player;
+import Player.Item.*;
 import Player.AiPlayer;
 import Pokemon.Pokemon;
 import Util.Ui;
@@ -20,10 +21,8 @@ public class BattleMode {
         Ui.tools.clearConsoleScreen();
         Ui.BattleModeUi.printBattleGameStartUi();
         while (choice != 4) {
-            // TODO ai 전투 과정 만들기
             Ui.BattleModeUi.printBattleUi(player, aiPlayer);
             Ui.BattleModeUi.printBattleGameLoopUi();
-            // showAiPokemon();
             choice = scanner.nextInt();
             Ui.tools.clearConsoleScreen();
             switch (choice) {
@@ -31,34 +30,34 @@ public class BattleMode {
                     // 죽이면 true리턴
                     if (attack(player, aiPlayer)) {
                         // ai가 사용가능한 포켓몬으로 변경..
-                        // 나중에 플레이거 클래스에서 자동으로 가장 좋은 포켓몬 가져오느 로직을 구성해도 좋을듯
-                        System.out.println("ai pokemon dead");
+                        // 나중에 플레이어 클래스에서 자동으로 가장 좋은 포켓몬 가져오는 로직을 구성해도 좋을듯
+                        System.out.println("상대방의 포켓몬이 쓰려졌다.\n");
                         if (((AiPlayer) aiPlayer).aiPlayerCanUsePokemon() != -1) {
                             aiPlayer.changePokemon(0, ((AiPlayer) aiPlayer).aiPlayerCanUsePokemon());
+                            continue;
                         } else {
                             // ai플레이어 전투 종료...
-                            // 보상지금..
+                            giveReward(player);
                             System.out.println("win!!");
+                            aiPlayer = makeAiPlayer(0);
+                            return;
                         }
-
-                        // ai 턴 넘기기
-                        continue;
-                    }
-                    if (attack(aiPlayer, player)) {
-
-                        // 보상 추가
-
                     }
                     break;
                 case 2:
                     changePokemon(player);
                     break;
                 case 3:
-
+                    bag(player);
                     break;
                 case 4:
                     run(player);
-                    break;
+                    return;
+            }
+
+            // ai 플레이어가 공격
+            if (attack(aiPlayer, player)) {
+                // 보상 추가
             }
         }
     }
@@ -75,12 +74,16 @@ public class BattleMode {
                 break;
             }
         }
+        if (type == -1) {
+            System.out.println("타입을 찾을 수 없습니다");
+            return -1.0;
+        }
         for (int i = 1; i < pokemonEffectSize; i++) {
             if (type2.equals(Main.pokemonEffect.get(0).get(i))) {
                 return Double.parseDouble(Main.pokemonEffect.get(type).get(i));
             }
         }
-        return -1.0;
+        return -10.0;
     }
 
     private double circulateDamageFormula(Player player1, Player player2) {
@@ -102,15 +105,46 @@ public class BattleMode {
 
     private void changePokemon(Player player) {
         player.showPlayerPokemon();
-        System.out.println("바꿀 두 포켓몬을 선택하시오.");
+        System.out.println("바꿀 두 포켓몬의 번호를 입력하시오.");
         int num1 = scanner.nextInt();
         int num2 = scanner.nextInt();
-        player.changePokemon(num1, num2);
+        player.changePokemon(num1 - 1, num2 - 1);
+        System.out.println("포켓몬이 교체되었습니다.");
     }
 
     private void run(Player player) {
-        System.out.println("run!!");
+        System.out.println("도망쳤다!!");
     }
+
+    /*
+     * for win reward
+     */
+    private void giveReward(Player player) {
+        Item rareCandy = new RareCandy();
+        int moneyAmount = 100;
+        int expAmount = 11;
+        player.setMoney(moneyAmount);
+        player.addItemBag(rareCandy, 1);
+        System.out.println(moneyAmount + "의 돈과 이상한사탕 1개를 얻었다. \n " + expAmount + "만큼의 경험치를 획득하였다.");
+        player.setExp(expAmount);
+    }
+
+    /*
+     * for choice bag
+     */
+    private void bag(Player player) {
+        player.showBag();
+        System.out.println("사용할 아이템의 번호를 입력해주세요");
+        int num = scanner.nextInt();
+        if (num != 1) {
+            System.out.println("사용할 수 없습니다, 다른아이템을 입력해주세요");
+            bag(player);
+        } else {
+            (player.useItemBag(num)).use(player);
+        }
+
+    }
+
     /*
      * for Ai
      */

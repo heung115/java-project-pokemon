@@ -19,12 +19,11 @@ public class Pokemon implements Serializable {
 	private boolean evolution;
 	private int evolutionLevel;
 	private int evolutionNo;
-	
+
 	/* For LevelPokemon */
 	int level;
-    int currentExp;
-    int maxExp;
-
+	int currentExp;
+	int maxExp;
 
 	private List<List<String>> encyclopedia = Encyclopedia.encyclopedia;
 
@@ -64,8 +63,8 @@ public class Pokemon implements Serializable {
 		insertInfo(num);
 
 	};
-	
-	public void insertInfo(int num){
+
+	public void insertInfo(int num) {
 		this.pokemonNumber = Integer.parseInt(encyclopedia.get(num).get(0));
 		this.unlock = Boolean.parseBoolean(encyclopedia.get(num).get(1));
 		this.pokemonName = encyclopedia.get(num).get(2);
@@ -98,10 +97,10 @@ public class Pokemon implements Serializable {
 
 	public void showAllStat() {
 		System.out.println(pokemonName);
-		System.out.println("max hp : " + maxHp);
-		System.out.println("current hp : " + currentHp);
-		System.out.println("type : " + type);
-		System.out.println("damage : " + damage + "\n");
+		System.out.println("레벨 : " + level);
+		System.out.println("체력 : " + currentHp + "/" + maxHp);
+		System.out.println("타입 : " + type);
+		System.out.println("공격력 : " + damage + "\n");
 
 	}
 
@@ -141,23 +140,24 @@ public class Pokemon implements Serializable {
 		return this.currentHp;
 	}
 
-	public boolean getEvolution(){
+	public boolean getEvolution() {
 		return this.evolution;
 	}
 
-	public int getEvolutionLevel(){
+	public int getEvolutionLevel() {
 		return this.evolutionLevel;
 	}
 
-	public Pokemon evolutionPokemon(Pokemon pokemon){
+	public Pokemon evolutionPokemon(Pokemon pokemon) {
 
-        Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
-        evolutionPokemon.unlock = true;
-        evolutionPokemon.currentExp = pokemon.currentExp;
-        evolutionPokemon.maxExp = pokemon.maxExp;
+		Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
+		evolutionPokemon.unlock = true;
+		evolutionPokemon.currentExp = pokemon.currentExp;
+		evolutionPokemon.maxExp = pokemon.maxExp;
 
-        return evolutionPokemon;
-    }
+		return evolutionPokemon;
+	}
+
 	/* To debug */
 	public static void main(String[] args) {
 
