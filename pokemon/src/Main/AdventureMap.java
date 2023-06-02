@@ -46,11 +46,11 @@ public class AdventureMap {
             }
             System.out.println("\n");
         }
-        System.out.println("이동 : 상(1) ,하(2) ,좌(3) ,우(4) \n");
+        System.out.println("이동 : 상(1) ,하(2) ,좌(3) ,우(4), 복귀(-1) \n");
 
     }
 
-    public void move(int mapNumber, int key) {
+    public boolean move(int mapNumber, int key) {
         String place = "";
         for (int i = 0; i < selectedMap.length; i++) {
             if (selectedMap[i].equals("x")) {
@@ -63,8 +63,9 @@ public class AdventureMap {
         switch (key) {
             case 1: // 위
                 try {
-                    selectedMap[pos] = place = this.mapList.get(mapNumber).get(pos);
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
                     pos -= 10;
+                    place = selectedMap[pos];
                     selectedMap[pos] = "x";
                     event(place);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -74,8 +75,9 @@ public class AdventureMap {
                 break;
             case 2: // 아래
                 try {
-                    selectedMap[pos] = place = this.mapList.get(mapNumber).get(pos);
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
                     pos += 10;
+                    place = selectedMap[pos];
                     selectedMap[pos] = "x";
                     event(place);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -83,21 +85,11 @@ public class AdventureMap {
                     pos -= 10;
                 }
                 break;
-            case 4: // 좌
-                if (!(pos % 10 == 9)) {
-                    selectedMap[pos] = place = this.mapList.get(mapNumber).get(pos);
-                    pos += 1;
-                    selectedMap[pos] = "x";
-                    event(place);
-                } else {
-                    Util.Ui.AdventureModeUi.printCannotGoUi();
-                    pos -= 1;
-                }
-                break;
-            case 3: // 우
+            case 3: // 좌
                 if (!(pos % 10 == 0)) {
-                    selectedMap[pos] = place = this.mapList.get(mapNumber).get(pos);
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
                     pos -= 1;
+                    place = selectedMap[pos];
                     selectedMap[pos] = "x";
                     event(place);
                 } else {
@@ -105,7 +97,27 @@ public class AdventureMap {
                     pos += 1;
                 }
                 break;
+            case 4: // 우
+                if (!(pos % 10 == 9)) {
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
+                    pos += 1;
+                    place = selectedMap[pos];
+                    System.out.println(selectedMap[pos]);
+                    selectedMap[pos] = "x";
+                    event(place);
+                } else {
+                    Util.Ui.AdventureModeUi.printCannotGoUi();
+                    pos -= 1;
+                }
+                break;
+            case -1:
+                return false;
+            default:
+                System.out.println("잘못입력하였습니다.");
+                break;
+
         }
+        return true;
     }
 
     private void event(String place) {
@@ -117,6 +129,7 @@ public class AdventureMap {
                 healCenter(player);
                 break;
             case "S":
+                Util.Ui.tools.clearConsoleScreen();
                 shop(player);
                 break;
             case "O":
@@ -130,19 +143,21 @@ public class AdventureMap {
 
         int size = 9;// Encyclopedia.csv에 담긴 포켓몬 수
         double a = Math.random();
-        if (a > 5.0) {
-            Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, false));
+
+        if (a > 0.5) {
+            Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
+            Util.Ui.tools.clearConsoleScreen();
+            System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
             // battleMode(wildPokemon);
             // appearingPokemonUi();
         } else {
-            Util.Ui.tools.clearConsoleScreen();
+            // Util.Ui.tools.clearConsoleScreen();
             ;
             printMap(selectedMap);
         }
     }
 
     private void healCenter(Player player) {
-
 
     }
 
@@ -152,22 +167,29 @@ public class AdventureMap {
          * 이상한 사탕
          * 몬스터 볼 : 일반, 슈퍼, 하이퍼, 마스터
          ***********************************/
-        // Util.Ui.ShopUi.printShopUi;
         Scanner choice = new Scanner(System.in);
         boolean roof = true;
         while (roof) {
+            Util.Ui.tools.clearConsoleScreen();
+            Util.Ui.AdventureModeUi.printShopUi();
+
             roof = false;
             switch (choice.nextInt()) {
                 case 1:
-                    // addMedicine(),payMoney()
-                    // payMoney는 비용을 메서드로 받아 boolean을 리턴, if:false -> print: error! + roof =true;
-                    break;
+                    Ui.AdventureModeUi.printShowItemUi(0);
+                    if(buyItem(0))break;
+                    else roof = true; 
+                    continue;
                 case 2:
-                    // addMonsterBall(),payMoney()
-                    break;
+                    Ui.AdventureModeUi.printShowItemUi(1);
+                    if(buyItem(1))break;
+                    else roof = true; 
+                    continue;
                 case 3:
-                    // addCandy(),payMoney()
-                    break;
+                    Ui.AdventureModeUi.printShowItemUi(2);
+                    if(buyItem(2))break;
+                    else roof = true; 
+                    continue;
                 default:
                     roof = true;
                     System.out.print("\n입력 오류! 다시 입력해주세요 : ");
@@ -177,7 +199,26 @@ public class AdventureMap {
         choice.close();
     }
 
-    public String[] getMap() {
-        return this.selectedMap;
+    private boolean buyItem(int itemNum){
+        Scanner choice = new Scanner(System.in);
+        boolean roof = true;
+        while (roof) {
+            roof = false;
+            switch (choice.next()) {
+                case "Y":case "y":
+                    if(itemNum==0) ;//볼구매
+                    else if(itemNum==1);//상처약 구매
+                    else if(itemNum==2);//사탕 구매
+                    return true;
+                case "N":case "n":
+                    return false;
+                default:
+                    roof = true;
+                    System.out.print("\n입력 오류! 다시 입력해주세요 : ");
+                    break;
+            }
+        }
+        choice.close();
+        return true;
     }
 }
