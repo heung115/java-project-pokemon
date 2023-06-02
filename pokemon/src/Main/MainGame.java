@@ -26,7 +26,7 @@ public class MainGame {
                     option.mainOptionLoop(player);
                     break;
                 case 4:
-
+                
                     break;
             }
         }

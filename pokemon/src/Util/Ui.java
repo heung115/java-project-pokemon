@@ -70,7 +70,14 @@ public class Ui {
             aiPlayer.showPlayerPokemonCombat();
         }
     }
-
+    public static class AdventureModeUi {
+        public static void printAppearWildPokemonUi() {
+            System.out.println("\n야생의 포켓몬이 나타났다!! \n");
+        }
+        public static void printCannotGoUi() {
+            System.out.println("더 이상 갈 수 없다.");
+        }
+    }
     public static class Option {
         public static void printOptionUi() {
             System.out.println("===================================");
