@@ -97,8 +97,8 @@ public class Pokemon implements Serializable {
 
 	public void showAllStat() {
 		System.out.println(pokemonName);
-		System.out.println("래벨 : " + level);
-		System.out.println("채력 : " + currentHp + "/" + maxHp);
+		System.out.println("레벨 : " + level);
+		System.out.println("체력 : " + currentHp + "/" + maxHp);
 		System.out.println("타입 : " + type);
 		System.out.println("공격력 : " + damage + "\n");
 
