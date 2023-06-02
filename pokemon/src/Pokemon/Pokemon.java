@@ -11,7 +11,7 @@ public class Pokemon implements Serializable {
 	private int pokemonNumber;
 	private int maxHp;
 	private int currentHp;
-	private int belong; // 0-player, 1-wild, 2-AI
+	//private int belong; // 0-player, 1-wild, 2-AI
 	private String type; // 0-water, 1-fire, 2-grass -> 물, 불, 풀
 	private int damage;
 

@@ -2,8 +2,8 @@ IndexNo,Unlock,Name,Type,MaxHp,Damage,Evolution,EvolutionLevel,EvolutionNo
 1,false,kobugi,물,7500,550,TRUE,30,3
 2,false,aunibugi,물,1000,250,TRUE,60,4
 3,false,kobuking,물,1250,350,FALSE,0,0
-4,false,pyree,불,750,150,TURE,30,5
-5,false,rizad,불,1000,250,TURE,60,6
+4,false,pyree,불,750,150,TRUE,30,5
+5,false,rizad,불,1000,250,TRUE,60,6
 6,false,rizamong,불,1250,350,FALSE,0,0
 7,false,mobugi,풀,750,150,TRUE,30,8
 8,false,sufulbugi,풀,1000,250,TRUE,60,9

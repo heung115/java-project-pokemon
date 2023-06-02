@@ -1,17 +1,17 @@
 package Main;
 
 import Pokemon.Pokemon;
+import Player.Player;
 import Util.*;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class AdventureMap {
-    
+    public AdventureMap(){}
     private List<List<String>> mapList = CSVReader.readCSV("pokemon/src/CVSFile/map.csv");
-    AdventureMap(){}
-
     private String selectedMap[] = new String[80];
+    private Player player = new Player("Name");
 
     public void initMap(int num){
         int mapSize = 80;
@@ -53,7 +53,7 @@ public class AdventureMap {
                 break;
             };
         }
-
+        
         switch(key){
             case "위": 
                 try {
@@ -62,7 +62,7 @@ public class AdventureMap {
                     event(map, pos);
                     map[pos] = "x";
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    //TODO 다른 맵으로 이동
+                    System.out.println("막힌 공간입니다.");
                 }
                 break;
             case "아래": 
@@ -72,7 +72,7 @@ public class AdventureMap {
                     event(map, pos);
                     map[pos] = "x";
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    //TODO 다른 맵으로 이동
+                    System.out.println("막힌 공간입니다.");
                 }
                 break;
             case "오른쪽": 
@@ -83,7 +83,7 @@ public class AdventureMap {
                     map[pos] = "x";
                 }
                 else{ 
-                    //TODO 다른 맵으로 이동
+                    System.out.println("막힌 공간입니다.");
                 }
                 break;
             case "왼쪽": 
@@ -94,7 +94,7 @@ public class AdventureMap {
                     map[pos] = "x";
                 }
                 else{ 
-                    //TODO 다른 맵으로 이동
+                    System.out.println("막힌 공간입니다.");
                 }
                 break;
         }
@@ -106,8 +106,8 @@ public class AdventureMap {
     private void event(String[] map, int pos){
         switch(map[pos]){
             case "B": bush();break;
-            case "H": healCenter(); break;
-            case "S": shop(); break;
+            case "H": healCenter(player); break;
+            case "S": shop(player); break;
             case "O": printMap(map); break;
         }
     }
@@ -127,11 +127,12 @@ public class AdventureMap {
         }
     }
 
-    private void healCenter(){
+    private void healCenter(Player player){
         // TODO 포켓몬 힐 기능
+        
     }
 
-    private void shop(){
+    private void shop(Player player){
         // TODO 아이템 구매
         /**********************************
          * 상처약 : 고급, 중급, 하급
