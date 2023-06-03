@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import Pokemon.Pokemon;
 import Player.Item.*;
+import Pokemon.LevelPokemon;
 
 public class Player implements Serializable {
   private String playerName;
@@ -119,6 +120,17 @@ public class Player implements Serializable {
     }
   }
 
+  public int getPlayerPokemonLevel(int num) {
+    try {
+      Pokemon pokemon = playerPokemon.get(num);
+      return pokemon.getLevel();
+    } catch (IndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+      return 0;
+    }
+
+  }
+
   public void setPlayerPokemonHp(int num, int damage) {
     try {
       Pokemon pokemon = playerPokemon.get(num);
@@ -127,7 +139,6 @@ public class Player implements Serializable {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return;
     }
-
   }
 
   public void changePokemon(int num1, int num2) {
@@ -143,7 +154,18 @@ public class Player implements Serializable {
   }
 
   public int getPokemonArraySize() {
+
     return playerPokemon.size();
+  }
+
+  public void levelUpPlayerPokemon(int level, int pokemonNum) {
+    try {
+      Pokemon pokemon = playerPokemon.get(pokemonNum);
+      LevelPokemon.levelUp(pokemon);
+    } catch (IndexOutOfBoundsException e) {
+      System.out.println("알맞은 포켓몬을 선택해주세요.");
+    }
+
   }
 
   public void giveExpPlayerPokemon(int exp, int pokemonNum) {

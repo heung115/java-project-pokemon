@@ -12,7 +12,7 @@ public class LevelPokemon implements Serializable{
 
     //player pokemon list에 add할 때 호출
     public static void setLevel(Pokemon pokemon){
-        
+
         pokemon.level = 1;
         pokemon.currentExp = 0;
         pokemon.maxExp = 8;
@@ -31,21 +31,22 @@ public class LevelPokemon implements Serializable{
 
     public static void giveExp(Pokemon pokemon, int exp ){
         /*********************************************************************************
-         * exp = battleType:(wild:1, Ai:1.5) * other pokemon level * baseExp:10 * item effect
-        **********************************************************************************/
-        pokemon.currentExp += exp; 
+         * exp = battleType:(wild:1, Ai:1.5) * other pokemon level * baseExp:10 * item
+         * effect
+         **********************************************************************************/
+        pokemon.currentExp += exp;
         levelUp(pokemon);
 
     }
 
-    public static void levelUp(Pokemon pokemon){
+    public static void levelUp(Pokemon pokemon) {
         /*****************
          * maxExp
          * 1 level -> 2 level = 8 ...
          * (n - 1) level -> n level = n ^ 3
-        ******************/
+         ******************/
 
-        while(pokemon.currentExp >= pokemon.maxExp){
+        while (pokemon.currentExp >= pokemon.maxExp) {
 
             pokemon.level++;
             pokemon.increaseStat();
@@ -62,14 +63,14 @@ public class LevelPokemon implements Serializable{
     public static boolean canEvolution(Pokemon pokemon){
         if(pokemon.getEvolution() && pokemon.level >= pokemon.getEvolutionLevel()) 
             return true;
-        else 
-            return false; 
+        else
+            return false;
     }
 /*
     public Pokemon evolutionPokemon(Pokemon pokemon){
 
         Pokemon evolutionPokemon = evolutionPokemon(pokemon);
-        giveLevel(evolutionPokemon, pokemon.level-1);
+        giveLevel(evolutionPokemon, pokemon.level - 1);
 
         return evolutionPokemon;
     }
