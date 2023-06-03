@@ -64,7 +64,7 @@ public class BattleMode {
             if (attack(aiPlayer, player)) {
 
                 if (player.getPlayerPokemonCurrentHp(0) == 0) {
-                    if (player.getLiveCombatPokemonCount() == 0) {
+                    if (player.getLiveCombatPokemonCount() == 1) {
                         System.out.println("대전에서 패배했다..\n");
                         System.out.println("눈앞이 깜깜해 진다..\n");
                         Ui.tools.giveDelay(500);
@@ -74,12 +74,32 @@ public class BattleMode {
                             player.setPlayerPokemonHp(i, -99999);
                         }
                         player.setLiveCombatPokemonCount();
+                        return;
                     }else{
+                        System.out.println(player.getPlayerPokemonName(0)+"이 쓰려졌다.\n");
                         player.decreaseLiveCombatPokemonCount(1);
-                        System.out.println("교체할 포켓몬을 선택하세요.\n");
-                        
-                        choice = scanner.nextInt();
-                        player.changePokemon(0, choice);
+                        System.out.println(player.getLiveCombatPokemonCount());
+                        Boolean boolean_ = false; 
+                        while (true) {
+                            System.out.println("교체할 포켓몬을 선택하세요.\n");
+                            player.showPlayerPokemon();
+                            choice = scanner.nextInt();
+                            switch (choice) {
+                                case 1:case 2:case 3:
+                                    break;
+                                default:
+                                    System.out.println("다시 입력해주세요.\n");
+                                    boolean_ = true;
+                                    continue;
+                            }
+                            if(boolean_) continue;
+                            if (player.getPlayerPokemonCurrentHp(choice - 1) == 0)
+                                System.out.println("선택할 수 없습니다.\n");
+                            else {
+                                player.changePokemon(0, choice - 1);
+                                break;
+                            }
+                        }
                     }
                 }
             }
