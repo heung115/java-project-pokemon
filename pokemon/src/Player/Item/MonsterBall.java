@@ -39,6 +39,7 @@ public class MonsterBall extends Item {
             // capture!
             System.out.println("\n" + targetPokemon.getName() + ", 넌 내꺼야!!!\n");
             player.addPokemonToPlayerPokemonArrayList(targetPokemon);
+            player.addPokemonToEncyclopedia();
         } else if (player.getLevel() < targetPokemon.getLevel()) {
             System.out.println("\n너무 강해서 몬스터볼이 효과가 없다...!");
         } else {
