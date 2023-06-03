@@ -22,6 +22,7 @@ public class Option {
             switch (choice) {
                 case 1:
                     player.showBag();
+                    player.useItemBag(choice);
                     break;
                 case 2:
                     showInfo(player);
