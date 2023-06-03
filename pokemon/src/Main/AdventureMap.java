@@ -423,6 +423,7 @@ public class AdventureMap {
             System.out.println("전투중에 한눈을 팔았다....");
             return false;
         }
+        
         Item item = player.useItemBag(num);
         if (item == null) {
             System.out.println("다시 입력해주세요");
