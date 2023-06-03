@@ -20,6 +20,8 @@ public class BattleMode {
     public void mainBattleModeLoop(Player player) {
         Ui.tools.clearConsoleScreen();
         Ui.BattleModeUi.printBattleGameStartUi();
+        Player aiPlayer = makeAiPlayer(0);
+        choice = 0;
         while (choice != 4) {
             Ui.BattleModeUi.printBattleUi(player, aiPlayer);
             Ui.BattleModeUi.printBattleGameLoopUi();
@@ -113,8 +115,12 @@ public class BattleMode {
 
     private void changePokemon(Player player) {
         player.showPlayerPokemon();
-        System.out.println("바꿀 두 포켓몬의 번호를 입력하시오.");
+        System.out.println("바꿀 두 포켓몬의 번호를 입력하시오.(뒤로가기 : -1)");
         int num1 = scanner.nextInt();
+        if (num1 == -1) {
+            System.out.println("전투중에 한눈을 팔았다....");
+            return;
+        }
         int num2 = scanner.nextInt();
         player.changePokemon(num1 - 1, num2 - 1);
         System.out.println("포켓몬이 교체되었습니다.");
