@@ -8,28 +8,47 @@ import Player.Item.*;
 import Pokemon.LevelPokemon;
 
 public class Player implements Serializable {
-    private String playerName;
-    // private int playerState;
-    private int money = 10000;
-    private int level;
-    private int currentExp;
-    private int maxExp;
+  private String playerName;
+  // private int playerState;
+  private int money = 10000;
+  private int level;
+  private int currentExp;
+  private int maxExp;
 
-    protected int availableCombatPokemonCount = 3;
-    ArrayList<Pokemon> playerPokemon = new ArrayList<>();
-    private Bag playerBag = new Bag();
-    private Encyclopedia playerEncyclopedia = new Encyclopedia();
+  protected int availableCombatPokemonCount = 3;
+  protected int liveCombatPokemonCount = 3;
+  ArrayList<Pokemon> playerPokemon = new ArrayList<>();
+  private Bag playerBag = new Bag();
+  private Encyclopedia playerEncyclopedia = new Encyclopedia();
 
-    public Player(String playerName) {
-        this.playerName = playerName;
-        level = 10;
-        currentExp = 0;
-        maxExp = 10;
-    }
+  public Player(String playerName) {
+    this.playerName = playerName;
+    level = 10;
+    currentExp = 0;
+    maxExp = 10;
+  }
 
-    public String getName() {
-        return playerName;
-    }
+  public void setLiveCombatPokemonCount(){
+    
+    if(playerPokemon.size()<3){
+      liveCombatPokemonCount = playerPokemon.size();
+    }else liveCombatPokemonCount =3;
+
+  }
+
+  public int decreaseLiveCombatPokemonCount(int num){
+    this.liveCombatPokemonCount -= num;
+    return this.liveCombatPokemonCount;
+  }
+
+  public int getLiveCombatPokemonCount(){
+    return liveCombatPokemonCount;
+    
+  }
+
+  public String getName() {
+    return playerName;
+  }
 
     public int getMoney() {
         return money;
