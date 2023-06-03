@@ -19,16 +19,17 @@ public class AdventureMode {
         map.initMap(mapNumber);
         while (true) {
             try {
-                if (map.move(player,mapNumber, scanner.nextInt())) continue;
-                return;
+                if (!map.move(player, mapNumber, scanner.nextInt()))
+                    break;
                 
             } catch (InputMismatchException e) {
                 System.out.println("잘못입력하였습니다.");
                 scanner.nextLine();// 버퍼 비우기
             }
         }
+
     }
-/*
+/*/
     static public void main(String args[]) {
         AdventureMode a = new AdventureMode();
         Player player = new Player("name");

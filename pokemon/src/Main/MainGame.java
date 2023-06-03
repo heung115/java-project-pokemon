@@ -5,11 +5,11 @@ import Player.Player;
 import Util.*;
 
 public class MainGame {
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     BattleMode battleMode = new BattleMode();
     AdventureMode adventureMode = new AdventureMode();
     Option option = new Option();
-    
+
     private int choice = 0;
 
     public void mainGameLoop(Player player) {
@@ -27,7 +27,7 @@ public class MainGame {
                     option.mainOptionLoop(player);
                     break;
                 case 4:
-                
+
                     break;
             }
         }

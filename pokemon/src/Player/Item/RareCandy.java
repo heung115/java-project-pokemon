@@ -12,6 +12,8 @@ public class RareCandy extends Item {
     }
 
     public void use(Pokemon pokemon) {
+        
         levelPokemon.giveLevel(pokemon, 1);
+        
     }
 }

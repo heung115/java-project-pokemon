@@ -9,8 +9,13 @@ public class Item implements Serializable {
     String itemName;
 
     /*
-     * itemIndex 1 : 몬스터볼
-     * itemIndex 2 : 상처약
+     * itemIndex 10 : 몬스터볼
+     * itemIndex 11 : 슈퍼볼
+     * itemIndex 12 : 하이퍼볼
+     * itemIndex 13 : 마스터볼
+     * itemIndex 20 : 하급상처약
+     * itemIndex 21 : 중급상처약
+     * itemIndex 22 : 고급상처약
      * itemIndex 3 : 이상한 사탕
      */
     public void use() {

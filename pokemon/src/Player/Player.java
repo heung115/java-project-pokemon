@@ -9,7 +9,7 @@ import Player.Item.*;
 public class Player implements Serializable {
   private String playerName;
   // private int playerState;
-  private int money=1000000;
+  private int money=10000;
   private int level;
   private int currentExp;
   private int maxExp;
@@ -140,6 +140,10 @@ public class Player implements Serializable {
 
   public void addPokemonToPlayerPokemonArrayList(Pokemon pokemon) {
     playerPokemon.add(pokemon);
+  }
+
+  public int getPokemonArraySize() {
+    return playerPokemon.size();
   }
 
   public void giveExpPlayerPokemon(int exp, int pokemonNum) {

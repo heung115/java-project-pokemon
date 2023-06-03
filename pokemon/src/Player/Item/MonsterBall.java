@@ -8,22 +8,25 @@ public class MonsterBall extends Item {
     static double[] captureRate = new double[] { 1, 1.5, 2, 255 };
 
     public MonsterBall(String monsterBallName) {
-        itemIndex = 1;
         switch (monsterBallName) {
             case "몬스터볼":
                 this.monsterBallKind = 0;
+                this.itemIndex = 10;
                 this.itemName = "몬스터볼";
                 break;
             case "슈퍼볼":
                 this.monsterBallKind = 1;
+                this.itemIndex = 11;
                 this.itemName = "슈퍼볼";
                 break;
             case "하이퍼볼":
                 this.monsterBallKind = 2;
+                this.itemIndex = 12;
                 this.itemName = "하이퍼볼";
                 break;
             case "마스터볼":
                 this.monsterBallKind = 3;
+                this.itemIndex = 13;
                 this.itemName = "마스터볼";
                 break;
             default:
@@ -40,6 +43,7 @@ public class MonsterBall extends Item {
         } else {
             System.out.println("실패!!!");
         }
+        
     }
 
     private double captureRateFormula(Pokemon targetPokemon) {
