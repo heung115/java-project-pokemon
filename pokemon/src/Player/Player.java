@@ -27,6 +27,23 @@ public class Player implements Serializable {
     maxExp = 10;
   }
 
+  public void setAvailableCombatPokemonCount(){
+    
+    if(playerPokemon.size()<3){
+      availableCombatPokemonCount = playerPokemon.size();
+    }else availableCombatPokemonCount =3;
+
+  }
+
+  public int increaseAvailableCombatPokemonCount(int num){
+    this.availableCombatPokemonCount += num;
+    return this.availableCombatPokemonCount;
+  }
+
+  public int getAvailableCombatPokemonCount(){
+    return availableCombatPokemonCount;
+  }
+
   public String getName() {
     return playerName;
   }

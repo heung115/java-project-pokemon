@@ -37,7 +37,9 @@ public class BattleMode {
                         if (((AiPlayer) aiPlayer).aiPlayerCanUsePokemon() != -1) {
                             aiPlayer.changePokemon(0, ((AiPlayer) aiPlayer).aiPlayerCanUsePokemon());
                             continue;
-                        } else {
+                        } 
+                        else if(){}
+                        else {
                             // ai플레이어 전투 종료...
                             giveReward(player);
                             System.out.println("win!!");
