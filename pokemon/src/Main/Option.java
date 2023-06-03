@@ -26,7 +26,6 @@ public class Option {
             switch (choice) {
                 case 1:
                     showBag(player);
-
                     break;
                 case 2:
                     showInfo(player);
@@ -39,6 +38,9 @@ public class Option {
                     break;
                 case 5:
                     return;
+                default:
+                    System.out.println("다시입력해주세요");
+                    break;
             }
         }
     }
