@@ -18,6 +18,7 @@ public class Option {
     }
 
     public void mainOptionLoop(Player player) {
+        choice = 0;
         while (choice != 4) {
             Ui.Option.printOptionUi();
             choice = scanner.nextInt();

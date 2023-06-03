@@ -20,6 +20,8 @@ public class BattleMode {
     public void mainBattleModeLoop(Player player) {
         Ui.tools.clearConsoleScreen();
         Ui.BattleModeUi.printBattleGameStartUi();
+        Player aiPlayer = makeAiPlayer(0);
+        choice = 0;
         while (choice != 4) {
             Ui.BattleModeUi.printBattleUi(player, aiPlayer);
             Ui.BattleModeUi.printBattleGameLoopUi();
