@@ -21,7 +21,7 @@ public class Main {
     MainGame mainGame = new MainGame();
     Player player;
 
-    System.out.println("저장되어있는 정보가 있는지 검사중입니다");
+    System.out.println("저장되어있는 정보가 있는지 검사중입니다.\n");
     player = Load.loadData();
 
     if (player != null) {
@@ -74,7 +74,7 @@ public class Main {
   }
 
   private void showInfo(Player player) {
-    System.out.println("플레이어" + player.getName() + "이/가 생성되었습니다.");
+    System.out.println("플레이어" + player.getName() + "이/가 생성되었습니다.\n");
     player.showInfo();
     System.out.println("내용을 확인했으면 엔터를 눌러주세요");
     try {
@@ -95,4 +95,5 @@ public class Main {
     return player;
   }
 
+  
 }

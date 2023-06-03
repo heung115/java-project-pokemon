@@ -27,7 +27,7 @@ public class Potion extends Item {
                 throw new IllegalArgumentException("상처약의 이름을 다시 설정해주세요");
         }
     }
-
+    
     public void use(Player player) {
         System.out.println("사용할 포켓몬을 골라주세요");
         player.showPlayerPokemon();

@@ -5,36 +5,36 @@ import java.io.*;
 import Util.CSVReader;
 
 public class Encyclopedia implements Serializable {
-  // Encyclopedia 2ì°¨ì› ë™ì  ë¦¬ìŠ¤íŠ¸ ë°°ì—´ ìƒì„±
+  // Encyclopedia 2Â÷¿ø µ¿Àû ¸®½ºÆ® ¹è¿­ »ı¼º
   public static List<List<String>> encyclopedia = CSVReader
       .readCSV("pokemon/src/CVSFile/Encyclopedia.csv");
-  // ë„ê° ì¸ë±ìŠ¤ : (í¬ì¼“ëª¬ ë„˜ë²„, íšë“ì—¬ë¶€, í¬ì¼“ëª¬ ì´ë¦„, hp,ê³µê²©ë ¥, ì†ì„±, ì„¤ëª… , íšë“ ì—¬ë¶€)
+  // µµ°¨ ÀÎµ¦½º : (Æ÷ÄÏ¸ó ³Ñ¹ö, È¹µæ¿©ºÎ, Æ÷ÄÏ¸ó ÀÌ¸§, hp,°ø°İ·Â, ¼Ó¼º, ¼³¸í , È¹µæ ¿©ºÎ)
 
-  // ë„ê°ì„ ì´ˆê¸°í™” í•˜ëŠ” ìƒì„±ì.a
+  // µµ°¨À» ÃÊ±âÈ­ ÇÏ´Â »ı¼ºÀÚ.a
   public Encyclopedia() {
 
   }
 
-  // ë„ê° ì¶œë ¥
+  // µµ°¨ Ãâ·Â
   public void ShowEncyclopedia() {
     for (int i = 0; i < encyclopedia.get(0).size(); i++) {
       if (i == 1) {
         continue;
       }
-      System.out.printf("%15s", encyclopedia.get(0).get(i));
+      System.out.printf("%-15s", encyclopedia.get(0).get(i));
     }
     System.out.println();
 
     for (int i = 1; i < encyclopedia.size(); i++) {
-      System.out.printf("%15s", encyclopedia.get(i).get(0));
+      System.out.printf("%-15s", encyclopedia.get(i).get(0));
       for (int j = 1; j < encyclopedia.get(i).size(); j++) {
         if (j == 1) {
           continue;
         }
         if (Boolean.parseBoolean(encyclopedia.get(i).get(1)) == true) {
-          System.out.printf("%15s", encyclopedia.get(i).get(j));
+          System.out.printf("%-15s", encyclopedia.get(i).get(j));
         } else {
-          System.out.printf("%15s", "??");
+          System.out.printf("%-15s", "??");
         }
       }
       System.out.println();

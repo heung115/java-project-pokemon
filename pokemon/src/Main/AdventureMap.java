@@ -26,7 +26,7 @@ public class AdventureMap {
         selectMap[40] = "x";// 초기 위치
         this.selectedMap = selectMap.clone();
 
-        printMap(this.selectedMap);
+        printMap(selectMap);
     }
 
     public void printMap(String[] map) {
@@ -181,6 +181,7 @@ public class AdventureMap {
         while (roof) {
             Util.Ui.tools.clearConsoleScreen();
             System.out.println("\n잔액 : " + player.getMoney() + "$");
+            player.showBag();
             Util.Ui.AdventureModeUi.printShopUi();
 
             switch (choice.nextInt()) {
