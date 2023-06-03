@@ -55,7 +55,7 @@ public class Player implements Serializable {
   public void showPlayerPokemonCombat() {
     Pokemon pokemon = playerPokemon.get(0);
     System.out.println(pokemon.getName());
-    // System.out.println("level :" + pokemon.getLevel);
+    System.out.println("level :" + pokemon.getLevel());
     System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
   }
 
