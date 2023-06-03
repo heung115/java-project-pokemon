@@ -119,6 +119,7 @@ public class AdventureMap {
                 break;
 
         }
+
         return true;
     }
 
@@ -150,7 +151,7 @@ public class AdventureMap {
 
         int size = Encyclopedia.encyclopedia.size();
         double a = Math.random();
-
+        System.out.println("부쉬부쉬");
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
             LevelPokemon.giveLevel(wildPokemon, (int)(a*100%player.getLevel())+5);;
