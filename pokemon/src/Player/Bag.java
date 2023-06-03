@@ -17,11 +17,12 @@ public class Bag implements Serializable {
     if (bag.isEmpty()) {
       System.out.println("가방이 비었습니다");
     }
+    System.out.print("=========가방========\n");
     for (int i = 0; i < bag.size(); i++) {
       // System.out.print(i + ":");
       Item item = (Item) bag.get(i).get(1);
       // TODO: 한글 출력 정렬추가
-      System.out.printf("%2d%6s,%3d\n", i, item.getItemName(), bag.get(i).get(2));
+      System.out.printf("%2d  %s\t%3d\n", i, item.getItemName(), bag.get(i).get(2));
       // System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");
     }
   }
