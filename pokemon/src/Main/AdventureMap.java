@@ -153,6 +153,7 @@ public class AdventureMap {
 
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
+            LevelPokemon.giveLevel(wildPokemon, (int)(a*100%player.getLevel())+5);;
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
             battleLoop(player, wildPokemon);
 
@@ -383,6 +384,7 @@ public class AdventureMap {
         System.out.println("나 : " + player.getName());
         player.showPlayerPokemonCombat();
         System.out.println("\n상대 : " + pokemon.getName());
+        System.out.println("Level :" + pokemon.getLevel());
         System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
     }
 

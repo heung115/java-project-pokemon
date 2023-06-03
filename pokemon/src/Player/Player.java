@@ -22,7 +22,7 @@ public class Player implements Serializable {
 
   public Player(String playerName) {
     this.playerName = playerName;
-    level = 1;
+    level = 10;
     currentExp = 0;
     maxExp = 10;
   }
@@ -55,7 +55,7 @@ public class Player implements Serializable {
   public void showPlayerPokemonCombat() {
     Pokemon pokemon = playerPokemon.get(0);
     System.out.println(pokemon.getName());
-    // System.out.println("level :" + pokemon.getLevel);
+    System.out.println("level :" + pokemon.getLevel());
     System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
   }
 
