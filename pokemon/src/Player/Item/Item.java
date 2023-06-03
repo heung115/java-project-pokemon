@@ -5,7 +5,7 @@ import Pokemon.Pokemon;
 import java.io.*;
 
 public class Item implements Serializable {
-    int itemIndex = 0;
+    int itemIndex = 999;
     String itemName;
 
     /*

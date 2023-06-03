@@ -23,9 +23,6 @@ public class Bag implements Serializable {
             // System.out.print(i + ":");
             Item item = (Item) bag.get(i).get(1);
             // TODO: 한글 출력 정렬추가
-            if ((int) bag.get(i).get(2) < 1) {
-                bag.remove(i);
-            }
             System.out.printf("%s  %s\t%3d\n", bag.get(i).get(0), item.getItemName(), bag.get(i).get(2));
             // System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");
         }
@@ -36,7 +33,12 @@ public class Bag implements Serializable {
         for (int i = 0; i < bag.size(); i++) {
             int choiceNum = (int) bag.get(i).get(0);
             if (choiceNum == itemNum) {
-                bag.get(i).set(2, ((Integer) bag.get(i).get(2)).intValue());
+                bag.get(i).set(2, (Integer) (((int) bag.get(i).get(2)) - 1));
+                // 아이템 갯수가 0이면 지운다.
+                if ((int) bag.get(i).get(2) < 1) {
+                    bag.remove(i);
+                }
+                System.out.println("item num : " + itemNum + " i : " + i + " bagsize : " + bag.size());
                 return ((Item) bag.get(i).get(1));
             }
         }
@@ -66,10 +68,6 @@ public class Bag implements Serializable {
         row.add(itemCount);
         bag.add(row);
         sortBag();
-    }
-
-    private void deleteItem() {
-
     }
 
     private void sortBag() {

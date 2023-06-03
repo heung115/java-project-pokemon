@@ -401,15 +401,25 @@ public class AdventureMap {
 
     private boolean bag(Player player, Pokemon pokemon) {
         player.showBag();
-        System.out.println("사용할 아이템의 번호를 입력해주세요");
+        System.out.println("사용할 아이템의 번호를 입력해주세요 (-1 = 돌아가기)");
         int num = scanner.nextInt();
+        if (num == -1) {
+            System.out.println("전투중에 한눈을 팔았다....");
+            return false;
+        }
+        Item item = player.useItemBag(num);
+        if (item == null) {
+            System.out.println("다시 입력해주세요");
+            bag(player, pokemon);
+        }
         switch (num / 10) {
             case 1:
                 // 몬스터볼
                 System.out.println("몬스터터볼 사용");
                 int temp = player.getPokemonArraySize();
-                System.out.println(player.useItemBag(num).getItemName());
-                player.useItemBag(num).use(player, pokemon);
+                // System.out.println(player.useItemBag(num).getItemName());
+                item.use(player, pokemon);
+
                 if (temp != player.getPokemonArraySize()) {
                     Ui.tools.giveDelay(500);
                     return true;
@@ -417,18 +427,18 @@ public class AdventureMap {
                 break;
             case 2:
                 // 힐
-                player.useItemBag(num).use(pokemon);
+                item.use(player);
                 break;
             case 3:
                 // 사탕
                 System.out.println("사용할 수 없습니다, 다른아이템을 입력해주세요");
+                player.addItemBag(item, 1);
                 bag(player, pokemon);
         }
         return false;
     }
 
     private void battleLoop(Player player, Pokemon pokemon) {
-        LevelPokemon levelPokemon = new LevelPokemon();
         int choice;
         while (true) {
             printBattleUi(player, pokemon);
@@ -438,7 +448,7 @@ public class AdventureMap {
                 case 1:
                     if (attack(player, pokemon)) {
                         System.out.println("포켓몬을 죽였다");
-                        levelPokemon.giveExp(pokemon, 10);
+                        LevelPokemon.giveExp(pokemon, 10);
                         return;
                     }
 

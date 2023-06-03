@@ -134,9 +134,13 @@ public class BattleMode {
      */
     private void bag(Player player) {
         player.showBag();
-        System.out.println("사용할 아이템의 번호를 입력해주세요");
+        System.out.println("사용할 아이템의 번호를 입력해주세요 (-1 = 돌아가기)");
         int num = scanner.nextInt();
-        if (num != 1) {
+        if (num == -1) {
+            System.out.println("전투중에 한눈을 팔았다....");
+            return;
+        }
+        if (num / 10 != 2) {
             System.out.println("사용할 수 없습니다, 다른아이템을 입력해주세요");
             bag(player);
         } else {
