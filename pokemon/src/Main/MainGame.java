@@ -7,6 +7,7 @@ import Util.*;
 public class MainGame {
     Scanner scanner = new Scanner(System.in);
     BattleMode battleMode = new BattleMode();
+    AdventureMode adventureMode = new AdventureMode();
     Option option = new Option();
     
     private int choice = 0;
@@ -20,7 +21,7 @@ public class MainGame {
                     battleMode.mainBattleModeLoop(player);
                     break;
                 case 2:
-
+                    adventureMode.adventureRoof(player);
                     break;
                 case 3:
                     option.mainOptionLoop(player);
