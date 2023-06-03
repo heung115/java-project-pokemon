@@ -165,7 +165,7 @@ public class AdventureMap {
 
     private void healCenter(Player player) {
         Ui.AdventureModeUi.printHealCenterUi();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < player.getPokemonArraySize(); i++) {
             player.setPlayerPokemonHp(i, -99999);
         }
         return;
@@ -340,7 +340,15 @@ public class AdventureMap {
         }
         for (int i = 1; i < pokemonEffectSize; i++) {
             if (type2.equals(Main.pokemonEffect.get(0).get(i))) {
-                return Double.parseDouble(Main.pokemonEffect.get(type).get(i));
+                double effect = Double.parseDouble(Main.pokemonEffect.get(type).get(i));
+                if (effect == 1.25) {
+                    System.out.println("효과과 굉장했다..");
+                } else if (effect == 1) {
+                    System.out.println("효과는 평범했다..");
+                } else if (effect == 0.8) {
+                    System.out.println("효과과 굉장했다..");
+                }
+                return effect;
             }
         }
         return -10.0;
@@ -360,7 +368,7 @@ public class AdventureMap {
         int damage = (int) circulateDamageFormula(player, pokemon);
         pokemon.setHp(damage);
         System.out.println(
-                player.getName() + "의 포켓몬 " + player.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공");
+                player.getName() + "의 포켓몬 " + player.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공\n");
         if (pokemon.getCurrentHp() == 0) {
             return true;
         } else {
@@ -371,7 +379,7 @@ public class AdventureMap {
     private boolean attackPokemon(Player player, Pokemon pokemon) {
         int damage = (int) circulateDamageFormulaPokemon(player, pokemon);
         player.setPlayerPokemonHp(0, damage);
-        System.out.println(pokemon.getName() + "이/가 " + damage + "만큼의 공격 성공");
+        System.out.println(pokemon.getName() + "이/가 " + damage + "만큼의 공격 성공\n");
         if (player.getPlayerPokemonCurrentHp(0) == 0) {
             return true;
         } else {
@@ -383,6 +391,7 @@ public class AdventureMap {
         System.out.println("나 : " + player.getName());
         player.showPlayerPokemonCombat();
         System.out.println("\n상대 : " + pokemon.getName());
+        System.out.println("Level :" + pokemon.getLevel());
         System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
     }
 
