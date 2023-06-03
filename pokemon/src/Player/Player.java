@@ -269,7 +269,7 @@ public class Player implements Serializable {
 
     public int setExp(int exp) {
         currentExp += exp;
-        if (currentExp > maxExp) {
+        if (currentExp >= maxExp) {
             levelUp();
             currentExp = maxExp - currentExp;
             maxExp = level * 10;
@@ -279,7 +279,7 @@ public class Player implements Serializable {
     }
 
     private void levelUp() {
-        System.out.print("레밸업!! " + level + "->");
+        System.out.print("플레이어 레벨업!! " + level + "->");
         level++;
         System.out.println(level);
 

@@ -499,6 +499,7 @@ public class AdventureMap {
                         Ui.tools.giveDelay(500);
                         System.out.println("포켓몬이 모두 치유되었습니다.\n");
                         Ui.tools.giveDelay(500);
+                        Ui.tools.clearConsoleScreen();
                         for (int i = 0; i < player.getPokemonArraySize(); i++) {
                             player.setPlayerPokemonHp(i, -99999);
                         }
