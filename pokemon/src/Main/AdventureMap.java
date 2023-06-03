@@ -153,6 +153,8 @@ public class AdventureMap {
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
+
+
             
         } else {
             printMap(selectedMap);
@@ -179,6 +181,7 @@ public class AdventureMap {
         boolean roof = true;
         while (roof) {
             Util.Ui.tools.clearConsoleScreen();
+            System.out.println("\n잔액 : "+player.getMoney()+"$");
             Util.Ui.AdventureModeUi.printShopUi();
 
             switch (choice.nextInt()) {
