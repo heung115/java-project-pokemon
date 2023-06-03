@@ -153,7 +153,10 @@ public class AdventureMap {
 
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
+            LevelPokemon.giveLevel(wildPokemon, (int)(a*100%player.getLevel())+5);;
+            System.out.println("************************************************");
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
+            System.out.println("************************************************");
             battleLoop(player, wildPokemon);
 
         } else {
@@ -401,11 +404,11 @@ public class AdventureMap {
         int num1 = scanner.nextInt();
         int num2 = scanner.nextInt();
         player.changePokemon(num1 - 1, num2 - 1);
-        System.out.println("포켓몬이 교체되었습니다.");
+        System.out.println("포켓몬이 교체되었습니다.\n");
     }
 
     private void run(Player player) {
-        System.out.println("도망쳤다!!");
+        System.out.println("도망쳤다!!\n");
     }
 
     private boolean bag(Player player, Pokemon pokemon) {
@@ -456,8 +459,9 @@ public class AdventureMap {
             switch (choice) {
                 case 1:
                     if (attack(player, pokemon)) {
-                        System.out.println("포켓몬을 죽였다");
+                        System.out.println("포켓몬을 죽였다\n");
                         LevelPokemon.giveExp(pokemon, 10);
+                        Ui.tools.clearConsoleScreen();
                         return;
                     }
 
