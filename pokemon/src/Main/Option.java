@@ -111,11 +111,14 @@ public class Option {
             return;
         }
         int num2 = scanner.nextInt();
-        if (num1 == 0) {
+        if (num1 == 0 && player.getPokemonArraySize() != 1) {
             System.out.println(player.getPlayerPokemonName(num2 - 1) + "을/를 방생하였습니다");
             player.deletePokemonList(num2 - 1);
             // player.showAllPlayerPokemon();
             return;
+        }else if(player.getPokemonArraySize() == 1){
+            System.out.println("마지막은 방생할 수 없습니다");
+
         }
         player.changeAllPokemon(num1, num2);
     }
