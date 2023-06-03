@@ -10,7 +10,7 @@ import Pokemon.LevelPokemon;
 public class Player implements Serializable {
   private String playerName;
   // private int playerState;
-  private int money=10000;
+  private int money = 10000;
   private int level;
   private int currentExp;
   private int maxExp;
@@ -161,7 +161,8 @@ public class Player implements Serializable {
   public void levelUpPlayerPokemon(int level, int pokemonNum) {
     try {
       Pokemon pokemon = playerPokemon.get(pokemonNum);
-      LevelPokemon.levelUp(pokemon);
+      System.out.println(pokemon.getName());
+      LevelPokemon.giveLevel(pokemon, 1);
     } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
     }

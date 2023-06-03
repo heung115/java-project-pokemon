@@ -71,8 +71,8 @@ public class Option {
                 player.showPlayerPokemon();
                 System.out.println("사용할 포켓몬을 선택해 주세요");
                 int choice = scanner.nextInt();
-                choice++;
-                if (player.getLevel() < player.getPlayerPokemonLevel(choice)) {
+                choice--;
+                if (player.getLevel() <= player.getPlayerPokemonLevel(choice)) {
                     System.out.println("이포켓몬에는 사용할 수 없다");
                     player.addItemBag(item, 1);
                     showBag(player);

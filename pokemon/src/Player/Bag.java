@@ -37,6 +37,7 @@ public class Bag implements Serializable {
                 // 아이템 갯수가 0이면 지운다.
                 if ((int) bag.get(i).get(2) < 1) {
                     bag.remove(i);
+                    sortBag();
                 }
                 System.out.println("item num : " + itemNum + " i : " + i + " bagsize : " + bag.size());
                 return ((Item) bag.get(i).get(1));

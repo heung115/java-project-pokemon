@@ -75,7 +75,7 @@ public class Pokemon implements Serializable {
 		this.damage = Integer.parseInt(encyclopedia.get(num).get(5));
 		this.evolution = Boolean.parseBoolean(encyclopedia.get(num).get(6));
 		this.evolutionLevel = Integer.parseInt(encyclopedia.get(num).get(7));
-		this.evolutionNo = Integer.parseInt(encyclopedia.get(num).get(8))-1;
+		this.evolutionNo = Integer.parseInt(encyclopedia.get(num).get(8)) - 1;
 		LevelPokemon.setLevel(this);
 	}
 
@@ -100,12 +100,12 @@ public class Pokemon implements Serializable {
 
 	public void showAllStat() {
 		System.out.println(pokemonName);
-		System.out.println("레벨 : " + level+" ("+ currentExp+" / "+maxExp+")");
+		System.out.println("레벨 : " + level + " (" + currentExp + " / " + maxExp + ")");
 
 		System.out.println("체력 : " + currentHp + "/" + maxHp);
 		System.out.println("타입 : " + type);
 		System.out.println("공격력 : " + damage + "\n");
-		
+
 	}
 
 	public int getPokemonNumber() {
@@ -161,9 +161,9 @@ public class Pokemon implements Serializable {
 		Pokemon evolutionPokemon = new Pokemon(pokemon.evolutionNo);
 
 		Ui.tools.giveDelay(1000);
-		System.out.println("\n오잉..? "+pokemon.pokemonName+"의 모습이..?\n");
+		System.out.println("\n오잉..? " + pokemon.pokemonName + "의 모습이..?\n");
 		Ui.tools.giveDelay(1000);
-		System.out.println(evolutionPokemon.pokemonName+"으로 진화하였다.\n");
+		System.out.println(evolutionPokemon.pokemonName + "으로 진화하였다.\n");
 		Ui.tools.giveDelay(700);
 
 		this.unlock = true;
@@ -176,8 +176,8 @@ public class Pokemon implements Serializable {
 		this.maxHp = this.currentHp = evolutionPokemon.maxHp;
 		evolutionPokemon.level = this.level;
 		LevelPokemon.setLevel(pokemon);
-		LevelPokemon.giveLevel(this, evolutionPokemon.level-1);
-		
+		LevelPokemon.giveLevel(this, evolutionPokemon.level - 1);
+
 	}
 
 	/* To debug */
@@ -186,13 +186,12 @@ public class Pokemon implements Serializable {
 		Pokemon poke[] = new Pokemon[2];
 		poke[1] = new Pokemon(1);
 		poke[1].showAllStat();
-		LevelPokemon levelPokemon = new LevelPokemon();
-		for(int i=0;i<29;i++){
-			System.out.println(i);
-			levelPokemon.giveLevel(poke[1], 1);
-			
+		for (int i = 0; i < 29; i++) {
+			System.out.println(poke[1].getLevel());
+			LevelPokemon.giveLevel(poke[1], 1);
+
 		}
 		poke[1].showAllStat();
 	}
-	
+
 }
