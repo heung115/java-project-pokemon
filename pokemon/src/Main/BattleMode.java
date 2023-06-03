@@ -125,7 +125,7 @@ public class BattleMode {
         }
         int num2 = scanner.nextInt();
         player.changePokemon(num1 - 1, num2 - 1);
-        System.out.println("포켓몬이 교체되었습니다.");
+        
     }
 
     private void run(Player player) {
