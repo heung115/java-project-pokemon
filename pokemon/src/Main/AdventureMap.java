@@ -3,10 +3,12 @@ package Main;
 import java.util.List;
 import java.util.Scanner;
 
+import Player.Encyclopedia;
 import Player.Player;
+import Player.Item.*;
 import Pokemon.Pokemon;
-import Util.CSVReader;
-import Util.Ui;
+import Util.*;
+
 
 public class AdventureMap {
     public AdventureMap() {
@@ -14,7 +16,6 @@ public class AdventureMap {
 
     private List<List<String>> mapList = CSVReader.readCSV("pokemon/src/CVSFile/map.csv");
     private String selectedMap[] = new String[80];
-    private Player player = new Player("Name");
     private int pos = 0;
 
     public void initMap(int num) {
@@ -52,7 +53,7 @@ public class AdventureMap {
 
     }
 
-    public boolean move(int mapNumber, int key) {
+    public boolean move(Player player,int mapNumber, int key) {
         String place = "";
         for (int i = 0; i < selectedMap.length; i++) {
             if (selectedMap[i].equals("x")) {
@@ -69,7 +70,7 @@ public class AdventureMap {
                     pos -= 10;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(place);
+                    event(player,place);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos += 10;
@@ -81,7 +82,7 @@ public class AdventureMap {
                     pos += 10;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(place);
+                    event(player,place);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos -= 10;
@@ -93,7 +94,7 @@ public class AdventureMap {
                     pos -= 1;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(place);
+                    event(player,place);
                 } else {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos += 1;
@@ -105,7 +106,7 @@ public class AdventureMap {
                     pos += 1;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(place);
+                    event(player,place);
                 } else {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos -= 1;
@@ -121,11 +122,11 @@ public class AdventureMap {
         return true;
     }
 
-    private void event(String place) {
+    private void event(Player player,String place) {
         switch (place) {
             case "B":
                 Util.Ui.tools.clearConsoleScreen();
-                bush();
+                bush(player);
                 printMap(selectedMap);
                 break;
             case "H":
@@ -145,17 +146,15 @@ public class AdventureMap {
         }
     }
 
-    private void bush() {
+    private void bush(Player player) {
 
-        int size = 9;// Encyclopedia.csv에 담긴 포켓몬 수
+        int size = Encyclopedia.encyclopedia.size();
         double a = Math.random();
 
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
 
-
-            
         } else {
             printMap(selectedMap);
         }
@@ -166,7 +165,7 @@ public class AdventureMap {
     private void healCenter(Player player) {
         Ui.AdventureModeUi.printHealCenterUi();
         for (int i = 0; i < 3; i++) {
-            //player.setPlayerPokemonHp(i, -99999);
+            player.setPlayerPokemonHp(i, -99999);
         }
         return;
     }
@@ -181,23 +180,23 @@ public class AdventureMap {
         boolean roof = true;
         while (roof) {
             Util.Ui.tools.clearConsoleScreen();
-            System.out.println("\n잔액 : "+player.getMoney()+"$");
+            System.out.println("\n잔액 : " + player.getMoney() + "$");
             Util.Ui.AdventureModeUi.printShopUi();
 
             switch (choice.nextInt()) {
-                case 1://몬스터볼
+                case 1:// 몬스터볼
                     Ui.AdventureModeUi.printShowItemUi(0);
-                    buyItem(1);
+                    buyItem(player,1);
                     break;
-                case 2://상처약
+                case 2:// 상처약
                     Ui.AdventureModeUi.printShowItemUi(1);
-                    buyItem(2);
+                    buyItem(player,2);
                     break;
-                case 3://이상한사탕
+                case 3:// 이상한사탕
                     Ui.AdventureModeUi.printShowItemUi(2);
-                    buyItem(3);
+                    buyItem(player,3);
                     break;
-                case -1: 
+                case -1:
                     roof = false;
                     return;
                 default:
@@ -208,54 +207,111 @@ public class AdventureMap {
         choice.close();
     }
 
-    private void buyItem(int itemNum) {
+    private void buyItem(Player player, int itemNum) {
         Scanner choice = new Scanner(System.in);
         boolean roof = true;
-        int num;
+        int num1, num2;
 
         while (roof) {
-            roof=false;
+            roof = false;
             switch (choice.next()) {
-                case "Y":case "y":
+                case "Y":
+                case "y":
+                    System.out.print("구입할 물품을 입력해주세요 : ");
+                    num1 = choice.nextInt();
                     System.out.print("구입할 갯수를 입력해주세요 : ");
-                    num = choice.nextInt();
-                    purchase(itemNum, num);// 볼구매
+                    num2 = choice.nextInt();
+                    purchase(player,itemNum, num1, num2);// 볼구매
                     return;
-                case "N":case "n":
+                case "N":
+                case "n":
                     System.out.println("\n구입을 취소하였습니다.");
                     Ui.tools.giveDelay(500);
                     return;
                 default:
-                    roof=true;
+                    roof = true;
                     System.out.print("\n입력 오류! 다시 입력해주세요 : ");
                     break;
             }
-            
+
         }
         choice.close();
         return;
     }
 
-    private void purchase(int itemNum, int num){
+    private void purchase(Player player,int itemNum, int num1, int num2) {
         /******************************************
          * 몬스터볼 : 100$, 150$, 300$, 1000$
          * 상처약 : 100$, 200$, 300$
-         * 이상한사탕 : 1000$ 
+         * 이상한사탕 : 1000$
          ******************************************/
-        int itemPrice=0;
+        int itemPrice = 0;
 
-        switch(itemNum){
-            case 1: itemPrice = 100;
-            case 2: itemPrice = 100;
-            case 3: itemPrice = 1000;
+        Item potion = new Item();
+        Item monsterBall = new Item();
+        Item candy = new Item();
+
+        switch (itemNum) {
+            case 1:
+                switch (num1) {
+                    case 1:
+                        itemPrice = 100;
+                        monsterBall = new MonsterBall("몬스터볼");
+                        break;
+                    case 2:
+                        itemPrice = 150;
+                        monsterBall = new MonsterBall("슈퍼볼");
+                        break;
+                    case 3:
+                        itemPrice = 300;
+                        monsterBall = new MonsterBall("하이퍼볼");
+                        break;
+                    case 4:
+                        itemPrice = 1000;
+                        monsterBall = new MonsterBall("마스터볼");
+                        break;
+                    default:
+                        throw new IllegalArgumentException("유효하지 않은 품목입니다.");
+
+                }
+                break;
+            case 2:
+                switch (num1) {
+                    case 1:
+                        itemPrice = 100;
+                        potion = new Potion("하급 상처약");
+                        break;
+                    case 2:
+                        itemPrice = 200;
+                        potion = new Potion("중급 상처약");
+                        break;
+                    case 3:
+                        itemPrice = 300;
+                        potion = new Potion("고급 상처약");
+                        break;
+                    default:
+                        throw new IllegalArgumentException("유효하지 않은 품목입니다.");
+                }
+                break;
+            case 3:
+                itemPrice = 1000;
+                candy = new RareCandy();
+                break;
         }
 
-        if(player.gerMoney() >= (itemPrice * num)){
-            player.setMoney(-itemPrice * num);
-            player.addItemBag(player.useItemBag(itemNum), num);
-            System.out.println("\n아이템 "+num+"개를 구입하였습니다.\n");
+        if (player.gerMoney() >= (itemPrice * num2)) {
+            player.setMoney(-itemPrice * num2);
+            switch(itemNum){
+                case 1:
+                    player.addItemBag(monsterBall, num2); break;
+                case 2:
+                    player.addItemBag(potion, num2); break;
+                case 3:
+                    player.addItemBag(candy, num2); break;
+            }
+            System.out.println("\n아이템 " + num2 + "개를 구입하였습니다.\n");
             Ui.tools.giveDelay(1000);
-        }else{
+        } else {
             System.out.println("\n돈이 부족합니다.\n");
             Ui.tools.giveDelay(1000);
         }

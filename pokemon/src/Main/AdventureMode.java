@@ -3,6 +3,8 @@ package Main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Player.Player;
+
 public class AdventureMode {
 
     private AdventureMap map;
@@ -13,11 +15,11 @@ public class AdventureMode {
         map.initMap(mapNumber);
     }
 
-    public void adventureRoof() {
+    public void adventureRoof(Player player) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                if (!map.move(mapNumber, scanner.nextInt()))
+                if (!map.move(player,mapNumber, scanner.nextInt()))
                     break;
                 ;
             } catch (InputMismatchException e) {
@@ -31,8 +33,9 @@ public class AdventureMode {
 
     static public void main(String args[]) {
         AdventureMode a = new AdventureMode();
+        Player player = new Player("name");
         while (true) {
-            a.adventureRoof();
+            a.adventureRoof(player);
         }
     }
 }
