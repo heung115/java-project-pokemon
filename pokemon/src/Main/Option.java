@@ -25,6 +25,7 @@ public class Option {
                     break;
                 case 2:
                     showInfo(player);
+                    break;
                 case 3:
                     player.ShowEncyclopedia();
                     break;

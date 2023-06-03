@@ -1,8 +1,10 @@
 package Player.Item;
 
 import Pokemon.Pokemon;
+import Pokemon.LevelPokemon;
 
 public class RareCandy extends Item {
+    LevelPokemon levelPokemon = new LevelPokemon();
 
     public RareCandy() {
         this.itemIndex = 1;
@@ -10,6 +12,6 @@ public class RareCandy extends Item {
     }
 
     public void use(Pokemon pokemon) {
-
+        levelPokemon.giveLevel(pokemon, 1);
     }
 }
