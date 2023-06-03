@@ -33,16 +33,17 @@ public class BattleMode {
                     if (attack(player, aiPlayer)) {
                         // ai가 사용가능한 포켓몬으로 변경..
                         // 나중에 플레이어 클래스에서 자동으로 가장 좋은 포켓몬 가져오는 로직을 구성해도 좋을듯
-                        System.out.println("상대방의 포켓몬이 쓰려졌다.\n");
+                        
+                        System.out.println(aiPlayer.getPlayerPokemonName(0)+"이 쓰려졌다.\n");
+                        
                         if (((AiPlayer) aiPlayer).aiPlayerCanUsePokemon() != -1) {
                             aiPlayer.changePokemon(0, ((AiPlayer) aiPlayer).aiPlayerCanUsePokemon());
                             continue;
                         } 
-                        else if(){}
                         else {
                             // ai플레이어 전투 종료...
                             giveReward(player);
-                            System.out.println("win!!");
+                            System.out.println("대전에서 승리했다!!\n");
                             aiPlayer = makeAiPlayer(0);
                             return;
                         }
@@ -61,7 +62,26 @@ public class BattleMode {
 
             // ai 플레이어가 공격
             if (attack(aiPlayer, player)) {
-                // 보상 추가
+
+                if (player.getPlayerPokemonCurrentHp(0) == 0) {
+                    if (player.getLiveCombatPokemonCount() == 0) {
+                        System.out.println("대전에서 패배했다..\n");
+                        System.out.println("눈앞이 깜깜해 진다..\n");
+                        Ui.tools.giveDelay(500);
+                        System.out.println("포켓몬이 모두 치유되었습니다.\n");
+                        Ui.tools.giveDelay(500);
+                        for (int i = 0; i < player.getPokemonArraySize(); i++) {
+                            player.setPlayerPokemonHp(i, -99999);
+                        }
+                        player.setLiveCombatPokemonCount();
+                    }else{
+                        player.decreaseLiveCombatPokemonCount(1);
+                        System.out.println("교체할 포켓몬을 선택하세요.\n");
+                        
+                        choice = scanner.nextInt();
+                        player.changePokemon(0, choice);
+                    }
+                }
             }
         }
     }
@@ -125,7 +145,7 @@ public class BattleMode {
         }
         int num2 = scanner.nextInt();
         player.changePokemon(num1 - 1, num2 - 1);
-        
+        System.out.println("포켓몬이 교체되었습니다.");
     }
 
     private void run(Player player) {

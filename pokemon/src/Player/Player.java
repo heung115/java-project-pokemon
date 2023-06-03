@@ -8,19 +8,19 @@ import Player.Item.*;
 import Pokemon.LevelPokemon;
 
 public class Player implements Serializable {
-    private String playerName;
-    // private int playerState;
-    private int money = 10000;
-    private int level;
-    private int currentExp;
-    private int maxExp;
+  private String playerName;
+  // private int playerState;
+  private int money = 10000;
+  private int level;
+  private int currentExp;
+  private int maxExp;
 
-    protected int availableCombatPokemonCount = 3;
-    ArrayList<Pokemon> playerPokemon = new ArrayList<>();
-    private Bag playerBag = new Bag();
-    private Encyclopedia playerEncyclopedia = new Encyclopedia();
+  protected int availableCombatPokemonCount = 3;
+  protected int liveCombatPokemonCount = 3;
+  ArrayList<Pokemon> playerPokemon = new ArrayList<>();
+  private Bag playerBag = new Bag();
+  private Encyclopedia playerEncyclopedia = new Encyclopedia();
 
-<<<<<<< HEAD
   public Player(String playerName) {
     this.playerName = playerName;
     level = 10;
@@ -28,114 +28,26 @@ public class Player implements Serializable {
     maxExp = 10;
   }
 
-  public void setAvailableCombatPokemonCount(){
+  public void setLiveCombatPokemonCount(){
     
     if(playerPokemon.size()<3){
-      availableCombatPokemonCount = playerPokemon.size();
-    }else availableCombatPokemonCount =3;
+      liveCombatPokemonCount = playerPokemon.size();
+    }else liveCombatPokemonCount =3;
 
   }
 
-  public int increaseAvailableCombatPokemonCount(int num){
-    this.availableCombatPokemonCount += num;
-    return this.availableCombatPokemonCount;
+  public int decreaseLiveCombatPokemonCount(int num){
+    this.liveCombatPokemonCount -= num;
+    return this.liveCombatPokemonCount;
   }
 
-  public int getAvailableCombatPokemonCount(){
-    return availableCombatPokemonCount;
+  public int getLiveCombatPokemonCount(){
+    return liveCombatPokemonCount;
   }
 
   public String getName() {
     return playerName;
   }
-
-  public int getMoney() {
-    return money;
-  }
-
-  public void printBag() {
-    System.out.println("player : bag");
-    playerBag.showBag();
-  }
-
-  public void showInfo() {
-    System.out.println("=====정보=====");
-    System.out.println("이름 : " + getName());
-    System.out.println("래벨 : " + getLevel() + "\nlv 경험치 :" + getCurrentExp() + "/" + getMaxExp());
-    showBag();
-    System.out.println("=====포켓몬=====");
-    showPlayerPokemon();
-  }
-  /*
-   * for pokemon
-   */
-
-  public void showPlayerPokemonCombat() {
-    Pokemon pokemon = playerPokemon.get(0);
-    System.out.println(pokemon.getName());
-    System.out.println("Level :" + pokemon.getLevel());
-    System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
-  }
-
-  public void showPlayerPokemon() {
-    int playerPokemonSize = playerPokemon.size();
-
-    for (int i = 0; i < playerPokemonSize; i++) {
-      System.out.print((i + 1) + ". ");
-      Pokemon tempPokemon = playerPokemon.get(i);
-      tempPokemon.showAllStat();
-    }
-  }
-
-  public int getPlayerPokemonMaxHp(int num) {
-    try {
-      Pokemon pokemon = playerPokemon.get(num);
-      return pokemon.getMaxHp();
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("알맞은 포켓몬을 선택해주세요.");
-      return -1;
-    }
-  }
-
-  public int getPlayerPokemonCurrentHp(int num) {
-    try {
-      Pokemon pokemon = playerPokemon.get(num);
-      return pokemon.getCurrentHp();
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("알맞은 포켓몬을 선택해주세요.");
-      return -1;
-    }
-  }
-
-  public int getPlayerPokemonDamage(int num) {
-    try {
-      Pokemon pokemon = playerPokemon.get(num);
-      return pokemon.getDamage();
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("알맞은 포켓몬을 선택해주세요.");
-      return -1;
-    }
-  }
-
-  public String getPlayerPokemonType(int num) {
-    try {
-      Pokemon pokemon = playerPokemon.get(num);
-      return pokemon.getType();
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("알맞은 포켓몬을 선택해주세요.");
-      return "-1";
-=======
-    public Player(String playerName) {
-        this.playerName = playerName;
-        level = 10;
-        currentExp = 0;
-        maxExp = 10;
->>>>>>> 83cd48aa81313b0e5d10a0bfc191458ae342fd80
-    }
-
-    public String getName() {
-        return playerName;
-    }
 
     public int getMoney() {
         return money;
