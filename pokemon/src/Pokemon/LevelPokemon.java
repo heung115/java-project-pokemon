@@ -1,16 +1,17 @@
 package Pokemon;
 
-public class LevelPokemon {
+import java.io.Serializable;
 
-    public LevelPokemon() {
+public class LevelPokemon implements Serializable{
+    
+    public LevelPokemon() {}
+
+    private static int levelExp(int num){
+        return (int)Math.pow(num, 3);
     }
 
-    private static int levelExp(int num) {
-        return (int) Math.pow(num, 3);
-    }
-
-    // player pokemon list에 add할 때 호출
-    public static void setLevel(Pokemon pokemon) {
+    //player pokemon list에 add할 때 호출
+    public static void setLevel(Pokemon pokemon){
 
         pokemon.level = 1;
         pokemon.currentExp = 0;
@@ -18,15 +19,17 @@ public class LevelPokemon {
 
     }
 
-    // 야생 포켓몬 생성, 사탕 사용, etc.
-    // 필드에서 Pokemon(int num) 호출 시 rand한 num으로 같이 호출하기
-    public static void giveLevel(Pokemon pokemon, int num) {
+    //야생 포켓몬 생성, 사탕 사용, etc.
+    //필드에서 Pokemon(int num) 호출 시 rand한 num으로 같이 호출하기
+    public static void giveLevel(Pokemon pokemon, int num){
+        
+        for(int i = 0; i< num; i++)
+            giveExp(pokemon, pokemon.maxExp);
 
-        giveExp(pokemon, levelExp(num));
 
     }
 
-    public static void giveExp(Pokemon pokemon, int exp) {
+    public static void giveExp(Pokemon pokemon, int exp ){
         /*********************************************************************************
          * exp = battleType:(wild:1, Ai:1.5) * other pokemon level * baseExp:10 * item
          * effect
@@ -47,26 +50,29 @@ public class LevelPokemon {
 
             pokemon.level++;
             pokemon.increaseStat();
-            pokemon.maxExp = levelExp(pokemon.level + 1);
-
+            pokemon.currentExp =0;
+            pokemon.maxExp = levelExp(pokemon.level+1);
+        
         }
 
-        if (canEvolution(pokemon))
-            pokemon = evolutionPokemon(pokemon);
+        if(canEvolution(pokemon)){ 
+            pokemon.evolutionPokemon(pokemon);
+        }
     }
 
-    public static boolean canEvolution(Pokemon pokemon) {
-        if (pokemon.getEvolution() && pokemon.level >= pokemon.getEvolutionLevel())
+    public static boolean canEvolution(Pokemon pokemon){
+        if(pokemon.getEvolution() && pokemon.level >= pokemon.getEvolutionLevel()) 
             return true;
         else
             return false;
     }
-
-    public static Pokemon evolutionPokemon(Pokemon pokemon) {
+/*
+    public Pokemon evolutionPokemon(Pokemon pokemon){
 
         Pokemon evolutionPokemon = evolutionPokemon(pokemon);
         giveLevel(evolutionPokemon, pokemon.level - 1);
 
         return evolutionPokemon;
     }
+    */
 }

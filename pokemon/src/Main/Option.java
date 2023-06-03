@@ -25,6 +25,7 @@ public class Option {
             switch (choice) {
                 case 1:
                     showBag(player);
+
                     break;
                 case 2:
                     showInfo(player);
