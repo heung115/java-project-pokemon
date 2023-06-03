@@ -63,7 +63,7 @@ public class Option {
                 break;
             case 2:
                 // 힐
-                player.setPlayerPokemonHp(num, num);
+                // player.setPlayerPokemonHp(num, num);
                 item.use(player);
                 break;
             case 3:
@@ -74,6 +74,7 @@ public class Option {
                 choice--;
                 if (player.getLevel() <= player.getPlayerPokemonLevel(choice)) {
                     System.out.println("이포켓몬에는 사용할 수 없다");
+                    item = new RareCandy();
                     player.addItemBag(item, 1);
                     showBag(player);
                 } else {
