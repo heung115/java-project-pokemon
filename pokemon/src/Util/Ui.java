@@ -16,6 +16,14 @@ public class Ui {
         public static void clearConsoleScreen() {
             System.out.print("\033[H\033[2J");
         }
+
+        public static void giveDelay(int num){
+            try {
+                Thread.sleep(num);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static class Main {
@@ -93,6 +101,26 @@ public class Ui {
         }
         public static void printCannotGoUi() {
             System.out.println("더 이상 갈 수 없다.");
+        }
+        public static void printHealCenterUi() {
+            
+            try {
+                Thread.sleep(500);
+                System.out.println("**********************************************\n");
+                System.out.println("포켓몬센터를 발견했다. 지친 포켓몬들을 쉬게 해주자.\n");
+                System.out.println("**********************************************");
+                Thread.sleep(700);
+                for(int i =9; i>0;i--){
+                    if(i%3==0) System.out.print(i/3+" ");
+                    else System.out.print(". ");
+                    Thread.sleep(330);
+                }
+                System.out.println("\n\n포켓몬들이 모두 회복되었다.\n\n");
+                Thread.sleep(700);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
         }
     }
     public static class Option {

@@ -1,10 +1,12 @@
 package Main;
 
-import Pokemon.Pokemon;
-import Player.Player;
-import Util.*;
 import java.util.List;
 import java.util.Scanner;
+
+import Player.Player;
+import Pokemon.Pokemon;
+import Util.CSVReader;
+import Util.Ui;
 
 public class AdventureMap {
     public AdventureMap() {
@@ -102,7 +104,6 @@ public class AdventureMap {
                     selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
                     pos += 1;
                     place = selectedMap[pos];
-                    System.out.println(selectedMap[pos]);
                     selectedMap[pos] = "x";
                     event(place);
                 } else {
@@ -123,14 +124,19 @@ public class AdventureMap {
     private void event(String place) {
         switch (place) {
             case "B":
+                Util.Ui.tools.clearConsoleScreen();
                 bush();
+                printMap(selectedMap);
                 break;
             case "H":
+                Util.Ui.tools.clearConsoleScreen();
                 healCenter(player);
+                printMap(selectedMap);
                 break;
             case "S":
                 Util.Ui.tools.clearConsoleScreen();
                 shop(player);
+                printMap(selectedMap);
                 break;
             case "O":
                 Util.Ui.tools.clearConsoleScreen();
@@ -146,19 +152,21 @@ public class AdventureMap {
 
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
-            Util.Ui.tools.clearConsoleScreen();
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
-            // battleMode(wildPokemon);
-            // appearingPokemonUi();
+            
         } else {
-            // Util.Ui.tools.clearConsoleScreen();
-            ;
             printMap(selectedMap);
         }
+
+        return;
     }
 
     private void healCenter(Player player) {
-
+        Ui.AdventureModeUi.printHealCenterUi();
+        for (int i = 0; i < 3; i++) {
+            //player.setPlayerPokemonHp(i, -99999);
+        }
+        return;
     }
 
     private void shop(Player player) {
@@ -173,25 +181,23 @@ public class AdventureMap {
             Util.Ui.tools.clearConsoleScreen();
             Util.Ui.AdventureModeUi.printShopUi();
 
-            roof = false;
             switch (choice.nextInt()) {
-                case 1:
+                case 1://몬스터볼
                     Ui.AdventureModeUi.printShowItemUi(0);
-                    if(buyItem(0))break;
-                    else roof = true; 
-                    continue;
-                case 2:
+                    buyItem(1);
+                    break;
+                case 2://상처약
                     Ui.AdventureModeUi.printShowItemUi(1);
-                    if(buyItem(1))break;
-                    else roof = true; 
-                    continue;
-                case 3:
+                    buyItem(2);
+                    break;
+                case 3://이상한사탕
                     Ui.AdventureModeUi.printShowItemUi(2);
-                    if(buyItem(2))break;
-                    else roof = true; 
-                    continue;
+                    buyItem(3);
+                    break;
+                case -1: 
+                    roof = false;
+                    return;
                 default:
-                    roof = true;
                     System.out.print("\n입력 오류! 다시 입력해주세요 : ");
                     break;
             }
@@ -199,26 +205,57 @@ public class AdventureMap {
         choice.close();
     }
 
-    private boolean buyItem(int itemNum){
+    private void buyItem(int itemNum) {
         Scanner choice = new Scanner(System.in);
         boolean roof = true;
+        int num;
+
         while (roof) {
-            roof = false;
+            roof=false;
             switch (choice.next()) {
                 case "Y":case "y":
-                    if(itemNum==0) ;//볼구매
-                    else if(itemNum==1);//상처약 구매
-                    else if(itemNum==2);//사탕 구매
-                    return true;
+                    System.out.print("구입할 갯수를 입력해주세요 : ");
+                    num = choice.nextInt();
+                    purchase(itemNum, num);// 볼구매
+                    return;
                 case "N":case "n":
-                    return false;
+                    System.out.println("\n구입을 취소하였습니다.");
+                    Ui.tools.giveDelay(500);
+                    return;
                 default:
-                    roof = true;
+                    roof=true;
                     System.out.print("\n입력 오류! 다시 입력해주세요 : ");
                     break;
             }
+            
         }
         choice.close();
-        return true;
+        return;
+    }
+
+    private void purchase(int itemNum, int num){
+        /******************************************
+         * 몬스터볼 : 100$, 150$, 300$, 1000$
+         * 상처약 : 100$, 200$, 300$
+         * 이상한사탕 : 1000$ 
+         ******************************************/
+        int itemPrice=0;
+
+        switch(itemNum){
+            case 1: itemPrice = 100;
+            case 2: itemPrice = 100;
+            case 3: itemPrice = 1000;
+        }
+
+        if(player.gerMoney() >= (itemPrice * num)){
+            player.setMoney(-itemPrice * num);
+            player.addItemBag(player.useItemBag(itemNum), num);
+            System.out.println("\n아이템 "+num+"개를 구입하였습니다.\n");
+            Ui.tools.giveDelay(1000);
+        }else{
+            System.out.println("\n돈이 부족합니다.\n");
+            Ui.tools.giveDelay(1000);
+        }
+
     }
 }
