@@ -1,27 +1,35 @@
 package Main;
 
-import Pokemon.Pokemon;
-import Util.*;
 import java.util.List;
 import java.util.Scanner;
 
+import Player.Encyclopedia;
+import Player.Player;
+import Player.Item.*;
+import Pokemon.Pokemon;
+import Util.*;
+
 
 public class AdventureMap {
-    
+    public AdventureMap() {
+    }
+
     private List<List<String>> mapList = CSVReader.readCSV("pokemon/src/CVSFile/map.csv");
-    AdventureMap(){}
-
     private String selectedMap[] = new String[80];
+    private int pos = 0;
 
-    public void initMap(int num){
+    public void initMap(int num) {
         int mapSize = 80;
         String selectMap[] = new String[mapSize];
-        for(int i=0; i < mapSize;i++) selectMap[i] = this.mapList.get(num).get(i);
-        selectMap[40] = "x";//초기 위치
-        this.selectedMap = selectedMap.clone();
+        for (int i = 0; i < mapSize; i++)
+            selectMap[i] = this.mapList.get(num).get(i);
+        selectMap[40] = "x";// 초기 위치
+        this.selectedMap = selectMap.clone();
+
+        printMap(this.selectedMap);
     }
-    
-    public void printMap(String[] map){
+
+    public void printMap(String[] map) {
 
         /*******************
          * SIZE : 10 * 8
@@ -32,130 +40,166 @@ public class AdventureMap {
          * x : 플레이어 위치
          *******************/
 
-        for(int i=0, k=0; i < 8;i++){
-            for(int j=0; j < 10;j++,k++){
-                if(map[k].equals("o"))
-                System.out.printf(" "+map[k]+"  ");
-                else 
-                System.out.printf("["+map[k]+"] ");
+        for (int i = 0, k = 0; i < 8; i++) {
+            for (int j = 0; j < 10; j++, k++) {
+                if (map[k].equals("x"))
+                    System.out.printf(" " + map[k] + "  ");
+                else
+                    System.out.printf("[" + map[k] + "] ");
             }
-            System.out.println("");
+            System.out.println("\n");
         }
-         
+        System.out.println("이동 : 상(1) ,하(2) ,좌(3) ,우(4), 복귀(-1) \n");
+
     }
 
-    public String[] move(String[] map, int mapNumber, String key){
-        
-        int pos = 0;
-        for(int i =0 ; i < map.length ;i++){
-            if(map[i].equals("x")){
+    public boolean move(Player player,int mapNumber, int key) {
+        String place = "";
+        for (int i = 0; i < selectedMap.length; i++) {
+            if (selectedMap[i].equals("x")) {
                 pos = i;
                 break;
-            };
+            }
+            ;
         }
 
-        switch(key){
-            case "위": 
+        switch (key) {
+            case 1: // 위
                 try {
-                    map[pos] = this.mapList.get(mapNumber).get(pos);
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
                     pos -= 10;
-                    event(map, pos);
-                    map[pos] = "x";
+                    place = selectedMap[pos];
+                    selectedMap[pos] = "x";
+                    event(player,place);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    //TODO 다른 맵으로 이동
-                }
-                break;
-            case "아래": 
-                try {
-                    map[pos] = this.mapList.get(mapNumber).get(pos);
+                    Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos += 10;
-                    event(map, pos);
-                    map[pos] = "x";
+                }
+                break;
+            case 2: // 아래
+                try {
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
+                    pos += 10;
+                    place = selectedMap[pos];
+                    selectedMap[pos] = "x";
+                    event(player,place);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    //TODO 다른 맵으로 이동
+                    Util.Ui.AdventureModeUi.printCannotGoUi();
+                    pos -= 10;
                 }
                 break;
-            case "오른쪽": 
-                if(!(pos % 10 == 9)){
-                    map[pos] = this.mapList.get(mapNumber).get(pos);
-                    pos += 1;
-                    event(map, pos);
-                    map[pos] = "x";
-                }
-                else{ 
-                    //TODO 다른 맵으로 이동
-                }
-                break;
-            case "왼쪽": 
-                if(!(pos % 10 == 0)){
-                    map[pos] = this.mapList.get(mapNumber).get(pos);
+            case 3: // 좌
+                if (!(pos % 10 == 0)) {
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
                     pos -= 1;
-                    event(map, pos);
-                    map[pos] = "x";
-                }
-                else{ 
-                    //TODO 다른 맵으로 이동
+                    place = selectedMap[pos];
+                    selectedMap[pos] = "x";
+                    event(player,place);
+                } else {
+                    Util.Ui.AdventureModeUi.printCannotGoUi();
+                    pos += 1;
                 }
                 break;
+            case 4: // 우
+                if (!(pos % 10 == 9)) {
+                    selectedMap[pos] = this.mapList.get(mapNumber).get(pos);
+                    pos += 1;
+                    place = selectedMap[pos];
+                    selectedMap[pos] = "x";
+                    event(player,place);
+                } else {
+                    Util.Ui.AdventureModeUi.printCannotGoUi();
+                    pos -= 1;
+                }
+                break;
+            case -1:
+                return false;
+            default:
+                System.out.println("잘못입력하였습니다.");
+                break;
+
         }
-
-        return map;
-
+        return true;
     }
 
-    private void event(String[] map, int pos){
-        switch(map[pos]){
-            case "B": bush();break;
-            case "H": healCenter(); break;
-            case "S": shop(); break;
-            case "O": printMap(map); break;
+    private void event(Player player,String place) {
+        switch (place) {
+            case "B":
+                Util.Ui.tools.clearConsoleScreen();
+                bush(player);
+                printMap(selectedMap);
+                break;
+            case "H":
+                Util.Ui.tools.clearConsoleScreen();
+                healCenter(player);
+                printMap(selectedMap);
+                break;
+            case "S":
+                Util.Ui.tools.clearConsoleScreen();
+                shop(player);
+                printMap(selectedMap);
+                break;
+            case "O":
+                Util.Ui.tools.clearConsoleScreen();
+                printMap(selectedMap);
+                break;
         }
     }
 
-    private void bush(){
-        // TODO 포켓몬 등장
-        int size = 9;//Encyclopedia.csv에 담긴 포켓몬 수 
+    private void bush(Player player) {
+
+        int size = Encyclopedia.encyclopedia.size();
         double a = Math.random();
-        if(a>5.0){
-            Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, false));
-            // battleMode(wildPokemon);
-            // appearingPokemonUi();
-        } 
-        else{
-            Util.Ui.tools.clearConsoleScreen();;
+
+        if (a > 0.5) {
+            Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
+            System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
+
+        } else {
             printMap(selectedMap);
         }
+
+        return;
     }
 
-    private void healCenter(){
-        // TODO 포켓몬 힐 기능
+    private void healCenter(Player player) {
+        Ui.AdventureModeUi.printHealCenterUi();
+        for (int i = 0; i < 3; i++) {
+            player.setPlayerPokemonHp(i, -99999);
+        }
+        return;
     }
 
-    private void shop(){
-        // TODO 아이템 구매
+    private void shop(Player player) {
         /**********************************
          * 상처약 : 고급, 중급, 하급
          * 이상한 사탕
          * 몬스터 볼 : 일반, 슈퍼, 하이퍼, 마스터
-        ***********************************/
-        //Util.Ui.ShopUi.printShopUi;
+         ***********************************/
         Scanner choice = new Scanner(System.in);
         boolean roof = true;
-        while(roof){
-            roof = false;
-            switch(choice.nextInt()){
-                case 1: 
-                    //addMedicine(),payMoney()
-                    //payMoney는 비용을 메서드로 받아 boolean을 리턴, if:false -> print: error! + roof =true;
+        while (roof) {
+            Util.Ui.tools.clearConsoleScreen();
+            System.out.println("\n잔액 : " + player.getMoney() + "$");
+            Util.Ui.AdventureModeUi.printShopUi();
+
+            switch (choice.nextInt()) {
+                case 1:// 몬스터볼
+                    Ui.AdventureModeUi.printShowItemUi(0);
+                    buyItem(player,1);
                     break;
-                case 2: 
-                    //addMonsterBall(),payMoney()
+                case 2:// 상처약
+                    Ui.AdventureModeUi.printShowItemUi(1);
+                    buyItem(player,2);
                     break;
-                case 3: 
-                    //addCandy(),payMoney()
+                case 3:// 이상한사탕
+                    Ui.AdventureModeUi.printShowItemUi(2);
+                    buyItem(player,3);
                     break;
-                default: 
-                    roof = true;
+                case -1:
+                    roof = false;
+                    return;
+                default:
                     System.out.print("\n입력 오류! 다시 입력해주세요 : ");
                     break;
             }
@@ -163,8 +207,114 @@ public class AdventureMap {
         choice.close();
     }
 
-    static public void main(String args[]){
-        AdventureMap adventureMap = new AdventureMap();
-        adventureMap.initMap(0);
+    private void buyItem(Player player, int itemNum) {
+        Scanner choice = new Scanner(System.in);
+        boolean roof = true;
+        int num1, num2;
+
+        while (roof) {
+            roof = false;
+            switch (choice.next()) {
+                case "Y":
+                case "y":
+                    System.out.print("구입할 물품을 입력해주세요 : ");
+                    num1 = choice.nextInt();
+                    System.out.print("구입할 갯수를 입력해주세요 : ");
+                    num2 = choice.nextInt();
+                    purchase(player,itemNum, num1, num2);// 볼구매
+                    return;
+                case "N":
+                case "n":
+                    System.out.println("\n구입을 취소하였습니다.");
+                    Ui.tools.giveDelay(500);
+                    return;
+                default:
+                    roof = true;
+                    System.out.print("\n입력 오류! 다시 입력해주세요 : ");
+                    break;
+            }
+
+        }
+        choice.close();
+        return;
+    }
+
+    private void purchase(Player player,int itemNum, int num1, int num2) {
+        /******************************************
+         * 몬스터볼 : 100$, 150$, 300$, 1000$
+         * 상처약 : 100$, 200$, 300$
+         * 이상한사탕 : 1000$
+         ******************************************/
+        int itemPrice = 0;
+
+        Item potion = new Item();
+        Item monsterBall = new Item();
+        Item candy = new Item();
+
+        switch (itemNum) {
+            case 1:
+                switch (num1) {
+                    case 1:
+                        itemPrice = 100;
+                        monsterBall = new MonsterBall("몬스터볼");
+                        break;
+                    case 2:
+                        itemPrice = 150;
+                        monsterBall = new MonsterBall("슈퍼볼");
+                        break;
+                    case 3:
+                        itemPrice = 300;
+                        monsterBall = new MonsterBall("하이퍼볼");
+                        break;
+                    case 4:
+                        itemPrice = 1000;
+                        monsterBall = new MonsterBall("마스터볼");
+                        break;
+                    default:
+                        throw new IllegalArgumentException("유효하지 않은 품목입니다.");
+
+                }
+                break;
+            case 2:
+                switch (num1) {
+                    case 1:
+                        itemPrice = 100;
+                        potion = new Potion("하급 상처약");
+                        break;
+                    case 2:
+                        itemPrice = 200;
+                        potion = new Potion("중급 상처약");
+                        break;
+                    case 3:
+                        itemPrice = 300;
+                        potion = new Potion("고급 상처약");
+                        break;
+                    default:
+                        throw new IllegalArgumentException("유효하지 않은 품목입니다.");
+                }
+                break;
+            case 3:
+                itemPrice = 1000;
+                candy = new RareCandy();
+                break;
+        }
+
+        if (player.gerMoney() >= (itemPrice * num2)) {
+            player.setMoney(-itemPrice * num2);
+            switch(itemNum){
+                case 1:
+                    player.addItemBag(monsterBall, num2); break;
+                case 2:
+                    player.addItemBag(potion, num2); break;
+                case 3:
+                    player.addItemBag(candy, num2); break;
+            }
+            System.out.println("\n아이템 " + num2 + "개를 구입하였습니다.\n");
+            Ui.tools.giveDelay(1000);
+        } else {
+            System.out.println("\n돈이 부족합니다.\n");
+            Ui.tools.giveDelay(1000);
+        }
+
     }
 }

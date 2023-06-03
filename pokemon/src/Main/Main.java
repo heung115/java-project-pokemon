@@ -68,7 +68,7 @@ public class Main {
 
   private void giveItem(Player player) {
     Item monsterBall = new MonsterBall("몬스터볼");
-    Item potion = new Potion();
+    Item potion = new Potion("하급 상처약");
     player.addItemBag(monsterBall, 3);
     player.addItemBag(potion, 5);
   }
