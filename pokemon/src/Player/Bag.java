@@ -26,6 +26,10 @@ public class Bag implements Serializable {
             if (item.getItemIndex() == 999) {
                 break;
             }
+            if ((int) bag.get(i).get(2) < 1) {
+                bag.remove(i);
+                sortBag();
+            }
             System.out.printf("%s  %s\t%3d\n", bag.get(i).get(0), item.getItemName(), bag.get(i).get(2));
             // System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");
         }
@@ -38,12 +42,6 @@ public class Bag implements Serializable {
             if (choiceNum == itemNum) {
                 bag.get(i).set(2, (Integer) (((int) bag.get(i).get(2)) - 1));
                 // 아이템 갯수가 0이면 지운다.
-                if ((int) bag.get(i).get(2) < 1) {
-                    bag.remove(i);
-                    sortBag();
-                }
-                // System.out.println("item num : " + itemNum + " i : " + i + " bagsize : " +
-                // bag.size());
                 return ((Item) bag.get(i).get(1));
             }
         }
