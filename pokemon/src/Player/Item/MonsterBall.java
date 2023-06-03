@@ -35,16 +35,13 @@ public class MonsterBall extends Item {
     }
 
     public void use(Player player, Pokemon targetPokemon) {
-        System.out.println(captureRateFormula(targetPokemon));
-        if (Math.random() < captureRateFormula(targetPokemon)&&player.getLevel()>=targetPokemon.getLevel()) {
+        if (Math.random() < captureRateFormula(targetPokemon) && player.getLevel() >= targetPokemon.getLevel()) {
             // capture!
-            System.out.println("\n"+targetPokemon.getName()+", 넌 내꺼야!!!\n");
+            System.out.println("\n" + targetPokemon.getName() + ", 넌 내꺼야!!!\n");
             player.addPokemonToPlayerPokemonArrayList(targetPokemon);
-        }
-        else if(player.getLevel()<targetPokemon.getLevel()){
+        } else if (player.getLevel() < targetPokemon.getLevel()) {
             System.out.println("\n너무 강해서 몬스터볼이 효과가 없다...!");
-        } 
-        else {
+        } else {
             System.out.println("\n조금만 더 하면 잡을 수 있었는데..!");
         }
 
