@@ -6,7 +6,7 @@ import java.util.Scanner;
 import Player.Encyclopedia;
 import Player.Player;
 import Player.Item.*;
-import Pokemon.Pokemon;
+import Pokemon.*;
 import Util.*;
 
 public class AdventureMap {
@@ -399,31 +399,47 @@ public class AdventureMap {
         System.out.println("도망쳤다!!");
     }
 
-    private void bag(Player player) {
+    private boolean bag(Player player, Pokemon pokemon) {
         player.showBag();
         System.out.println("사용할 아이템의 번호를 입력해주세요");
         int num = scanner.nextInt();
-        if (num != 1) {
-            System.out.println("사용할 수 없습니다, 다른아이템을 입력해주세요");
-            bag(player);
-        } else {
-            (player.useItemBag(num)).use(player);
+        switch (num / 10) {
+            case 1:
+                // 몬스터볼
+                System.out.println("몬스터터볼 사용");
+                int temp = player.getPokemonArraySize();
+                System.out.println(player.useItemBag(num).getItemName());
+                player.useItemBag(num).use(player, pokemon);
+                if (temp != player.getPokemonArraySize()) {
+                    Ui.tools.giveDelay(500);
+                    return true;
+                }
+                break;
+            case 2:
+                // 힐
+                player.useItemBag(num).use(pokemon);
+                break;
+            case 3:
+                // 사탕
+                System.out.println("사용할 수 없습니다, 다른아이템을 입력해주세요");
+                bag(player, pokemon);
         }
-
+        return false;
     }
 
     private void battleLoop(Player player, Pokemon pokemon) {
-        printBattleUi(player, pokemon);
-
+        LevelPokemon levelPokemon = new LevelPokemon();
         int choice;
         while (true) {
-            choice = scanner.nextInt();
+            printBattleUi(player, pokemon);
             Ui.AdventureModeUi.printBattleLoopUi();
+            choice = scanner.nextInt();
             switch (choice) {
                 case 1:
                     if (attack(player, pokemon)) {
                         System.out.println("포켓몬을 죽였다");
-                        // TODO 보상설정
+                        levelPokemon.giveExp(pokemon, 10);
+                        return;
                     }
 
                     break;
@@ -431,7 +447,9 @@ public class AdventureMap {
                     changePokemon(player);
                     break;
                 case 3:
-                    bag(player);
+                    if (bag(player, pokemon)) {
+                        return;
+                    }
                     break;
                 case 4:
                     run(player);

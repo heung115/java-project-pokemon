@@ -142,6 +142,10 @@ public class Player implements Serializable {
     playerPokemon.add(pokemon);
   }
 
+  public int getPokemonArraySize() {
+    return playerPokemon.size();
+  }
+
   public void giveExpPlayerPokemon(int exp, int pokemonNum) {
 
   }

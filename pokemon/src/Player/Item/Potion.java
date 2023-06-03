@@ -12,14 +12,17 @@ public class Potion extends Item {
         itemIndex = 2;
         switch (potionName) {
             case "하급 상처약":
+                this.itemIndex = 20;
                 this.effect = 0.3;
                 this.itemName = "하급 상처약";
                 break;
             case "중급 상처약":
+                this.itemIndex = 21;
                 this.effect = 0.6;
                 this.itemName = "중급 상처약";
                 break;
             case "고급 상처약":
+                this.itemIndex = 22;
                 this.effect = 1.0;
                 this.itemName = "고급 상처약";
                 break;

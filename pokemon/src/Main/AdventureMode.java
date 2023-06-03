@@ -17,9 +17,10 @@ public class AdventureMode {
 
     public void adventureRoof(Player player) {
         Scanner scanner = new Scanner(System.in);
+        map.initMap(mapNumber);
         while (true) {
             try {
-                if (!map.move(player,mapNumber, scanner.nextInt()))
+                if (!map.move(player, mapNumber, scanner.nextInt()))
                     break;
                 ;
             } catch (InputMismatchException e) {
