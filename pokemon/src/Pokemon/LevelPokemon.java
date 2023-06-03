@@ -1,6 +1,8 @@
 package Pokemon;
 
-public class LevelPokemon {
+import java.io.Serializable;
+
+public class LevelPokemon implements Serializable{
     
     public LevelPokemon() {}
 

@@ -9,7 +9,7 @@ import Player.Item.*;
 public class Player implements Serializable {
   private String playerName;
   // private int playerState;
-  private int money;
+  private int money=10000;
   private int level;
   private int currentExp;
   private int maxExp;

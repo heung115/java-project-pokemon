@@ -158,7 +158,7 @@ public class Pokemon implements Serializable {
 		return evolutionPokemon;
 	}
 
-	/* To debug */
+	/* To debug 
 	public static void main(String[] args) {
 
 		Pokemon poke[] = new Pokemon[2];
@@ -167,4 +167,5 @@ public class Pokemon implements Serializable {
 		poke[0].showAllStat();
 		poke[1].showAllStat();
 	}
+	*/
 }
