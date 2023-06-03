@@ -80,7 +80,15 @@ public class BattleMode {
         }
         for (int i = 1; i < pokemonEffectSize; i++) {
             if (type2.equals(Main.pokemonEffect.get(0).get(i))) {
-                return Double.parseDouble(Main.pokemonEffect.get(type).get(i));
+                double effect = Double.parseDouble(Main.pokemonEffect.get(type).get(i));
+                if (effect == 1.25) {
+                    System.out.println("효과가 굉장했다..");
+                } else if (effect == 1) {
+                    System.out.println("효과는 평범했다..");
+                } else if (effect == 0.8) {
+                    System.out.println("효과가 별로였다..");
+                }
+                return effect;
             }
         }
         return -10.0;
@@ -95,7 +103,7 @@ public class BattleMode {
         int damage = (int) circulateDamageFormula(player1, player2);
         player2.setPlayerPokemonHp(0, damage);
         System.out.println(
-                player1.getName() + "의 포켓몬 " + player1.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공");
+                player1.getName() + "의 포켓몬 " + player1.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공\n");
         if (player2.getPlayerPokemonCurrentHp(0) == 0) {
             return true;
         } else {
