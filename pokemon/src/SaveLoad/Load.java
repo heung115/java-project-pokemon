@@ -21,6 +21,9 @@ public class Load {
         } catch (FileNotFoundException e) {
             System.out.println("저장된 정보가 없습니다.");
             return null;
+        } catch (InvalidClassException e) {
+            System.out.println("저장된 파일이 버젼이 다릅니다.");
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
