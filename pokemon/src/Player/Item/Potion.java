@@ -33,9 +33,9 @@ public class Potion extends Item {
         player.showPlayerPokemon();
         int num = scanner.nextInt() - 1;
         System.out.println(num);
-        double healAmount = player.getPlayerPokemonMaxHp(num) * this.effect ;
+        double healAmount = player.getPlayerPokemonMaxHp(num) * this.effect;
 
-        player.setPlayerPokemonHp(num, (int)-healAmount);
-        System.out.println(player.getPlayerPokemonName(num) + "의 체력이 " + (int)healAmount + "만큼 회복되었습니다");
+        player.setPlayerPokemonHp(num, (int) -healAmount);
+        System.out.println(player.getPlayerPokemonName(num) + "의 체력이 " + (int) healAmount + "만큼 회복되었습니다");
     }
 }

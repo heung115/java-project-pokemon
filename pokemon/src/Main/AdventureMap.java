@@ -9,11 +9,11 @@ import Player.Item.*;
 import Pokemon.Pokemon;
 import Util.*;
 
-
 public class AdventureMap {
     public AdventureMap() {
     }
 
+    private Scanner scanner = new Scanner(System.in);
     private List<List<String>> mapList = CSVReader.readCSV("pokemon/src/CVSFile/map.csv");
     private String selectedMap[] = new String[80];
     private int pos = 0;
@@ -53,7 +53,7 @@ public class AdventureMap {
 
     }
 
-    public boolean move(Player player,int mapNumber, int key) {
+    public boolean move(Player player, int mapNumber, int key) {
         String place = "";
         for (int i = 0; i < selectedMap.length; i++) {
             if (selectedMap[i].equals("x")) {
@@ -70,7 +70,7 @@ public class AdventureMap {
                     pos -= 10;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(player,place);
+                    event(player, place);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos += 10;
@@ -82,7 +82,7 @@ public class AdventureMap {
                     pos += 10;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(player,place);
+                    event(player, place);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos -= 10;
@@ -94,7 +94,7 @@ public class AdventureMap {
                     pos -= 1;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(player,place);
+                    event(player, place);
                 } else {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos += 1;
@@ -106,7 +106,7 @@ public class AdventureMap {
                     pos += 1;
                     place = selectedMap[pos];
                     selectedMap[pos] = "x";
-                    event(player,place);
+                    event(player, place);
                 } else {
                     Util.Ui.AdventureModeUi.printCannotGoUi();
                     pos -= 1;
@@ -122,7 +122,7 @@ public class AdventureMap {
         return true;
     }
 
-    private void event(Player player,String place) {
+    private void event(Player player, String place) {
         switch (place) {
             case "B":
                 Util.Ui.tools.clearConsoleScreen();
@@ -154,6 +154,7 @@ public class AdventureMap {
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
+            battleLoop(player, wildPokemon);
 
         } else {
             printMap(selectedMap);
@@ -186,15 +187,15 @@ public class AdventureMap {
             switch (choice.nextInt()) {
                 case 1:// 몬스터볼
                     Ui.AdventureModeUi.printShowItemUi(0);
-                    buyItem(player,1);
+                    buyItem(player, 1);
                     break;
                 case 2:// 상처약
                     Ui.AdventureModeUi.printShowItemUi(1);
-                    buyItem(player,2);
+                    buyItem(player, 2);
                     break;
                 case 3:// 이상한사탕
                     Ui.AdventureModeUi.printShowItemUi(2);
-                    buyItem(player,3);
+                    buyItem(player, 3);
                     break;
                 case -1:
                     roof = false;
@@ -221,7 +222,7 @@ public class AdventureMap {
                     num1 = choice.nextInt();
                     System.out.print("구입할 갯수를 입력해주세요 : ");
                     num2 = choice.nextInt();
-                    purchase(player,itemNum, num1, num2);// 볼구매
+                    purchase(player, itemNum, num1, num2);// 볼구매
                     return;
                 case "N":
                 case "n":
@@ -239,7 +240,7 @@ public class AdventureMap {
         return;
     }
 
-    private void purchase(Player player,int itemNum, int num1, int num2) {
+    private void purchase(Player player, int itemNum, int num1, int num2) {
         /******************************************
          * 몬스터볼 : 100$, 150$, 300$, 1000$
          * 상처약 : 100$, 200$, 300$
@@ -301,19 +302,144 @@ public class AdventureMap {
 
         if (player.gerMoney() >= (itemPrice * num2)) {
             player.setMoney(-itemPrice * num2);
-            switch(itemNum){
+            switch (itemNum) {
                 case 1:
-                    player.addItemBag(monsterBall, num2); break;
+                    player.addItemBag(monsterBall, num2);
+                    break;
                 case 2:
-                    player.addItemBag(potion, num2); break;
+                    player.addItemBag(potion, num2);
+                    break;
                 case 3:
-                    player.addItemBag(candy, num2); break;
+                    player.addItemBag(candy, num2);
+                    break;
             }
             System.out.println("\n아이템 " + num2 + "개를 구입하였습니다.\n");
             Ui.tools.giveDelay(1000);
         } else {
             System.out.println("\n돈이 부족합니다.\n");
             Ui.tools.giveDelay(1000);
+        }
+
+    }
+
+    /*
+     * for battle
+     */
+    private double circulateEffect(String type1, String type2) {
+        int type = -1;
+        int pokemonEffectSize = Main.pokemonEffect.size();
+        for (int i = 1; i < pokemonEffectSize; i++) {
+            if (type1.equals(Main.pokemonEffect.get(i).get(0))) {
+                type = i;
+                break;
+            }
+        }
+        if (type == -1) {
+            System.out.println("타입을 찾을 수 없습니다");
+            return -1.0;
+        }
+        for (int i = 1; i < pokemonEffectSize; i++) {
+            if (type2.equals(Main.pokemonEffect.get(0).get(i))) {
+                return Double.parseDouble(Main.pokemonEffect.get(type).get(i));
+            }
+        }
+        return -10.0;
+    }
+
+    private double circulateDamageFormula(Player player, Pokemon pokemon) {
+        double typeDamage = circulateEffect(player.getPlayerPokemonType(0), pokemon.getType());
+        return player.getPlayerPokemonDamage(0) * typeDamage;
+    }
+
+    private double circulateDamageFormulaPokemon(Player player, Pokemon pokemon) {
+        double typeDamage = circulateEffect(pokemon.getType(), player.getPlayerPokemonType(0));
+        return pokemon.getDamage() * typeDamage;
+    }
+
+    private boolean attack(Player player, Pokemon pokemon) {
+        int damage = (int) circulateDamageFormula(player, pokemon);
+        pokemon.setHp(damage);
+        System.out.println(
+                player.getName() + "의 포켓몬 " + player.getPlayerPokemonName(0) + "이/가 " + damage + "만큼의 공격 성공");
+        if (pokemon.getCurrentHp() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean attackPokemon(Player player, Pokemon pokemon) {
+        int damage = (int) circulateDamageFormulaPokemon(player, pokemon);
+        player.setPlayerPokemonHp(0, damage);
+        System.out.println(pokemon.getName() + "이/가 " + damage + "만큼의 공격 성공");
+        if (player.getPlayerPokemonCurrentHp(0) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void printBattleUi(Player player, Pokemon pokemon) {
+        System.out.println("나 : " + player.getName());
+        player.showPlayerPokemonCombat();
+        System.out.println("\n상대 : " + pokemon.getName());
+        System.out.println("Hp :" + pokemon.getCurrentHp() + "/" + pokemon.getMaxHp());
+    }
+
+    private void changePokemon(Player player) {
+        player.showPlayerPokemon();
+        System.out.println("바꿀 두 포켓몬의 번호를 입력하시오.");
+        int num1 = scanner.nextInt();
+        int num2 = scanner.nextInt();
+        player.changePokemon(num1 - 1, num2 - 1);
+        System.out.println("포켓몬이 교체되었습니다.");
+    }
+
+    private void run(Player player) {
+        System.out.println("도망쳤다!!");
+    }
+
+    private void bag(Player player) {
+        player.showBag();
+        System.out.println("사용할 아이템의 번호를 입력해주세요");
+        int num = scanner.nextInt();
+        if (num != 1) {
+            System.out.println("사용할 수 없습니다, 다른아이템을 입력해주세요");
+            bag(player);
+        } else {
+            (player.useItemBag(num)).use(player);
+        }
+
+    }
+
+    private void battleLoop(Player player, Pokemon pokemon) {
+        printBattleUi(player, pokemon);
+
+        int choice;
+        while (true) {
+            choice = scanner.nextInt();
+            Ui.AdventureModeUi.printBattleLoopUi();
+            switch (choice) {
+                case 1:
+                    if (attack(player, pokemon)) {
+                        System.out.println("포켓몬을 죽였다");
+                        // TODO 보상설정
+                    }
+
+                    break;
+                case 2:
+                    changePokemon(player);
+                    break;
+                case 3:
+                    bag(player);
+                    break;
+                case 4:
+                    run(player);
+                    return;
+            }
+            if (attackPokemon(player, pokemon)) {
+                // TODO 죽었다
+            }
         }
 
     }
