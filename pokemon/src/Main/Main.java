@@ -45,7 +45,7 @@ public class Main {
   // TODO: pokemon 객체 리턴타입 수정
   private Pokemon choicePokemon() {
     System.out.println("포켓몬을 고르시오");
-    System.out.println("1. 파이리, 2.파이리, 3.모부기");
+    System.out.println("1. 꼬부기, 2.파이리, 3.모부기");
 
     while (true) {
       int input = sc.nextInt();

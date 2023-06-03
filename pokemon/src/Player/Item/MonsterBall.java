@@ -47,7 +47,7 @@ public class MonsterBall extends Item {
         else {
             System.out.println("\n조금만 더 하면 잡을 수 있었는데..!");
         }
-        
+
     }
 
     private double captureRateFormula(Pokemon targetPokemon) {

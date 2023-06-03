@@ -1,5 +1,7 @@
 package Player;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.List;
 import java.io.*;
 import Util.CSVReader;
@@ -36,8 +38,8 @@ public class Encyclopedia implements Serializable {
                     continue;
                 }
                 if (Boolean.parseBoolean(encyclopedia.get(i).get(1)) == true) {
-                    if (encyclopedia.get(0).get(i).length() > 3) {
-                        System.out.printf("%s\t\t", encyclopedia.get(i).get(j));
+                    if (encyclopedia.get(i).get(j).length() > 3 && containsHangul(encyclopedia.get(i).get(j))) {
+                        System.out.printf("%s\t", encyclopedia.get(i).get(j));
                     } else {
                         System.out.printf("%s\t\t", encyclopedia.get(i).get(j));
                     }
@@ -47,6 +49,13 @@ public class Encyclopedia implements Serializable {
             }
             System.out.println();
         }
+    }
+
+    private static boolean containsHangul(String input) {
+        // 한글 유니코드 범위: \uAC00-\uD7A3
+        Pattern pattern = Pattern.compile(".*[\\p{IsHangul}]+.*");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 
     public void addPokemonToEncyclopedia(int pokemonNum) {
