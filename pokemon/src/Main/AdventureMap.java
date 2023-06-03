@@ -400,8 +400,12 @@ public class AdventureMap {
 
     private void changePokemon(Player player) {
         player.showPlayerPokemon();
-        System.out.println("바꿀 두 포켓몬의 번호를 입력하시오.");
+        System.out.println("바꿀 두 포켓몬의 번호를 입력하시오. (뒤로가기 : -1)");
         int num1 = scanner.nextInt();
+        if (num1 == -1) {
+            System.out.println("전투중에 한눈을 팔았다....");
+            return;
+        }
         int num2 = scanner.nextInt();
         player.changePokemon(num1 - 1, num2 - 1);
         System.out.println("포켓몬이 교체되었습니다.\n");
@@ -450,6 +454,16 @@ public class AdventureMap {
         return false;
     }
 
+    private void reward(Player player) {
+        int playerExp = 10;
+        int pokemonExp = 10;
+        System.out.println("포켓몬을 죽였다");
+        System.out.println(player.getName() + "이/가" + playerExp + "만큼의경험치 획득\n");
+        player.setExp(playerExp);
+        System.out.println(player.getPlayerPokemonName(0) + "이/가" + pokemonExp + "만큼의경험치 획득\n");
+        player.giveExpPlayerPokemon(pokemonExp, 0);
+    }
+
     private void battleLoop(Player player, Pokemon pokemon) {
         int choice;
         while (true) {
@@ -459,9 +473,7 @@ public class AdventureMap {
             switch (choice) {
                 case 1:
                     if (attack(player, pokemon)) {
-                        System.out.println("포켓몬을 죽였다\n");
-                        LevelPokemon.giveExp(pokemon, 10);
-                        Ui.tools.clearConsoleScreen();
+                        reward(player);
                         return;
                     }
 

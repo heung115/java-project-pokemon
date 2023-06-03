@@ -13,6 +13,7 @@ public class MainGame {
     private int choice = 0;
 
     public void mainGameLoop(Player player) {
+        choice = 0;
         while (choice != 4) {
             Ui.MainGame.printMainGameLoopUi();
             choice = scanner.nextInt();
