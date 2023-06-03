@@ -46,7 +46,7 @@ public class MonsterBall extends Item {
             System.out.println("\n" + targetPokemon.getName() + ", 넌 내꺼야!!!\n");
 
             if (player.getPokemonArraySize() > 3) {
-                System.out.println("가방이 가득찼다...\n 가방에 있는 포켓몬과 교환하기 위해선 [교환할 포켓몬]을 입력해주세요");
+                System.out.println("손에 있는 포켓몬과 교환하기 위해선 [교환할 포켓몬]을 입력해주세요");
                 player.showPlayerPokemon();
                 int num1 = scanner.nextInt();
                 player.changeAllPokemon(num1 - 1, player.getPokemonArraySize() - 1);

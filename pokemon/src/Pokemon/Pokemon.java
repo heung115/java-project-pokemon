@@ -87,7 +87,7 @@ public class Pokemon implements Serializable {
 
 		/* 0을 사용할 수 없는 경우 */
 		while (a == 0 && notZero)
-			random.nextInt(size);
+			a = random.nextInt(size);
 
 		return a;
 	}

@@ -71,6 +71,7 @@ public class Main {
     Item potion = new Potion("하급 상처약");
     Item candy = new RareCandy();
     Item nope = new Item();
+
     player.addItemBag(monsterBall, 30);
     player.addItemBag(potion, 5);
     player.addItemBag(candy, 1);
