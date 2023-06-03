@@ -43,6 +43,7 @@ public class Player implements Serializable {
 
   public int getLiveCombatPokemonCount(){
     return liveCombatPokemonCount;
+    
   }
 
   public String getName() {
