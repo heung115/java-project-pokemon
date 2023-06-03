@@ -432,7 +432,6 @@ public class AdventureMap {
         switch (num / 10) {
             case 1:
                 // 몬스터볼
-                System.out.println("몬스터터볼 사용");
                 int temp = player.getPokemonArraySize();
                 // System.out.println(player.useItemBag(num).getItemName());
                 item.use(player, pokemon);

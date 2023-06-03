@@ -68,12 +68,10 @@ public class Main {
 
   private void giveItem(Player player) {
     Item monsterBall = new MonsterBall("몬스터볼");
-    Item monsterBall1 = new MonsterBall("슈퍼볼");
     Item potion = new Potion("하급 상처약");
     Item candy = new RareCandy();
     Item nope = new Item();
     player.addItemBag(monsterBall, 3);
-    player.addItemBag(monsterBall1, 3);
     player.addItemBag(potion, 5);
     player.addItemBag(candy, 1);
     player.addItemBag(nope, 1);
