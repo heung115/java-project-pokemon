@@ -13,6 +13,10 @@ public class Load {
             in.close();
             fileIn.close();
             System.out.println("정보를 불러왔습니다.");
+            int size = player.getPokemonArraySize();
+            for (int i = 0; i < size; i++) {
+                player.addPokemonToEncyclopediaLoad(i);
+            }
             return player;
         } catch (FileNotFoundException e) {
             System.out.println("저장된 정보가 없습니다.");

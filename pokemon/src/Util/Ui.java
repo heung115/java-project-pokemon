@@ -142,7 +142,7 @@ public class Ui {
     public static class Option {
         public static void printOptionUi() {
             System.out.println("===================================");
-            System.out.println("1.가방보기 \n2.플레이어 정보보기\n3.도감보기\n4.저장하기\n5.돌아가기");
+            System.out.println("1.가방보기 \n2.플레이어 정보보기\n3.도감보기\n4.상자보기\n5.저장하기\n6.돌아가기");
             System.out.println("===================================");
         }
     }
