@@ -23,7 +23,7 @@ public class Player implements Serializable {
 
     public Player(String playerName) {
         this.playerName = playerName;
-        level = 10;
+        level = 9;
         currentExp = 0;
         maxExp = 10;
     }

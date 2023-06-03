@@ -155,7 +155,7 @@ public class AdventureMap {
         if (a > 0.5) {
             Pokemon wildPokemon = new Pokemon(Pokemon.makeRandom(size, true));
             LevelPokemon.giveLevel(wildPokemon, (int) (a * 100 % player.getLevel()) + 5);
-            ;
+            Ui.tools.clearConsoleScreen();
             System.out.println("************************************************");
             System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
             System.out.println("************************************************");
@@ -458,10 +458,10 @@ public class AdventureMap {
     private void reward(Player player) {
         int playerExp = 10;
         int pokemonExp = 10;
-        System.out.println("포켓몬을 죽였다");
-        System.out.println(player.getName() + "이/가" + playerExp + "만큼의경험치 획득\n");
+        System.out.println("포켓몬을 죽였다.\n");
+        System.out.println(player.getName() + "이/가" + playerExp + "만큼의경험치 획득");
         player.setExp(playerExp);
-        System.out.println(player.getPlayerPokemonName(0) + "이/가" + pokemonExp + "만큼의경험치 획득\n");
+        System.out.println(player.getPlayerPokemonName(0) + "이/가" + pokemonExp + "만큼의경험치 획득");
         player.giveExpPlayerPokemon(pokemonExp, 0);
     }
 

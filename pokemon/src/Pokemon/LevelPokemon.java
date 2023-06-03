@@ -45,14 +45,13 @@ public class LevelPokemon implements Serializable{
          * 1 level -> 2 level = 8 ...
          * (n - 1) level -> n level = n ^ 3
          ******************/
+        System.out.println(pokemon.getName()+" 레벨업!\n");
 
         while (pokemon.currentExp >= pokemon.maxExp) {
-
             pokemon.level++;
             pokemon.increaseStat();
             pokemon.currentExp =0;
             pokemon.maxExp = levelExp(pokemon.level+1);
-        
         }
 
         if(canEvolution(pokemon)){ 
