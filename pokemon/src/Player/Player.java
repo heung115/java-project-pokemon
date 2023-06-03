@@ -73,7 +73,7 @@ public class Player implements Serializable {
     try {
       Pokemon pokemon = playerPokemon.get(num);
       return pokemon.getMaxHp();
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return -1;
     }
@@ -83,7 +83,7 @@ public class Player implements Serializable {
     try {
       Pokemon pokemon = playerPokemon.get(num);
       return pokemon.getCurrentHp();
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return -1;
     }
@@ -93,7 +93,7 @@ public class Player implements Serializable {
     try {
       Pokemon pokemon = playerPokemon.get(num);
       return pokemon.getDamage();
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return -1;
     }
@@ -103,7 +103,7 @@ public class Player implements Serializable {
     try {
       Pokemon pokemon = playerPokemon.get(num);
       return pokemon.getType();
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return "-1";
     }
@@ -114,7 +114,7 @@ public class Player implements Serializable {
     try {
       Pokemon pokemon = playerPokemon.get(num);
       return pokemon.getName();
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return "-1";
     }
@@ -135,7 +135,7 @@ public class Player implements Serializable {
     try {
       Pokemon pokemon = playerPokemon.get(num);
       pokemon.setHp(damage);
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 포켓몬을 선택해주세요.");
       return;
     }
@@ -144,7 +144,7 @@ public class Player implements Serializable {
   public void changePokemon(int num1, int num2) {
     try {
       Collections.swap(playerPokemon, num1, num2);
-    } catch (ArrayIndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException e) {
       System.out.println("알맞은 범위의 수를 입력해주세요.");
     }
   }
