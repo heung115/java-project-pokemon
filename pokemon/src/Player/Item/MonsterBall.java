@@ -1,13 +1,17 @@
 package Player.Item;
 
+import java.util.Scanner;
+
 import Player.Player;
 import Pokemon.Pokemon;
 
 public class MonsterBall extends Item {
     int monsterBallKind = 0;
     static double[] captureRate = new double[] { 1, 1.5, 2, 255 };
+    static Scanner scanner = new Scanner(System.in);
 
-    public MonsterBall(String monsterBallName) {
+    public MonsterBall(
+            String monsterBallName) {
         switch (monsterBallName) {
             case "몬스터볼":
                 this.monsterBallKind = 0;
@@ -37,9 +41,20 @@ public class MonsterBall extends Item {
     public void use(Player player, Pokemon targetPokemon) {
         if (Math.random() < captureRateFormula(targetPokemon) && player.getLevel() >= targetPokemon.getLevel()) {
             // capture!
-            System.out.println("\n" + targetPokemon.getName() + ", 넌 내꺼야!!!\n");
             player.addPokemonToPlayerPokemonArrayList(targetPokemon);
             player.addPokemonToEncyclopedia();
+            System.out.println("\n" + targetPokemon.getName() + ", 넌 내꺼야!!!\n");
+
+            if (player.getPokemonArraySize() > 3) {
+                System.out.println("가방이 가득찼다...\n 가방에 있는 포켓몬과 교환하기 위해선 [교환할 포켓몬]을 입력해주세요. \n 교환하지 않을라면 -1를 눌러주세요");
+                player.showPlayerPokemon();
+                int num1 = scanner.nextInt();
+                if (num1 == -1) {
+                    return;
+                }
+                player.changeAllPokemon(num1 - 1, player.getPokemonArraySize() - 1);
+            }
+
         } else if (player.getLevel() < targetPokemon.getLevel()) {
             System.out.println("\n너무 강해서 몬스터볼이 효과가 없다...!");
         } else {

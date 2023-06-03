@@ -34,9 +34,12 @@ public class Option {
                     player.ShowEncyclopedia();
                     break;
                 case 4:
-                    Save.savaData(player);
+                    changePokemonOrder(player);
                     break;
                 case 5:
+                    Save.savaData(player);
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("다시입력해주세요");
@@ -97,5 +100,26 @@ public class Option {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void changePokemonOrder(Player player) {
+        player.showAllPlayerPokemon();
+
+        System.out.println("변경할 포켓몬의 숫자를 입력해주세요 / 포켓몬을 방생하기 위해선 [0 '방생할 포켓몬'] 으로 입력해주세요(뒤로가기 : -1)");
+        int num1 = scanner.nextInt();
+        if (num1 == -1) {
+            return;
+        }
+        int num2 = scanner.nextInt();
+        if (num1 == 0 && player.getPokemonArraySize() != 1) {
+            System.out.println(player.getPlayerPokemonName(num2 - 1) + "을/를 방생하였습니다");
+            player.deletePokemonList(num2 - 1);
+            // player.showAllPlayerPokemon();
+            return;
+        }else if(player.getPokemonArraySize() == 1){
+            System.out.println("마지막은 방생할 수 없습니다");
+
+        }
+        player.changeAllPokemon(num1, num2);
     }
 }
