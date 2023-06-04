@@ -21,6 +21,7 @@ public class Main {
     MainGame mainGame = new MainGame();
     Player player;
 
+    Ui.tools.clearConsoleScreen();
     System.out.println("저장되어있는 정보가 있는지 검사중입니다");
     player = Load.loadData();
 
@@ -30,7 +31,6 @@ public class Main {
       player = my.gameStartSetting();
     }
     // Ui.Main.mainTitle();
-    // Ui.tools.clearConsoleScreen();
     mainGame.mainGameLoop(player);
   }
 

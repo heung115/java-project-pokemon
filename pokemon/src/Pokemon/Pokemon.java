@@ -177,21 +177,7 @@ public class Pokemon implements Serializable {
 		evolutionPokemon.level = this.level;
 		LevelPokemon.setLevel(pokemon);
 		LevelPokemon.giveLevel(this, evolutionPokemon.level - 1);
+123		Ui.tools.clearConsoleScreen();
 
 	}
-
-	/* To debug */
-	public static void main(String[] args) {
-
-		Pokemon poke[] = new Pokemon[2];
-		poke[1] = new Pokemon(1);
-		poke[1].showAllStat();
-		for (int i = 0; i < 29; i++) {
-			System.out.println(poke[1].getLevel());
-			LevelPokemon.giveLevel(poke[1], 1);
-
-		}
-		poke[1].showAllStat();
-	}
-
 }

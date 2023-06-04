@@ -23,7 +23,7 @@ public class Player implements Serializable {
 
     public Player(String playerName) {
         this.playerName = playerName;
-        level = 10;
+        level = 9;
         currentExp = 0;
         maxExp = 10;
     }
@@ -285,7 +285,7 @@ public class Player implements Serializable {
     }
 
     private void levelUp() {
-        System.out.print("레밸업!! " + level + "->");
+        System.out.print("플레이어 레벨업!! " + level + "->");
         level++;
         System.out.println(level);
 
