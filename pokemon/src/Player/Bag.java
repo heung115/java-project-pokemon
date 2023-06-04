@@ -14,6 +14,7 @@ public class Bag implements Serializable {
     }
 
     public void showBag() {
+        sortBag();
         if (bag.isEmpty()) {
             System.out.println("가방이 비었습니다");
         }
@@ -23,12 +24,13 @@ public class Bag implements Serializable {
             // System.out.print(i + ":");
             Item item = (Item) bag.get(i).get(1);
             // TODO: 한글 출력 정렬추가
-            if (item.getItemIndex() == 999) {
-                break;
+            if ((int) bag.get(i).get(0) == 999) {
+                continue;
             }
             if ((int) bag.get(i).get(2) < 1) {
                 bag.remove(i);
                 sortBag();
+                continue;
             }
             System.out.printf("%s  %s\t%3d\n", bag.get(i).get(0), item.getItemName(), bag.get(i).get(2));
             // System.out.println(item.getItemName() + "," + (int) bag.get(i).get(2) + "개");

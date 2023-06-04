@@ -157,7 +157,7 @@ public class AdventureMap {
             LevelPokemon.giveLevel(wildPokemon, (int) (a * 100 % player.getLevel()) + 5);
             Ui.tools.clearConsoleScreen();
             System.out.println("************************************************");
-            System.out.println("야생의 " + wildPokemon.getName() + "가 나타났다!");
+            System.out.println("야생의 " + wildPokemon.getName() + "이/가 나타났다!");
             System.out.println("************************************************");
             battleLoop(player, wildPokemon);
 
@@ -351,7 +351,7 @@ public class AdventureMap {
                 } else if (effect == 1) {
                     System.out.println("효과는 평범했다..");
                 } else if (effect == 0.8) {
-                    System.out.println("효과과 굉장했다..");
+                    System.out.println("효과과 별로였다..");
                 }
                 return effect;
             }
@@ -424,7 +424,7 @@ public class AdventureMap {
             System.out.println("전투중에 한눈을 팔았다....");
             return false;
         }
-        
+
         Item item = player.useItemBag(num);
         if (item == null) {
             System.out.println("다시 입력해주세요");
@@ -505,24 +505,27 @@ public class AdventureMap {
                         }
                         player.setLiveCombatPokemonCount();
                         return;
-                    }else{
-                        System.out.println(player.getPlayerPokemonName(0)+"이 쓰려졌다.\n");
+                    } else {
+                        System.out.println(player.getPlayerPokemonName(0) + "이 쓰려졌다.\n");
                         player.decreaseLiveCombatPokemonCount(1);
                         System.out.println(player.getLiveCombatPokemonCount());
-                        Boolean boolean_ = false; 
+                        Boolean boolean_ = false;
                         while (true) {
                             System.out.println("교체할 포켓몬을 선택하세요.\n");
                             player.showPlayerPokemon();
                             choice = scanner.nextInt();
                             switch (choice) {
-                                case 1:case 2:case 3:
+                                case 1:
+                                case 2:
+                                case 3:
                                     break;
                                 default:
                                     System.out.println("다시 입력해주세요.\n");
                                     boolean_ = true;
                                     continue;
                             }
-                            if(boolean_) continue;
+                            if (boolean_)
+                                continue;
                             if (player.getPlayerPokemonCurrentHp(choice - 1) == 0)
                                 System.out.println("선택할 수 없습니다.\n");
                             else {

@@ -10,20 +10,20 @@ import Pokemon.LevelPokemon;
 public class Player implements Serializable {
     private String playerName;
     // private int playerState;
-    private int money = 10000;
+    private int money = 100000;
     private int level;
     private int currentExp;
     private int maxExp;
 
     protected int availableCombatPokemonCount = 3;
-    protected int liveCombatPokemonCount = 3;
+    protected int liveCombatPokemonCount = 1;
     ArrayList<Pokemon> playerPokemon = new ArrayList<>();
     private Bag playerBag = new Bag();
     private Encyclopedia playerEncyclopedia = new Encyclopedia();
 
     public Player(String playerName) {
         this.playerName = playerName;
-        level = 9;
+        level = 20;
         currentExp = 0;
         maxExp = 10;
     }
@@ -79,7 +79,6 @@ public class Player implements Serializable {
         if (playerPokemonSize < availableCombatPokemonCount) {
             availableCombatPokemonCount = playerPokemonSize;
         }
-        System.out.println("출력 가능한 수 ㅣ" + availableCombatPokemonCount);
         for (int i = 0; i < availableCombatPokemonCount; i++) {
             System.out.print((i + 1) + ". ");
             Pokemon tempPokemon = playerPokemon.get(i);
@@ -285,9 +284,9 @@ public class Player implements Serializable {
     }
 
     private void levelUp() {
-        System.out.print("플레이어 레벨업!! " + level + "->");
+        System.out.print("플레이어 레벨업!! " + level + "lv -> ");
         level++;
-        System.out.println(level);
+        System.out.println(level + "lv");
 
     }
 

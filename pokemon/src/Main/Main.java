@@ -2,7 +2,7 @@ package Main;
 
 import Player.*;
 import Player.Item.*;
-import Pokemon.Pokemon;
+import Pokemon.*;
 import Util.*;
 import java.util.List;
 import java.util.Scanner;
@@ -52,9 +52,11 @@ public class Main {
       switch (input) {
         case 1:
           Pokemon pokemon1 = new Pokemon(1);
+          // LevelPokemon.giveLevel(pokemon1, 28);
           return pokemon1;
         case 2:
           Pokemon pokemon2 = new Pokemon(4);
+          // LevelPokemon.giveLevel(pokemon2, 58);
           return pokemon2;
         case 3:
           Pokemon pokemon3 = new Pokemon(7);
@@ -74,7 +76,7 @@ public class Main {
 
     player.addItemBag(monsterBall, 30);
     player.addItemBag(potion, 5);
-    player.addItemBag(candy, 1);
+    player.addItemBag(candy, 10);
     player.addItemBag(nope, 1);
   }
 
@@ -93,14 +95,15 @@ public class Main {
     Player player = createPlayerInstance();
     player.addPokemonToPlayerPokemonArrayList(choicePokemon());
     player.addPokemonToEncyclopedia();
-    player.addPokemonToPlayerPokemonArrayList(choicePokemon());
-    player.addPokemonToEncyclopedia();
-    player.addPokemonToPlayerPokemonArrayList(choicePokemon());
-    player.addPokemonToEncyclopedia();
-    player.addPokemonToPlayerPokemonArrayList(choicePokemon());
-    player.addPokemonToEncyclopedia();
-    player.addPokemonToPlayerPokemonArrayList(choicePokemon());
-    player.addPokemonToEncyclopedia();
+    // player.addPokemonToPlayerPokemonArrayList(choicePokemon());
+    // player.addPokemonToEncyclopedia();
+    // player.addPokemonToPlayerPokemonArrayList(choicePokemon());
+    // player.addPokemonToEncyclopedia();
+    // player.addPokemonToPlayerPokemonArrayList(choicePokemon());
+    // player.addPokemonToEncyclopedia();
+    // player.addPokemonToPlayerPokemonArrayList(choicePokemon());
+    // player.addPokemonToEncyclopedia();
+    player.setLiveCombatPokemonCount();
     giveItem(player);
     showInfo(player);
     return player;

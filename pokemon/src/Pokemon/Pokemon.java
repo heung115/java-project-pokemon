@@ -177,7 +177,7 @@ public class Pokemon implements Serializable {
 		evolutionPokemon.level = this.level;
 		LevelPokemon.setLevel(pokemon);
 		LevelPokemon.giveLevel(this, evolutionPokemon.level - 1);
-123		Ui.tools.clearConsoleScreen();
+		Ui.tools.clearConsoleScreen();
 
 	}
 }

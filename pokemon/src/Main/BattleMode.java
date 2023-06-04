@@ -18,7 +18,6 @@ public class BattleMode {
     }
 
     public void mainBattleModeLoop(Player player) {
-        Ui.tools.clearConsoleScreen();
         Ui.BattleModeUi.printBattleGameStartUi();
         Player aiPlayer = makeAiPlayer(0);
         choice = 0;
@@ -33,18 +32,17 @@ public class BattleMode {
                     if (attack(player, aiPlayer)) {
                         // ai가 사용가능한 포켓몬으로 변경..
                         // 나중에 플레이어 클래스에서 자동으로 가장 좋은 포켓몬 가져오는 로직을 구성해도 좋을듯
-                        
-                        System.out.println(aiPlayer.getPlayerPokemonName(0)+"이 쓰려졌다.\n");
-                        
+
+                        System.out.println(aiPlayer.getPlayerPokemonName(0) + "이/거 쓰려졌다.\n");
+
                         if (((AiPlayer) aiPlayer).aiPlayerCanUsePokemon() != -1) {
                             aiPlayer.changePokemon(0, ((AiPlayer) aiPlayer).aiPlayerCanUsePokemon());
                             continue;
-                        } 
-                        else {
+                        } else {
                             // ai플레이어 전투 종료...
                             giveReward(player);
                             System.out.println("대전에서 승리했다!!\n");
-                            aiPlayer = makeAiPlayer(0);
+                            // aiPlayer = makeAiPlayer(0);
                             return;
                         }
                     }
@@ -75,24 +73,27 @@ public class BattleMode {
                         }
                         player.setLiveCombatPokemonCount();
                         return;
-                    }else{
-                        System.out.println(player.getPlayerPokemonName(0)+"이 쓰려졌다.\n");
+                    } else {
+                        System.out.println(player.getPlayerPokemonName(0) + "이 쓰려졌다.\n");
                         player.decreaseLiveCombatPokemonCount(1);
                         System.out.println(player.getLiveCombatPokemonCount());
-                        Boolean boolean_ = false; 
+                        Boolean boolean_ = false;
                         while (true) {
                             System.out.println("교체할 포켓몬을 선택하세요.\n");
                             player.showPlayerPokemon();
                             choice = scanner.nextInt();
                             switch (choice) {
-                                case 1:case 2:case 3:
+                                case 1:
+                                case 2:
+                                case 3:
                                     break;
                                 default:
                                     System.out.println("다시 입력해주세요.\n");
                                     boolean_ = true;
                                     continue;
                             }
-                            if(boolean_) continue;
+                            if (boolean_)
+                                continue;
                             if (player.getPlayerPokemonCurrentHp(choice - 1) == 0)
                                 System.out.println("선택할 수 없습니다.\n");
                             else {
@@ -165,7 +166,7 @@ public class BattleMode {
         }
         int num2 = scanner.nextInt();
         player.changePokemon(num1 - 1, num2 - 1);
-        System.out.println("포켓몬이 교체되었습니다.");
+        // System.out.println("포켓몬이 교체되었습니다.");
     }
 
     private void run(Player player) {
@@ -216,12 +217,12 @@ public class BattleMode {
             aiPlayer.addPokemonToPlayerPokemonArrayList(makeAiPlayerPokemon(i + 2));
             aiPlayer.giveExpPlayerPokemon(aiPlayerLevel * 10, i);
         }
+        Ui.tools.clearConsoleScreen();
         return aiPlayer;
     }
 
     private Pokemon makeAiPlayerPokemon(int levelNum) {
-        // TODO: levelNum에 따라서 생성되면 포켓몬 변경로직 작성
-        Pokemon pokemon = new Pokemon(levelNum);
+        Pokemon pokemon = new Pokemon(Pokemon.makeRandom(9, true));
         // pokemon.makePokemon(levelNum);
         return pokemon;
     }
